@@ -2,7 +2,7 @@
 @section('main')
 	<div class="content">
 		<div class="login-form">
-			<form role="form" method="post">
+			{{ Form::open(array('route' => 'authenticate')) }}
 				<div class="form-group">
 					<label for="username-input">Username</label>
 					<input type="text" class="form-control" class="username-input" placeholder="Enter Username">

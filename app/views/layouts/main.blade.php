@@ -9,8 +9,6 @@
 	</head>
 	<body>
 		@yield('main')
-		<footer id="footer">(2013) All rights reserved</footer>
-		</div>
 		{{-- SCRIPTS --}}
 		{{ HTML::script('https://code.jquery.com/jquery-1.11.1.min.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
