@@ -1,5 +1,5 @@
 <?php
-class LoginController extends BaseController {
+class UsersController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -10,7 +10,7 @@ class LoginController extends BaseController {
 	*/
     public function __construct()
     {
-	 	$this->beforeFilter('auth', array('except' => array('login','authenticate','getRegister')));
+	 	$this->beforeFilter('auth', array('except' => array('login', 'authenticate','getRegister', 'postNewUser')));
 		// Enforce user authentication on specified methods
 		$this->beforeFilter('csrf', ['only' => ['authenticate']]);
 		parent::__construct();
@@ -28,10 +28,9 @@ class LoginController extends BaseController {
 		  );
 
 		if(Auth::attempt($credentials)){
-
 			return Redirect::intended('/');
 		} else {
-			return Redirect::to('/login');
+			return Redirect::to('/register');
 		}
 	}
 
@@ -39,5 +38,18 @@ class LoginController extends BaseController {
 		Auth::logout();
 		Session::flush();
 		return Redirect::to('/login');
+	}
+
+	/**
+	 * Create user registration page and save a new user.
+	 * @return [type] [description]
+	 */
+	public function getRegister(){
+		return View::make('auth.register');
+	}
+
+	public function postNewUser(){
+		User::createUser(Input::all());
+		return Redirect::intended('login');
 	}
 }

@@ -10,7 +10,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'user';
+	public $timestamps = false;
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -80,4 +81,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	protected $fillable = array('username', 'name', 'contact_person', 'contact_address', 'contact_phone', 'contact_sms', 'password', 'account_type_id');
+
+	public static function createUser($data){
+		$data['password'] = Hash::make($data['password']);
+		$user = new User($data);
+   		return $user->save();
+	}
+
+	public static function updateUser($data){
+		User::find($uid)->update(Input::all());
+		Session::flash('status_success', 'Profile updated');
+		return Redirect::back();
+	}
 }

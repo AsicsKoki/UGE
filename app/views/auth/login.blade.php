@@ -2,16 +2,11 @@
 @section('main')
 	<div class="content">
 		<div class="login-form">
-			{{ Form::open(array('route' => 'authenticate')) }}
-				<div class="form-group">
-					<label for="username-input">Username</label>
-					<input type="text" class="form-control" class="username-input" placeholder="Enter Username">
-				</div>
-				<div class="form-group">
-					<label for="password-input">Password</label>
-					<input type="password" class="form-control" class="password-input" placeholder="Password">
-				</div>
-				<button type="submit" class="btn btn-default">Log in</button>
-			</form>
+			{{ Former::open()->method('POST') }}
+				{{Former::text('username')->required()->label('username')->placeholder('Username')}}
+				{{Former::password('password')->required()->label('password')->placeholder('Password')}}
+				{{Former::hidden()->name('_token')->value(csrf_token())}}
+				{{Former::submit('Sign in')}}
+			{{ Former::close() }}
 		</div>
 	</div>

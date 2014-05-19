@@ -14,5 +14,7 @@
 Route::get('/', array('as' => 'homePage', 'uses' => 'HomeController@showWelcome'));
 
 // Log in;
-Route::get('login', array('uses' => 'LoginController@login'));
-Route::post('login', array('as' => 'authenticate', 'uses' => 'LoginController@authenticate'));
+Route::get('login', array('uses' => 'UsersController@login'));
+Route::post('login', array('as' => 'authenticate', 'uses' => 'UsersController@authenticate'));
+Route::get('register', array('as' => 'register', 'uses' => 'UsersController@getRegister'));
+Route::post('register', array('as'=>'postNewUser', 'uses' => 'UsersController@postNewUser'));
