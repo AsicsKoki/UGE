@@ -81,6 +81,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	public function admin()
+	{
+		return $this->hasOne('account_type');
+	}
+
+	public function analyzer()
+	{
+		return $this->hasMany('analyzer');
+	}
+
 	protected $fillable = array('username', 'name', 'contact_person', 'contact_address', 'contact_phone', 'contact_sms', 'password', 'account_type_id');
 
 	public static function createUser($data){

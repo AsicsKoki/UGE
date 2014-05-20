@@ -32,14 +32,14 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							@if (Auth::user()->account_type_id)
-								<li><a href="{{ URL::route('register') }}">Admin Panel</a></li>
+								<li><a href="{{ URL::route('register') }}">Admin Panel</a>
+								</li>
 							@endif
 							<li><a href="{{ URL::route('logout') }}">Log out</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
-
 		</div>
 		@yield('main')
 		{{-- SCRIPTS --}}

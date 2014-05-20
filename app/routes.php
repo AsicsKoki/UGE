@@ -19,3 +19,4 @@ Route::post('login', array('as' => 'authenticate', 'uses' => 'UsersController@au
 Route::get('register', array('as' => 'register', 'uses' => 'UsersController@getRegister'));
 Route::post('register', array('as'=>'postNewUser', 'uses' => 'UsersController@postNewUser'));
 Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
+Route::get('charts', array('as' => 'charts', 'uses' => 'ChartController@getChartPage'));
