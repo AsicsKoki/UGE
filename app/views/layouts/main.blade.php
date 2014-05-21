@@ -43,6 +43,7 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</div>
+		@include('partials.status')
 		{{-- SCRIPTS --}}
 		{{ HTML::script('js/jquery/dist/jquery.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}

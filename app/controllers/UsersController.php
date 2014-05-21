@@ -60,9 +60,8 @@ class UsersController extends BaseController {
 		return View::make('auth.register');
 	}
 
-	public function postNewUser(){
-		$credentials = array(
-			'username'              => 'required|min:3',
+	private $validationRules = [
+			'username'              => 'required|min:3|unique:user,username',
 			'password'              => 'required|min:3',
 			'password_confirmation' => 'required|min:3',
 			'name'                  => 'required',
@@ -70,13 +69,18 @@ class UsersController extends BaseController {
 			'contact_person'        => 'required',
 			'contact_phone'         => 'required',
 			'contact_sms'           => 'required',
-			'account_type_id'       => 'required',
-			);
+			'account_type_id'       => 'required'
+		];
+
+	public function postNewUser(){
+		$validator = Validator::make(Input::all(),
+		    $this->validationRules
+		);
 		if($validator->passes()){
 			User::createUser(Input::all());
 			return Redirect::intended('/');
 		} else {
-			return Redirect::intended('/register');
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
 	}
 
@@ -86,11 +90,36 @@ class UsersController extends BaseController {
 	}
 
 	public function getUser($uid) {
+		if (!$user = User::find($uid)) {
+			Session::flash('status_error', 'The user does not exist');
+			return Redirect::route('getUsers');
+		}
 
 		return View::make('users.user')->with('user', User::find($uid));
 	}
 
 	public function putUser($uid) {
-		return "put!";
+		if (!$user = User::find($uid)) {
+			Session::flash('status_error', 'The user does not exist');
+			return Redirect::back();
+		}
+
+		$this->validationRules['username'] .= ','. $uid;
+
+		$validator = Validator::make(Input::all(),
+		    $this->validationRules
+		);
+
+		if($validator->passes()){
+			$user->update(Input::all());
+			Session::flash('status_success', 'Profile updated');
+			return Redirect::route('getUsers');
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+	}
+
+	public function deleteUser($uid) {
+
 	}
 }

@@ -100,8 +100,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public static function updateUser($data){
-		User::find($uid)->update(Input::all());
-		Session::flash('status_success', 'Profile updated');
-		return Redirect::back();
+		if (isset($data['password']))
+			$data['password'] = Hash::make($data['password']);
+		return User::find($uid)->update($data);
 	}
 }
