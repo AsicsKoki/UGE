@@ -22,8 +22,10 @@ Route::post('login', array('as' => 'authenticate', 'uses' => 'UsersController@au
 Route::get('register', array('as' => 'register', 'uses' => 'UsersController@getRegister'));
 
 Route::post('register', array('as'=>'postNewUser', 'uses' => 'UsersController@postNewUser'));
-Route::put('users/{userId}/update', array('as'=>'putUser', 'uses' => 'UsersController@putUser'))->where('userId', '\d+');
-Route::get('users/{userId}', array('as' => 'deleteUser',  'uses' => 'UsersController@deleteUser'))->where('userId', '\d+');
+Route::put('users/{userId}', array('as'=>'putUser', 'uses' => 'UsersController@putUser'))->where('userId', '\d+');
+
+Route::get('users/{userId}/delete', array('as' => 'deleteUser',  'uses' => 'UsersController@deleteUser'))->where('userId', '\d+');
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
+
 Route::get('charts', array('as' => 'charts', 'uses' => 'ChartController@getChartPage'));

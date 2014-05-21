@@ -12,6 +12,11 @@ class ChartController extends BaseController {
 
 	public function getChartPage()
 	{
+		$analyzer = Auth::User()->analyzer()->first();
+
+		d($analyzer->measureTypeInAnalyzer()->with('measure', 'measureType')->get()->toArray()); 
+
+		exit;
 		return View::make('charts.chart');
 	}
 

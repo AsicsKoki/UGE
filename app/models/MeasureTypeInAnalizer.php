@@ -6,4 +6,9 @@ class MeasureTypeInAnalyzer extends Eloquent {
 	{
 		return $this->hasMany('measure');
 	}
+
+	public function measureType()
+	{
+		return $this->belongsTo('measureType');
+	}
 }
