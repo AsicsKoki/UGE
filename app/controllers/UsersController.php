@@ -79,7 +79,8 @@ class UsersController extends BaseController {
 		);
 		if($validator->passes()){
 			User::createUser(Input::all());
-			return Redirect::intended('/');
+			Session::flash('status_success', 'User successfully created');
+			return Redirect::route('homePage');
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}

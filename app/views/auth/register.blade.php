@@ -21,9 +21,11 @@
 			{{Former::text('contact_person')->label('Contact person')->placeholder('Contact person')->class('form-control')}}
 			{{Former::text('contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
 			{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
-			{{Former::text('account_type_id')->label('Account Type')->placeholder('1: Admin 0: User')->class('form-control')}}
+
+			{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
+
 			{{Former::hidden()->name('_token')->value(csrf_token())}}
-			{{Former::submit('Register')->class('form-control')}}
+			{{Former::submit('Register')->class('form-control submit-button')}}
 		{{ Former::close() }}
 	</div>
 @stop
