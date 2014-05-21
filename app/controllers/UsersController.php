@@ -76,7 +76,7 @@ class UsersController extends BaseController {
 			User::createUser(Input::all());
 			return Redirect::intended('/');
 		} else {
-			return Redirect::intended('/register')
+			return Redirect::intended('/register');
 		}
 	}
 }

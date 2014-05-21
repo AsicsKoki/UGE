@@ -20,3 +20,7 @@ body {
 	left: 5%;
 	position: relative;
 }
+.chart-content{
+	width: 80%;
+	height:80%;
+}

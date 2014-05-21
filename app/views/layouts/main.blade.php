@@ -43,10 +43,12 @@
 		</div>
 		@yield('main')
 		{{-- SCRIPTS --}}
-		{{ HTML::script('https://code.jquery.com/jquery-1.11.1.min.js') }}
+		{{ HTML::script('js/jquery/dist/jquery.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
 		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js') }}
 		{{ HTML::script('js/main.js') }}
+		{{ HTML::script('js/highcharts/highcharts.js') }}
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
 		@yield('moreScripts')
 	</body>
 </html>
