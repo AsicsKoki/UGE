@@ -2,7 +2,7 @@
 @section('main')
 	<div class="register-form">
 		{{ Former::open()->class('form-horizontal')->method('POST')->enctype('multipart/form-data')->action(URL::route('postNewUser'))
-		->rules(array(
+			->rules([
 					'username'              => 'required|min:3',
 					'password'              => 'required|min:3',
 					'password_confirmation' => 'required|min:3',
@@ -12,7 +12,7 @@
 					'contact_phone'         => 'required',
 					'contact_sms'           => 'required',
 					'account_type_id'       => 'required',
-				))}}
+				])}}
 			{{Former::text('username')->label('username')->placeholder('Username')->class('form-control')}}
 			{{Former::password('password')->label('password')->placeholder('Password')->class('form-control')}}
 			{{Former::password('password_confirmation')->label('password')->placeholder('Retype your password')->class('form-control')}}

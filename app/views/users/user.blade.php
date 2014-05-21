@@ -2,7 +2,7 @@
 @section('main')
 	<div class='col-md-6'>
 		{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putUser', ['userId'=>$user->id]))
-		/*->rules([
+		->rules([
 					'username'              => 'required|min:3',
 					'password'              => 'required|min:3',
 					'password_confirmation' => 'required|min:3',
@@ -12,7 +12,7 @@
 					'contact_phone'         => 'required',
 					'contact_sms'           => 'required',
 					'account_type_id'       => 'required',
-				])*/}}
+				])}}
 			{{Former::populate($user)}}
 			{{Former::text('username')->label('username')->placeholder('Username')->class('form-control')}}
 			{{Former::password('password')->label('password')->placeholder('Password')->class('form-control')}}
@@ -29,9 +29,4 @@
 	</div>
 @stop
 @section('moreScripts')
-{{HTML::style('js/datatables/media/css/jquery.dataTables.css')}}
-{{ HTML::script('js/datatables/media/js/jquery.dataTables.js') }}
-<script>
-	$('div.users-list table').dataTable();
-</script>
 @stop

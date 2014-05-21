@@ -73,6 +73,7 @@ class UsersController extends BaseController {
 		];
 
 	public function postNewUser(){
+
 		$validator = Validator::make(Input::all(),
 		    $this->validationRules
 		);
@@ -120,6 +121,13 @@ class UsersController extends BaseController {
 	}
 
 	public function deleteUser($uid) {
+		if (!$user = User::find($uid)) {
+			Session::flash('status_error', 'The user does not exist');
+			return Redirect::back();
+		}
 
+		$user->delete();
+		Session::flash('status_success', 'User successfully deleted');
+		return Redirect::route('getUsers');
 	}
 }

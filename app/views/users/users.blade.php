@@ -1,6 +1,9 @@
 @extends('layouts/main')
 @section('main')
 	<div class="users-list col-md-10">
+		<div class="form-group pull-right">
+			<a href="{{URL::route('postNewUser')}}" class="btn btn-primary">Create New User</a>
+		</div>
 		<table class='table table-striped'>
 			<thead>
 				<th>Name</th>
@@ -24,7 +27,7 @@
 						<td>{{$user->contact_phone}}</td>
 						<td>{{$user->contact_sms}}</td>
 						<td><a class="btn btn-primary" href="{{ URL::route('getUser', array('userId'=>$user->id)) }}">Edit</a></td>
-						<td><button type="button" class="btn btn-danger">Delete</button></td>
+						<td><a class="btn btn-danger" href="{{ URL::route('deleteUser', array('userId'=>$user->id)) }}">Delete</a></td>
 					</tr>
 				@endforeach
 			</tbody>
