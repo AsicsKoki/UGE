@@ -34,6 +34,8 @@
 							@if (Auth::user()->account_type_id)
 								<li><a href="{{ URL::route('register') }}">Admin Panel</a>
 								</li>
+								<li><a href="{{ URL::route('register') }}">Users</a>
+								</li>
 							@endif
 							<li><a href="{{ URL::route('logout') }}">Log out</a></li>
 						</ul>
@@ -41,7 +43,6 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</div>
-		@yield('main')
 		{{-- SCRIPTS --}}
 		{{ HTML::script('js/jquery/dist/jquery.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
@@ -49,6 +50,7 @@
 		{{ HTML::script('js/main.js') }}
 		{{ HTML::script('js/highcharts/highcharts.js') }}
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+		@yield('main')
 		@yield('moreScripts')
 	</body>
 </html>

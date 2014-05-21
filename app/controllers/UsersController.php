@@ -79,4 +79,18 @@ class UsersController extends BaseController {
 			return Redirect::intended('/register');
 		}
 	}
+
+	public function getUsers() {
+
+		return View::make('users.users')->with('users', User::all());
+	}
+
+	public function getUser($uid) {
+
+		return View::make('users.user')->with('user', User::find($uid));
+	}
+
+	public function putUser($uid) {
+		return "put!";
+	}
 }

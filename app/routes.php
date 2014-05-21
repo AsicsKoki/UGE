@@ -14,9 +14,17 @@
 Route::get('/', array('as' => 'homePage', 'uses' => 'HomeController@getHome'));
 
 // Log in;
+Route::get('users', array('as' => 'getUsers',  'uses' => 'UsersController@getUsers'));
+Route::get('users/{userId}', array('as' => 'getUser',  'uses' => 'UsersController@getUser'))->where('userId', '\d+');
+
+
+
 Route::get('login', array('uses' => 'UsersController@login'));
 Route::post('login', array('as' => 'authenticate', 'uses' => 'UsersController@authenticate'));
 Route::get('register', array('as' => 'register', 'uses' => 'UsersController@getRegister'));
+
 Route::post('register', array('as'=>'postNewUser', 'uses' => 'UsersController@postNewUser'));
+Route::put('users/{userId}/update', array('as'=>'putUser', 'uses' => 'UsersController@putUser'))->where('userId', '\d+');
+
 Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 Route::get('charts', array('as' => 'charts', 'uses' => 'ChartController@getChartPage'));
