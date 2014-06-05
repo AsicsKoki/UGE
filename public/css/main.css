@@ -21,8 +21,10 @@ body {
 	position: relative;
 }
 .chart-content{
+	position: relative;
 	width: 80%;
 	height:80%;
+	left: 5%;
 }
 
 input.submit-button {

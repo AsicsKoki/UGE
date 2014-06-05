@@ -1,8 +1,6 @@
 <?php
 class Analyzer extends Eloquent {
 
-	protected $table = 'analyzer';
-
 	public function user()
 	{
 		return $this->hasOne('user');

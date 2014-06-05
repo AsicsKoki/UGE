@@ -31,7 +31,7 @@
 							<li><a href="#">Charts</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							@if (Auth::user()->account_type_id)
+							@if (Auth::user()->account_types_id)
 								<li><a href="{{ URL::route('register') }}">Admin Panel</a>
 								</li>
 								<li><a href="{{ URL::route('getUsers') }}">Users</a>

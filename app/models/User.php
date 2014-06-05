@@ -10,7 +10,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'user';
 	public $timestamps = false;
 
 	/**

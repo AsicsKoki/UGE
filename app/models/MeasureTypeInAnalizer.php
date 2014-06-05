@@ -1,13 +1,13 @@
 <?php
 class MeasureTypeInAnalyzer extends Eloquent {
-	protected $table = 'measure_type_in_analyzer';
+	protected $table = 'measure_types_in_analyzers';
 
-	public function measure()
+	public function measures()
 	{
 		return $this->hasMany('measure');
 	}
 
-	public function measureType()
+	public function measureTypes()
 	{
 		return $this->belongsTo('measureType');
 	}
