@@ -11,4 +11,8 @@ class MeasureTypeInAnalyzer extends Eloquent {
 	{
 		return $this->belongsTo('measureType');
 	}
+	public function analyzer()
+	{
+		return $this->belongsTo('analyzer');
+	}
 }

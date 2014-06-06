@@ -28,4 +28,4 @@ Route::get('users/{userId}/delete', array('as' => 'deleteUser',  'uses' => 'User
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 
-Route::get('charts', array('as' => 'charts', 'uses' => 'ChartController@getChartPage'));
+Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'ChartController@getAnalyzerList'));
