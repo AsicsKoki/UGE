@@ -3,6 +3,7 @@
 	<head>
 		{{-- STYLES --}}
 		{{HTML::style('css/main.css')}}
+		{{HTML::style('css/sidebar.css')}}
 		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')}}
 		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css')}}
 		@yield('moreStyles')
@@ -28,7 +29,7 @@
 							<li><a href="{{ URL::route('homePage') }}">Home</a></li>
 							<li><a href="#">About us</a></li>
 							<li><a href="#">Contact</a></li>
-							<li><a href="#">Charts</a></li>
+							<li><a href="{{ URL::route('monitoring') }}">Monitoring</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							@if (Auth::user()->account_type_id)

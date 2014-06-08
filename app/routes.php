@@ -28,4 +28,8 @@ Route::get('users/{userId}/delete', array('as' => 'deleteUser',  'uses' => 'User
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 
-Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'ChartController@getAnalyzerList'));
+// Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'ChartController@getAnalyzerList'));
+Route::get('monitoring', array('as' => 'monitoring', 'uses' => 'MonitoringController@getMonitoring'));
+Route::get('controlPanel', array('as' => 'controlPanel', 'uses' => 'MonitoringController@getControlPanel'));
+Route::get('consumption', array('as' => 'consumption', 'uses' => 'MonitoringController@getConsumption'));
+Route::get('measurements', array('as' => 'measurements', 'uses' => 'MonitoringController@getMeasurements'));
