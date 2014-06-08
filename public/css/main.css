@@ -28,3 +28,10 @@ body {
 input.submit-button {
 	margin-top: 15px;
 }
+.widget{
+	margin-left: 80px;
+	position: relative;
+	float: left;
+	height: 25%;
+	width: 25%;
+}
