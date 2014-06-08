@@ -20,4 +20,9 @@ class MonitoringController extends BaseController {
 		return View::make('monitoring/controlPanel');
 	}
 
+	public function getMeasurements()
+	{
+		return View::make('monitoring/measurements');
+	}
+
 }
