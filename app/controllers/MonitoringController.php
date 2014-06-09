@@ -19,8 +19,20 @@ class MonitoringController extends BaseController {
 
 	public function getControlPanel()
 	{
+		$latestVoltage = Analyzer::with(['measures' => function($query){
+		$query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
+			}])->get()->toArray();
 
-		return View::make('monitoring/controlPanel');
+		// $latestPower = Analyzer::with(['measures' => function($query){
+		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 10);
+		// 	}])->get()->toArray();
+
+
+		// $latestPmax = Analyzer::with(['measures' => function($query){
+		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 30);
+		// 	}])->get()->toArray();
+
+		return View::make('monitoring/controlPanel')->with('latestVoltage', $latestVoltage)->with('latestPower', $latestPower)->with('latestPmax', $latestPmax);
 	}
 
 	public function getMeasurements()
@@ -33,7 +45,6 @@ class MonitoringController extends BaseController {
 		}
 
 		$chartMeasureSet = [];
-
 		foreach ([1, 2, 3] as $measureType) {
 			$analyzerSet = Analyzer::with(['measures' => function($query) use ($measureType, $startDate, $endDate)
 				{
@@ -60,4 +71,10 @@ class MonitoringController extends BaseController {
 		return View::make('monitoring/measurements')->with('dataSet', $chartMeasureSet);
 	}
 
+	public function getLatestVoltage()
+	{
+	return $data = Analyzer::with(['measures' => function($query){
+		$query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
+			}])->get()->toArray();
+	}
 }
