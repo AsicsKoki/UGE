@@ -17,12 +17,34 @@ class MonitoringController extends BaseController {
 
 	public function getControlPanel()
 	{
+
 		return View::make('monitoring/controlPanel');
 	}
 
 	public function getMeasurements()
 	{
-		return View::make('monitoring/measurements');
+		$chartMeasureSet = [];
+
+		foreach ([1, 2, 3] as $measureType) {
+			$analyzerSet = Analyzer::with(['measures' => function($query) use ($measureType)
+				{
+				    $query->take(300)
+				    		->where('key_tip_merenja', '=', $measureType);
+				}])->get();
+
+			foreach ($analyzerSet as $dataSet) {
+				if (!isset($chartMeasureSet[$dataSet->key_analizator]))
+					$chartMeasureSet[$dataSet->key_analizator] = [];
+				$chartMeasureSet[$dataSet->key_analizator][$measureType] = array_map(function($item){
+					return [
+					'x' => strtotime($item['vreme_iz_analizatora'])*1000,
+					'y' => $item['vrednost'],
+					];
+				}, $dataSet->measures->toArray());
+			};
+		}
+
+		return View::make('monitoring/measurements')->with('dataSet', $chartMeasureSet);
 	}
 
 }
