@@ -32,7 +32,7 @@ class MonitoringController extends BaseController {
 		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 30);
 		// 	}])->get()->toArray();
 
-		return View::make('monitoring/controlPanel')->with('latestVoltage', $latestVoltage)->with('latestPower', $latestPower)->with('latestPmax', $latestPmax);
+		return View::make('monitoring/controlPanel')->with('latestVoltage', $latestVoltage);
 	}
 
 	public function getMeasurements()
