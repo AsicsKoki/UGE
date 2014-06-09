@@ -32,4 +32,4 @@ Route::get('logout', array('as' => 'logout', 'uses' => 'UsersController@logout')
 Route::get('monitoring', array('as' => 'monitoring', 'uses' => 'MonitoringController@getMonitoring'));
 Route::get('controlPanel', array('as' => 'controlPanel', 'uses' => 'MonitoringController@getControlPanel'));
 Route::get('consumption', array('as' => 'consumption', 'uses' => 'MonitoringController@getConsumption'));
-Route::get('measurements', array('as' => 'measurements', 'uses' => 'MonitoringController@getMeasurements'));
+Route::get('measurements/{startDate?}/{endDate?}', array('as' => 'measurements', 'uses' => 'MonitoringController@getMeasurements'))->where('startDate', '\d+')->where('endDate', '\d+');
