@@ -14,7 +14,6 @@
         </div>
         <div>
             <div id="voltage1"></div>
-        	<div id="voltage2"></div>
         </div>
 @stop
 @section('moreScripts')
@@ -62,51 +61,6 @@ $(function () {
                 borderWidth: 0
             },
             series: analizator1
-        });
-    });
-$(function () {
-     var dataSet = {{json_encode($dataSet)}};
-     var analizator2 = [];
-     for (var key in dataSet['2'])
-        analizator2.push({data: dataSet['2'][key]});
-        $('#voltage2DISABLED').highcharts({
-            title: {
-                text: 'Analizator 50',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'Voltage across time span',
-                x: -20 //center
-            },
-            yAxis: {
-                title: {
-                    text: 'Voltage (V)'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            xAxis : {
-            title: {
-                  text: "Time Span"
-              },
-            type: 'datetime',
-            dateTimeLabelFormats: {
-                day: '%e of %b'
-            }
-        },
-            tooltip: {
-                valueSuffix: 'V'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: analizator2
         });
     });
 </script>
