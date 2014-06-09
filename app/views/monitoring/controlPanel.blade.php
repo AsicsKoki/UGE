@@ -1,6 +1,6 @@
 @extends('layouts/main')
 @section('main')
-	<div id="wrapper">
+    <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -13,7 +13,7 @@
             </ul>
         </div>
         <div>
-        	<div class="widget" id="voltage"></div>
+            <div class="widget" id="voltage"></div>
             <div class="widget" id="power"></div>
             <div class="widget" id="powerMax"></div>
         </div>
@@ -21,6 +21,8 @@
 @section('moreScripts')
 <script type="text/javascript">
 $(function () {
+    var data = {{json_encode($latestVoltage[0]['measures'][0]['vrednost'])}};
+    console.log(data);
     $('#voltage').highcharts({
         chart: {
             type: 'gauge',
@@ -30,11 +32,11 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Speedometer'
+            text: 'Latest Voltage'
         },
         pane: {
-            startAngle: -150,
-            endAngle: 150,
+            startAngle: -130,
+            endAngle: +130,
             background: [{
                 backgroundColor: {
                     linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
@@ -64,18 +66,15 @@ $(function () {
                 innerRadius: '103%'
             }]
         },
-           
         // the value axis
         yAxis: {
-            min: 0,
-            max: 200,
-            
+            min: 160,
+            max: 280,
             minorTickInterval: 'auto',
             minorTickWidth: 1,
             minorTickLength: 10,
             minorTickPosition: 'inside',
             minorTickColor: '#666',
-    
             tickPixelInterval: 30,
             tickWidth: 2,
             tickPosition: 'inside',
@@ -86,191 +85,42 @@ $(function () {
                 rotation: 'auto'
             },
             title: {
-                text: 'km/h'
+                text: 'V'
             },
             plotBands: [{
-                from: 0,
-                to: 120,
-                color: '#55BF3B' // green
-            }, {
-                from: 120,
-                to: 160,
-                color: '#DDDF0D' // yellow
-            }, {
                 from: 160,
                 to: 200,
                 color: '#DF5353' // red
-            }]        
+            }, {
+                from: 200,
+                to: 240,
+                color: '#55BF3B' // green
+            }, {
+                from: 240,
+                to: 280,
+                color: '#DF5353' // red
+            }]
         },
-    
         series: [{
             name: 'Speed',
-            data: [80],
+            data: [data],
             tooltip: {
-                valueSuffix: ' km/h'
+                valueSuffix: ' V'
             }
         }]
-    
-    }, 
+    },
     // Add some life
     function (chart) {
-        if (!chart.renderer.forExport) {
-            setInterval(function () {
-                var point = chart.series[0].points[0],
-                    newVal,
-                    inc = Math.round((Math.random() - 0.5) * 20);
-                
-                newVal = point.y + inc;
-                if (newVal < 0 || newVal > 200) {
-                    newVal = point.y - inc;
-                }
-                
-                point.update(newVal);
-                
-            }, 3000);
-        }
+            // setInterval(function () {
+            //     $.AJAX({
+            //         url:"/voltageUpdate.php",
+            //         type: "GET",
+            //         success: function(data){
+            //             // data.update(newVal);
+            //         }
+            //     })
+            // }, 3000);
     });
-});
-$(function () {
-    var gaugeOptions = {
-        chart: {
-            type: 'solidgauge'
-        },
-        
-        title: null,
-        
-        pane: {
-            center: ['50%', '85%'],
-            size: '140%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                innerRadius: '60%',
-                outerRadius: '100%',
-                shape: 'arc'
-            }
-        },
-
-        tooltip: {
-            enabled: false
-        },
-           
-        // the value axis
-        yAxis: {
-            stops: [
-                [0.1, '#55BF3B'], // green
-                [0.5, '#DDDF0D'], // yellow
-                [0.9, '#DF5353'] // red
-            ],
-            lineWidth: 0,
-            minorTickInterval: null,
-            tickPixelInterval: 400,
-            tickWidth: 0,
-            title: {
-                y: -70
-            },
-            labels: {
-                y: 16
-            }        
-        },
-        
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    y: 5,
-                    borderWidth: 0,
-                    useHTML: true
-                }
-            }
-        }
-    };
-    
-    // The speed gauge
-    $('#power').highcharts(Highcharts.merge(gaugeOptions, {
-        yAxis: {
-            min: 0,
-            max: 200,
-            title: {
-                text: 'Speed'
-            }       
-        },
-
-        credits: {
-            enabled: false
-        },
-    
-        series: [{
-            name: 'Speed',
-            data: [80],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' + 
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' + 
-                    '<span style="font-size:12px;color:silver">km/h</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' km/h'
-            }
-        }]
-    
-    }));
-    
-    // The RPM gauge
-    $('#powerMax').highcharts(Highcharts.merge(gaugeOptions, {
-        yAxis: {
-            min: 0,
-            max: 5,
-            title: {
-                text: 'RPM'
-            }       
-        },
-    
-        series: [{
-            name: 'RPM',
-            data: [1],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' + 
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' + 
-                    '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' revolutions/min'
-            }      
-        }]
-    
-    }));                    
-    // Bring life to the dials
-    setInterval(function () {
-        // Speed
-        var chart = $('#power').highcharts();
-        if (chart) {
-            var point = chart.series[0].points[0],
-                newVal,
-                inc = Math.round((Math.random() - 0.5) * 100);
-            
-            newVal = point.y + inc;
-            if (newVal < 0 || newVal > 200) {
-                newVal = point.y - inc;
-            }
-            
-            point.update(newVal);
-        }
-
-        // RPM
-        chart = $('#powerMax').highcharts();
-        if (chart) {
-            var point = chart.series[0].points[0],
-                newVal,
-                inc = Math.random() - 0.5;
-            
-            newVal = point.y + inc;
-            if (newVal < 0 || newVal > 5) {
-                newVal = point.y - inc;
-            }
-            
-            point.update(newVal);
-        }
-    }, 2000);   
 });
 </script>
 @stop
