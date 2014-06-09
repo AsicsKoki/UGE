@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class MonitoringController extends BaseController {
 
     public function __construct()
@@ -23,13 +25,24 @@ class MonitoringController extends BaseController {
 
 	public function getMeasurements()
 	{
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$startDate = $endDate = false;
+		}
+
 		$chartMeasureSet = [];
 
 		foreach ([1, 2, 3] as $measureType) {
-			$analyzerSet = Analyzer::with(['measures' => function($query) use ($measureType)
+			$analyzerSet = Analyzer::with(['measures' => function($query) use ($measureType, $startDate, $endDate)
 				{
 				    $query->take(300)
 				    		->where('key_tip_merenja', '=', $measureType);
+
+				    if ($startDate AND $endDate)
+				    	$query->where('originalno_vreme', '<', $endDate->toDateTimeString())
+				    			->where('originalno_vreme', '>', $startDate->toDateTimeString());
 				}])->get();
 
 			foreach ($analyzerSet as $dataSet) {

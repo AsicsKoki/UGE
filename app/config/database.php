@@ -55,10 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'uge16',
+			'database'  => 'mrezni_analizatori',
 			'username'  => 'root',
-			'password'  => 'v2R"5p{@/]#2_:K
-',
+			'password'  => 'v2R"5p{@/]#2_:K',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

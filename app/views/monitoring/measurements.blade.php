@@ -15,8 +15,28 @@
         <div>
             <div id="voltage1"></div>
         </div>
+        <div>
+
+            {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
+                    <div class="form-group">
+                        <label for="daterange">Date Range</label>
+                    </div>
+                    <div class="form-group">
+                        {{Former::text('daterange')->label('')->class('form-control date-range')}}
+                    </div>
+                    <div class="form-group">
+                       {{Former::hidden('date-start')}}
+                       {{Former::hidden('date-end')}}
+                       {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
+                       {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
+                    </div>
+            {{ Former::close() }}
+        </div>
 @stop
 @section('moreScripts')
+{{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
+{{HTML::script('js/momentjs/min/moment.min.js')}}
+{{HTML::script('js/bootstrap-daterangepicker/daterangepicker.js')}}
 <script type="text/javascript">
 $(function () {
      var dataSet = {{json_encode($dataSet)}};
@@ -61,6 +81,23 @@ $(function () {
                 borderWidth: 0
             },
             series: analizator1
+        });
+
+         $('input.date-range').daterangepicker();
+         $('input.date-range').on('apply.daterangepicker', function(ev, picker) {
+          $('input[name=date-start]').val(picker.startDate.valueOf());
+          $('input[name=date-end]').val(picker.endDate.valueOf());
+        });
+
+        $('button.submit').on('click', function(){
+            $(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
+            $(this).parents('form').submit();
+        });
+
+        $('button.reset').on('click', function(){
+            $(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
+            $(this).parents('form').find('input[name=date-start], input[name=date-end]').attr('disabled', 'disabled');
+            $(this).parents('form').submit();
         });
     });
 </script>
