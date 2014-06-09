@@ -22,7 +22,6 @@
 <script type="text/javascript">
 $(function () {
     $('#voltage').highcharts({
-    
         chart: {
             type: 'gauge',
             plotBackgroundColor: null,
@@ -30,11 +29,9 @@ $(function () {
             plotBorderWidth: 0,
             plotShadow: false
         },
-        
         title: {
             text: 'Speedometer'
         },
-        
         pane: {
             startAngle: -150,
             endAngle: 150,

@@ -13,76 +13,101 @@
             </ul>
         </div>
         <div>
-        	<div class="widget" id="voltage"></div>
+            <div id="voltage1"></div>
+        	<div id="voltage2"></div>
         </div>
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-$(function() {
-    Highcharts.setOptions({
-        global : {
-            useUTC : false
-        }
-    });
-    // Create the chart
-    $('#voltage').highcharts('StockChart', {
-        chart : {
-            events : {
-                load : function() {
-
-                    // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function() {
-                        var x = (new Date()).getTime(), // current time
-                        y = Math.round(Math.random() * 100);
-                        series.addPoint([x, y], true, true);
-                    }, 1000);
-                }
+$(function () {
+     var dataSet = {{json_encode($dataSet)}};
+     var analizator1 = [];
+     for (var key in dataSet['1'])
+        analizator1.push({data: dataSet['1'][key]});
+        $('#voltage1').highcharts({
+            title: {
+                text: 'Voltage',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Voltage across time span',
+                x: -20 //center
+            },
+            yAxis: {
+                title: {
+                    text: 'Voltage (V)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            xAxis : {
+            title: {
+                  text: "Time Span"
+              },
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%e of %b'
             }
         },
-        
-        rangeSelector: {
-            buttons: [{
-                count: 1,
-                type: 'minute',
-                text: '1M'
-            }, {
-                count: 5,
-                type: 'minute',
-                text: '5M'
-            }, {
-                type: 'all',
-                text: 'All'
-            }],
-            inputEnabled: false,
-            selected: 0
-        },
-        
-        title : {
-            text : 'Live random data'
-        },
-        
-        exporting: {
-            enabled: false
-        },
-        
-        series : [{
-            name : 'Random data',
-            data : (function() {
-                // generate an array of random data
-                var data = [], time = (new Date()).getTime(), i;
-
-                for( i = -999; i <= 0; i++) {
-                    data.push([
-                        time + i * 1000,
-                        Math.round(Math.random() * 100)
-                    ]);
-                }
-                return data;
-            })()
-        }]
+            tooltip: {
+                valueSuffix: 'V'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: analizator1
+        });
     });
-});
-
+$(function () {
+     var dataSet = {{json_encode($dataSet)}};
+     var analizator2 = [];
+     for (var key in dataSet['2'])
+        analizator2.push({data: dataSet['2'][key]});
+        $('#voltage2DISABLED').highcharts({
+            title: {
+                text: 'Analizator 50',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Voltage across time span',
+                x: -20 //center
+            },
+            yAxis: {
+                title: {
+                    text: 'Voltage (V)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            xAxis : {
+            title: {
+                  text: "Time Span"
+              },
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%e of %b'
+            }
+        },
+            tooltip: {
+                valueSuffix: 'V'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: analizator2
+        });
+    });
 </script>
 @stop

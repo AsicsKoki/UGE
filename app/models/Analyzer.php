@@ -1,7 +1,8 @@
 <?php
 class Analyzer extends Eloquent {
 
-	protected $table = 'analyzer';
+	protected $table = 'analizator';
+	protected $primaryKey = 'key_analizator';
 
 	public function user()
 	{
@@ -16,5 +17,10 @@ class Analyzer extends Eloquent {
 	public function measureTypeInAnalyzer()
 	{
 		return $this->hasMany('MeasureTypeInAnalyzer', 'analyzer_id');
+	}
+
+	public function measures()
+	{
+		return $this->hasMany('Measure', 'key_analizator');
 	}
 }
