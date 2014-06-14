@@ -10,7 +10,7 @@ class UsersController extends BaseController {
 	*/
     public function __construct()
     {
-	 	// $this->beforeFilter('auth', array('except' => array('login', 'authenticate')));
+	 	$this->beforeFilter('auth', array('except' => array('login', 'authenticate')));
 		// Enforce user authentication on specified methods
 		$this->beforeFilter('csrf', ['only' => ['authenticate']]);
 		parent::__construct();

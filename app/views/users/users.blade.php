@@ -1,6 +1,9 @@
 @extends('layouts/main')
 @section('main')
-	<div class="users-list col-md-10">
+	<div>
+	@include('partials.sidebar')
+	</div>
+	<div class="users-list panelContent">
 		<div class="form-group pull-right">
 			<a href="{{URL::route('postNewUser')}}" class="btn btn-primary">Create New User</a>
 		</div>

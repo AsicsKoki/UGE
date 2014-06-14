@@ -15,6 +15,7 @@
         <div>
         	123
         </div>
+    </div>
 @stop
 @section('moreScripts')
 @stop

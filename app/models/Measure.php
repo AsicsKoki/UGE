@@ -1,7 +1,8 @@
 <?php
 class Measure extends Eloquent {
-	protected $table = 'merenje';
-	protected $primaryKey = 'key_merenje';
+	public $timestamps = false;
+
+
 	public function measureTypeInAnalyzer()
 	{
 		return $this->hasOne('measureTypeInAnalyzer');
@@ -11,4 +12,5 @@ class Measure extends Eloquent {
 	{
 		return $this->hasOne('analyzer');
 	}
+
 }
