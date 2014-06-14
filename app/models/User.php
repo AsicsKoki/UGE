@@ -10,7 +10,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'user';
 	public $timestamps = false;
 
 	/**
@@ -86,10 +85,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('account_type');
 	}
 
-	public function analyzer()
+	public function customer()
 	{
-		return $this->hasMany('analyzer');
+		return $this->belongsTo('customer');
 	}
+
 
 	protected $fillable = array('username', 'name', 'contact_person', 'contact_address', 'contact_phone', 'contact_sms', 'password', 'account_type_id');
 

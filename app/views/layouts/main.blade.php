@@ -6,6 +6,7 @@
 		{{HTML::style('css/sidebar.css')}}
 		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')}}
 		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css')}}
+		{{HTML::style('//cdn.datatables.net/1.10.0/css/jquery.dataTables.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
@@ -32,8 +33,8 @@
 							<li><a href="{{ URL::route('monitoring') }}">Monitoring</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							@if (1 == 1)
-								<li><a href="{{ URL::route('register') }}">Admin Panel</a>
+							@if (Auth::user()->account_types_id)
+								<li><a href="{{ URL::route('analyzers') }}">Admin Panel</a>
 								</li>
 								<li><a href="{{ URL::route('getUsers') }}">Users</a>
 								</li>
@@ -53,6 +54,7 @@
 		<script src="http://code.highcharts.com/highcharts-more.js"></script>
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
 		<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>
+		<script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 		@yield('main')
 		@yield('moreScripts')
 	</body>

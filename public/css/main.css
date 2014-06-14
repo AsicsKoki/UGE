@@ -35,3 +35,11 @@ input.submit-button {
 	height: 20%;
 	width: 20%;
 }
+.panelContent{
+	position: relative;
+	width: 70%;
+	left: 25%;
+}
+.users-list{
+	width: 70%;
+}
