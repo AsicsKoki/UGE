@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Carbon\Carbon;
 
@@ -19,9 +19,9 @@ class MonitoringController extends BaseController {
 
 	public function getControlPanel()
 	{
-		$latestVoltage = Analyzer::with(['measures' => function($query){
-		$query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
-			}])->get()->toArray();
+		// $latestVoltage = Analyzer::with(['measures' => function($query){
+		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
+		// 	}])->get()->toArray();
 
 		// $latestPower = Analyzer::with(['measures' => function($query){
 		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 10);
@@ -32,7 +32,7 @@ class MonitoringController extends BaseController {
 		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 30);
 		// 	}])->get()->toArray();
 
-		return View::make('monitoring/controlPanel')->with('latestVoltage', $latestVoltage);
+		return View::make('monitoring/controlPanel');
 	}
 
 	public function getMeasurements()

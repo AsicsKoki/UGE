@@ -33,7 +33,7 @@ input.submit-button {
 	position: relative;
 	float: left;
 	height: 20%;
-	width: 20%;
+	/* width: 20%; */
 }
 .panelContent{
 	position: relative;

@@ -12,5 +12,4 @@ class Measure extends Eloquent {
 	{
 		return $this->hasOne('analyzer');
 	}
-
 }
