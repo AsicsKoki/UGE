@@ -44,8 +44,15 @@ class MonitoringController extends BaseController {
 			$startDate = $endDate = false;
 		}
 
+		if (!Input::get('chart-type') || Input::get('chart-type') == 1)
+			$measureSetIds = [1, 2, 3];
+		else if(Input::get('chart-type') == 2)
+			$measureSetIds = [4, 5, 6];
+		else
+			$measureSetIds = [7, 8, 9, 10];
+
 		$chartMeasureSet = [];
-		foreach ([1, 2, 3] as $measureType) {
+		foreach ($measureSetIds as $measureType) {
 			$analyzerSet = Analyzer::with(['measures' => function($query) use ($measureType, $startDate, $endDate)
 				{
 				    $query->take(300)
@@ -62,7 +69,7 @@ class MonitoringController extends BaseController {
 				$chartMeasureSet[$dataSet->key_analizator][$measureType] = array_map(function($item){
 					return [
 					'x' => strtotime($item['vreme_iz_analizatora'])*1000,
-					'y' => $item['vrednost'],
+					'y' => round($item['vrednost'], 2),
 					];
 				}, $dataSet->measures->toArray());
 			};
