@@ -16,14 +16,18 @@
 			<div class="widget" id="voltage"></div>
 			<div class="widget" id="power"></div>
 			<div class="widget" id="powerMax"></div>
+			<div class="widget" id="">
+				<div class="measureBox"><span id="kWh">50</span> Hz</div>
+				<div class="measureBox"><span id="kWh">6371</span> kWh</div>
+				<div class="measureBox"><span id="kVArh">6636</span> kVArh</div>
+			</div>
 		</div>
 @stop
 @section('moreScripts')
 <script type="text/javascript">
+"use strict"
 	$(function () {
-
     var gaugeOptions = {
-
 	    chart: {
 	        type: 'solidgauge'
 	    },
@@ -50,8 +54,8 @@
 	    // the value axis
 	    yAxis: {
 			stops: [
-				[0.1, '#55BF3B'], // green
-	        	[0.5, '#DDDF0D'], // yellow
+				[0.1, '#DF5353'], // green
+	        	[0.5, '#55BF3B'], // yellow
 	        	[0.9, '#DF5353'] // red
 			],
 			lineWidth: 0,
@@ -77,13 +81,67 @@
         }
     };
 
+var gaugeOptionsPower = {
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+    	center: ['50%', '85%'],
+    	size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+    	enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+		stops: [
+			[0.1, '#DF5353'], // green
+        	[0.5, '#55BF3B'], // yellow
+        	[0.9, '#DF5353'] // red
+		],
+		lineWidth: 0,
+        minorTickInterval: null,
+        tickPixelInterval: 400,
+        tickWidth: 0,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
     // The speed gauge
     $('#voltage').highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
-	        min: 0,
-	        max: 200,
+	        min: 160,
+	        max: 280,
 	        title: {
-	            text: 'Speed'
+	            text: 'Napon'
 	        }
 	    },
 
@@ -92,40 +150,122 @@
 	    },
 
 	    series: [{
-	        name: 'Speed',
-	        data: [80],
+	        name: 'Napon',
+	        data: [219],
 	        dataLabels: {
 	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                   	'<span style="font-size:12px;color:silver">km/h</span></div>'
+                   	'<span style="font-size:12px;color:black">trentunti napon (V)</span></div>'
 	        },
 	        tooltip: {
-	            valueSuffix: ' km/h'
+	            valueSuffix: 'V'
 	        }
 	    }]
 
 	}));
 
     // The RPM gauge
-    $('#power').highcharts(Highcharts.merge(gaugeOptions, {
+    $('#power').highcharts(Highcharts.merge(gaugeOptionsPower, {
         yAxis: {
         	min: 0,
         	max: 5,
 	        title: {
-	            text: 'RPM'
+	            text: 'Power'
 	        }
 	    },
 
 	    series: [{
-	        name: 'RPM',
+	        name: 'Power',
 	        data: [1],
 	        dataLabels: {
 	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                   	'<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+                   	'<span style="font-size:12px;color:black">Trentuntna snaga (kW)</span></div>'
 	        },
 	        tooltip: {
-	            valueSuffix: ' revolutions/min'
+	            valueSuffix: ' Maximum Power'
+	        }
+	    }]
+
+	}));
+var gaugeOptionsPowerMax = {
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+    	center: ['50%', '85%'],
+    	size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+    	enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+		stops: [
+			[0.1, '#DF5353'], // green
+        	[0.5, '#55BF3B'], // yellow
+        	[0.9, '#DF5353'] // red
+		],
+		lineWidth: 0,
+        minorTickInterval: null,
+        tickPixelInterval: 400,
+        tickWidth: 0,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
+    // The speed gauge
+    $('#powerMax').highcharts(Highcharts.merge(gaugeOptionsPowerMax, {
+        yAxis: {
+	        min: 0,
+	        max: 5,
+	        title: {
+	            text: 'Power'
+	        }
+	    },
+
+	    credits: {
+	    	enabled: false
+	    },
+
+	    series: [{
+	        name: 'Max Power',
+	        data: [3.1],
+	        dataLabels: {
+	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   	'<span style="font-size:12px;color:black">Maksimalna snaga(kW)</span></div>'
+	        },
+	        tooltip: {
+	            valueSuffix: 'kW'
 	        }
 	    }]
 
@@ -134,22 +274,16 @@
     // Bring life to the dials
     setInterval(function () {
     	// Speed
-        var chart = $('#container-speed').highcharts();
+        var chart = $('#voltage').highcharts();
         if (chart) {
             var point = chart.series[0].points[0],
                 newVal,
-                inc = Math.round((Math.random() - 0.5) * 100);
-
-            newVal = point.y + inc;
-            if (newVal < 0 || newVal > 200) {
-                newVal = point.y - inc;
-            }
-
-            point.update(newVal);
+                value = Math.round((Math.random() * (240 - 180)+ 180));
+            point.update(value);
         }
 
         // RPM
-        chart = $('#container-rpm').highcharts();
+        chart = $('#power').highcharts();
         if (chart) {
             var point = chart.series[0].points[0],
                 newVal,
@@ -162,7 +296,14 @@
 
             point.update(newVal);
         }
-    }, 2000);
+        var value = Number($('#kWh').text());
+    	var increment = Math.round(Math.random() * 15);
+    	$('#kWh').html(value + increment);
+
+        var value2 = Number($('#kVArh').text());
+    	var increment2 = Math.round(Math.random() * 15);
+    	$('#kVArh').html(value2 + increment2);
+    }, 20000);
 });
 </script>
 @stop
