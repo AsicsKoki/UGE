@@ -141,7 +141,7 @@ var gaugeOptionsPower = {
 	        min: 160,
 	        max: 280,
 	        title: {
-	            text: 'Napon'
+	            text: ''
 	        }
 	    },
 
@@ -170,7 +170,7 @@ var gaugeOptionsPower = {
         	min: 0,
         	max: 5,
 	        title: {
-	            text: 'Power'
+	            text: ''
 	        }
 	    },
 
@@ -248,7 +248,7 @@ var gaugeOptionsPowerMax = {
 	        min: 0,
 	        max: 5,
 	        title: {
-	            text: 'Power'
+	            text: ''
 	        }
 	    },
 
