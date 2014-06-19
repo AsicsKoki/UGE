@@ -12,12 +12,20 @@
                 </li>
             </ul>
         </div>
+        {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
         <div>
-            <div id="voltage1"></div>
+            <div class="row col-xs-4">
+                <select name="chart-type" id="input" class="form-control" required="required">
+                    <option value="1">Prikaz napona</option>
+                    <option value="2">Prikaz struje</option>
+                    <option value="3">Prikaz aktivna snage</option>
+                </select>
+            </div>
+            <div style="clear:both;"></div>
+            <div  id="voltage1"></div>
         </div>
         <div>
 
-            {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
                     <div class="form-group">
                         <label for="daterange">Date Range</label>
                     </div>
@@ -30,8 +38,8 @@
                        {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
                        {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
                     </div>
-            {{ Former::close() }}
         </div>
+        {{ Former::close() }}
 @stop
 @section('moreScripts')
 {{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
