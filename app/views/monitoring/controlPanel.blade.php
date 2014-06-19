@@ -4,7 +4,7 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
-				<li><a href="{{ URL::route('controlPanel') }}">Control Panel</a>
+				<li><a href="{{ URL::route('controlPanel') }}">Dashboard</a>
 				</li>
 				<li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
 				</li>
@@ -12,15 +12,19 @@
 				</li>
 			</ul>
 		</div>
+		<div class="row" style="position:relative; left: 20%; width: 50%; background-color:#0F98D8;">
+			<div class="measureBox pull-left"><span id="kWh">6371</span> kWh</div>
+			<div class="measureBox pull-right"><span id="kVArh">6636</span> kVArh</div>
+		</div>
+		<div class="row" style="position:relative; left: 20%; width: 50%; background-color:#0F98D8;">
+		</div>
 		<div class='row'>
 			<div class="widget" id="voltage"></div>
 			<div class="widget" id="power"></div>
 			<div class="widget" id="powerMax"></div>
-			<div class="widget" id="">
-				<div class="measureBox"><span id="Hz">49.27</span> Hz</div>
-				<div class="measureBox"><span id="kWh">6371</span> kWh</div>
-				<div class="measureBox"><span id="kVArh">6636</span> kVArh</div>
-			</div>
+		</div>
+		<div class="row">
+			<div class="measureBox" style="left:40%; position: relative; width:20%"><span id="Hz">49.27</span> Hz</div>
 		</div>
 @stop
 @section('moreScripts')
@@ -36,7 +40,7 @@
 
 	    pane: {
 	    	center: ['50%', '85%'],
-	    	size: '140%',
+	    	size: '100%',
 	        startAngle: -90,
 	        endAngle: 90,
             background: {
@@ -90,7 +94,7 @@ var gaugeOptionsPower = {
 
     pane: {
     	center: ['50%', '85%'],
-    	size: '140%',
+    	size: '100%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -197,7 +201,7 @@ var gaugeOptionsPowerMax = {
 
     pane: {
     	center: ['50%', '85%'],
-    	size: '140%',
+    	size: '100%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -278,7 +282,7 @@ var gaugeOptionsPowerMax = {
         if (chart) {
             var point = chart.series[0].points[0],
                 newVal,
-                value = Math.round((Math.random() * (240 - 180)+ 180));
+                value = Math.round((Math.random() * (230 - 210)+ 210));
             point.update(value);
         }
 
