@@ -14,6 +14,16 @@
 			<img class="imgThumb" style="width:250; height:150px;" src="/img/nis.jpg"/>Benzinska stanica: Ledena Stena, Nis
 			<img class="pull-right" src="/img/analizator.png"/>
 		</div>
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li><a href="{{ URL::route('controlPanel') }}">Control Panel</a>
+				</li>
+				<li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
+				</li>
+				<li><a href="{{ URL::route('consumption') }}">Consumption</a>
+				</li>
+			</ul>
+		</div>
 		@include('partials.status')
 		{{-- SCRIPTS --}}
 		{{ HTML::script('js/jquery/dist/jquery.js') }}

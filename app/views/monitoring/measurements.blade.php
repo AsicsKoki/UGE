@@ -4,7 +4,7 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li><a href="{{ URL::route('controlPanel') }}">Control Panel</a>
+                <li><a href="{{ URL::route('controlPanel') }}">Dashboard</a>
                 </li>
                 <li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
                 </li>
