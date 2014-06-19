@@ -17,7 +17,7 @@
 			<div class="widget" id="power"></div>
 			<div class="widget" id="powerMax"></div>
 			<div class="widget" id="">
-				<div class="measureBox"><span id="kWh">50</span> Hz</div>
+				<div class="measureBox"><span>50</span> Hz</div>
 				<div class="measureBox"><span id="kWh">6371</span> kWh</div>
 				<div class="measureBox"><span id="kVArh">6636</span> kVArh</div>
 			</div>
