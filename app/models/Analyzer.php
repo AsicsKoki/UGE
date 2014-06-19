@@ -1,5 +1,8 @@
 <?php
 class Analyzer extends Eloquent {
+
+		protected $table = 'analizator';
+	protected $primaryKey = 'key_analizator';
 	protected $fillable = array('name', 'description', 'comment', 'modbus_slave_address', 'current_measure_period', 'long_message_period', 'active', 'short_message_period', 'alarm_measure_period', 'measures_before_alarm', 'hubs_id', 'input_position', 'customers_id', 'analyzer_types_id');
 	public $timestamps = false;
 

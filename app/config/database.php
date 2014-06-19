@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'uge16',
+			'database'  => 'uge-old2',
 			'username'  => 'root',
 			'password'  => 'v2R"5p{@/]#2_:K',
 			'charset'   => 'utf8',
