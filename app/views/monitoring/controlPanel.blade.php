@@ -305,13 +305,13 @@ var gaugeOptionsPowerMax = {
     	$('#kVArh').html(value2 + increment2);
 
     	var value3 = Number($('#Hz').text());
-    	var increment3 = parseInt(Math.random()*100)/100;
+    	var increment3 = Math.random()*2;
     	if(value3 > 51){
-    		$('#Hz').html(value3 - increment3);
+    		$('#Hz').html((value3 - increment3).toFixed(2));
     	} else {
-    		$('#Hz').html(value3 + increment3);
+    		$('#Hz').html((value3 + increment3).toFixed(2));
     	}
-    }, 2000);
+    }, 20000);
 });
 </script>
 @stop
