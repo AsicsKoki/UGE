@@ -17,7 +17,7 @@
 			<div class="widget" id="power"></div>
 			<div class="widget" id="powerMax"></div>
 			<div class="widget" id="">
-				<div class="measureBox"><span>50</span> Hz</div>
+				<div class="measureBox"><span id="Hz">50.00</span> Hz</div>
 				<div class="measureBox"><span id="kWh">6371</span> kWh</div>
 				<div class="measureBox"><span id="kVArh">6636</span> kVArh</div>
 			</div>
@@ -303,7 +303,15 @@ var gaugeOptionsPowerMax = {
         var value2 = Number($('#kVArh').text());
     	var increment2 = Math.round(Math.random() * 15);
     	$('#kVArh').html(value2 + increment2);
-    }, 20000);
+
+    	var value3 = Number($('#Hz').text());
+    	var increment3 = parseInt(Math.random()*100)/100;
+    	if(value3 > 51){
+    		$('#Hz').html(value3 - increment3);
+    	} else {
+    		$('#Hz').html(value3 + increment3);
+    	}
+    }, 2000);
 });
 </script>
 @stop
