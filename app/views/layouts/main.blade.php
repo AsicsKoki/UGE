@@ -20,8 +20,6 @@
 				</li>
 				<li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
 				</li>
-				<li><a href="{{ URL::route('consumption') }}">Consumption</a>
-				</li>
 			</ul>
 		</div>
 		@include('partials.status')
