@@ -84,4 +84,8 @@ class MonitoringController extends BaseController {
 		$query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
 			}])->get()->toArray();
 	}
+
+	public function getConsumption(){
+		return View::make('monitoring/consumption');
+	}
 }
