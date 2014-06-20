@@ -8,8 +8,6 @@
                 </li>
                 <li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
                 </li>
-                <li><a href="{{ URL::route('consumption') }}">Consumption</a>
-                </li>
             </ul>
         </div>
         {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
@@ -53,16 +51,16 @@ $(function () {
         analizator1.push({data: dataSet['1'][key]});
         $('#voltage1').highcharts({
             title: {
-                text: 'Voltage',
+                text: '',
                 x: -20 //center
             },
             subtitle: {
-                text: 'Voltage across time span',
+                text: '',
                 x: -20 //center
             },
             yAxis: {
                 title: {
-                    text: 'Voltage (V)'
+                    text: ''
                 },
                 plotLines: [{
                     value: 0,
@@ -80,7 +78,7 @@ $(function () {
             }
         },
             tooltip: {
-                valueSuffix: 'V'
+                valueSuffix: ''
             },
             legend: {
                 layout: 'vertical',
