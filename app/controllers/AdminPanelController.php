@@ -4,7 +4,7 @@ class AdminPanelController extends BaseController {
 
     public function __construct()
 	{
-	 	// $this->beforeFilter('auth', array('except' => array('')));
+	 	$this->beforeFilter('auth', array('except' => array('')));
 		// Enforce user authentication on specified methods
 		$this->beforeFilter('csrf', ['only' => ['authenticate']]);
 		parent::__construct();
@@ -216,7 +216,18 @@ class AdminPanelController extends BaseController {
 
 	public function getModbusConsole()
 	{
-		return View::make('adminPanel.modbusConsole');
+		$analyzerData = Analyzer::all()->toArray();
+		$modbusResponses = ModbusResponses::all()->toArray();
+		// d($analyzerData, $modbusResponses);
+		// exit;
+		return View::make('adminPanel.modbusConsole')->with('analyzerData', $analyzerData);
+	}
+
+	public function sendModbusQuery()
+	{
+		$data = Input::all();
+		ModbusQuery::create($data);
+		return Redirect::back();
 	}
 
 	public function getAlarmManagement()
