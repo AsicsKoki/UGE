@@ -1,6 +1,6 @@
 <?php
 class AccountType extends Eloquent {
-	protected $table = 'account_type';
+	protected $table = 'account_types';
 
 	public function user()
 	{
