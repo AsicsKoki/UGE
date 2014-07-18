@@ -55,9 +55,10 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'uge-old2',
+			'database'  => 'uge16',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'v2R"5p{@/]#2_:K
+',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
