@@ -1,13 +1,6 @@
 @extends('layouts/main')
 @section('main')
 	<div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li><a href="{{ URL::route('getTemperature') }}">Temperatura</a>
-                </li>
-            </ul>
-        </div>
         {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
         <div>
             <div class="form-group">
@@ -24,6 +17,7 @@
             </div>
         </div>
         {{ Former::close() }}
+        <div id="chart"></div>
 @stop
 @section('moreScripts')
 {{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
@@ -32,10 +26,11 @@
 <script type="text/javascript">
 $(function () {
      var dataSet = {{json_encode($dataSet)}};
+     console.log(dataSet);
      var analizator1 = [];
      for (var key in dataSet['1'])
         analizator1.push({data: dataSet['1'][key]});
-        $('#voltage1').highcharts({
+        $('#chart').highcharts({
             title: {
                 text: '',
                 x: -20 //center

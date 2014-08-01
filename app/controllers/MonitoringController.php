@@ -19,8 +19,9 @@ class MonitoringController extends BaseController {
 
 	public function getTemperature()
 	{
-
-		return View::make('monitoring/temperature');
+		$data = Measure::where('key_tip_merenja', '=', 5)->get()->toArray();
+	
+		return View::make('monitoring/temperature')->with('dataSet', $data);
 	}
 
 	public function getMeasurements()
