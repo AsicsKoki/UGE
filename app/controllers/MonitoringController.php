@@ -17,22 +17,10 @@ class MonitoringController extends BaseController {
 		return View::make('monitoring/monitoring');
 	}
 
-	public function getControlPanel()
+	public function getTemperature()
 	{
-		// $latestVoltage = Analyzer::with(['measures' => function($query){
-		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 1);
-		// 	}])->get()->toArray();
 
-		// $latestPower = Analyzer::with(['measures' => function($query){
-		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 10);
-		// 	}])->get()->toArray();
-
-
-		// $latestPmax = Analyzer::with(['measures' => function($query){
-		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 30);
-		// 	}])->get()->toArray();
-
-		return View::make('monitoring/controlPanel');
+		return View::make('monitoring/temperature');
 	}
 
 	public function getMeasurements()

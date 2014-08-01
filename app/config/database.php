@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'mrezni_analizatori',
+			'database'  => 'eko',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
