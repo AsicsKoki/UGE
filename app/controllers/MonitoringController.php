@@ -19,9 +19,65 @@ class MonitoringController extends BaseController {
 
 	public function getTemperature()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 5)->get()->toArray();
-	
-		return View::make('monitoring/temperature')->with('dataSet', $data);
+		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getHumidity()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getCo()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getCo2()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getPm10()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getPm25()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+	}
+
+	public function getPm03()
+	{
+		$data = Measure::where('key_tip_merenja', '=', 6)->select('vreme_prijema','vrednost')->take(1000)->get();
+		foreach ($data as $item) {
+			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+		}
+		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
 
 	public function getMeasurements()

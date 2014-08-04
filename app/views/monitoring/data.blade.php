@@ -1,43 +1,23 @@
 @extends('layouts/main')
 @section('main')
 	<div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li><a href="{{ URL::route('controlPanel') }}">Dashboard</a>
-                </li>
-                <li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
-                </li>
-            </ul>
-        </div>
         {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
         <div>
-            <div class="row col-xs-4">
-                <select name="chart-type" id="input" class="form-control" required="required">
-                    <option value="1">Prikaz napona</option>
-                    <option value="2">Prikaz struje</option>
-                    <option value="3">Prikaz aktivna snage</option>
-                </select>
+            <div class="form-group">
+                <label for="daterange">Date Range</label>
             </div>
-            <div style="clear:both;"></div>
-            <div  id="voltage1"></div>
-        </div>
-        <div>
-
-                    <div class="form-group">
-                        <label for="daterange">Date Range</label>
-                    </div>
-                    <div class="form-group">
-                        {{Former::text('daterange')->label('')->class('form-control date-range')}}
-                    </div>
-                    <div class="form-group">
-                       {{Former::hidden('date-start')}}
-                       {{Former::hidden('date-end')}}
-                       {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
-                       {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
-                    </div>
+            <div class="form-group">
+                {{Former::text('daterange')->label('')->class('form-control date-range')}}
+            </div>
+            <div class="form-group">
+               {{Former::hidden('date-start')}}
+               {{Former::hidden('date-end')}}
+               {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
+               {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
+            </div>
         </div>
         {{ Former::close() }}
+        <div id="chart"></div>
 @stop
 @section('moreScripts')
 {{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
@@ -45,11 +25,15 @@
 {{HTML::script('js/bootstrap-daterangepicker/daterangepicker.js')}}
 <script type="text/javascript">
 $(function () {
-     var dataSet = {{json_encode($dataSet)}};
-     var analizator1 = [];
-     for (var key in dataSet['1'])
-        analizator1.push({data: dataSet['1'][key]});
-        $('#voltage1').highcharts({
+    var dataSet = {{json_encode($dataSet)}};
+        dataSet = [{data: dataSet.map(function(item){
+            return {
+                x: new Date(item['vreme_prijema']),
+                y: item['vrednost']
+            };
+        })}];
+        console.log(dataSet);
+        $('#chart').highcharts({
             title: {
                 text: '',
                 x: -20 //center
@@ -69,14 +53,14 @@ $(function () {
                 }]
             },
             xAxis : {
-            title: {
-                  text: "Time Span"
-              },
-            type: 'datetime',
-            dateTimeLabelFormats: {
-                day: '%e of %b'
-            }
-        },
+                title: {
+                      text: "Time Span"
+                  },
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    day: '%e of %b'
+                }
+            },
             tooltip: {
                 valueSuffix: ''
             },
@@ -86,7 +70,7 @@ $(function () {
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: analizator1
+            series: dataSet
         });
 
          $('input.date-range').daterangepicker();

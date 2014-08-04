@@ -14,9 +14,17 @@
 			<ul class="sidebar-nav">
 				<li><a href="{{ URL::route('getTemperature') }}">Temperatura</a>
 				</li>
-				<li><a href="{{ URL::route('getTemperature') }}">Temperatura</a>
+				<li><a href="{{ URL::route('getHumidity') }}">Vlaznost</a>
 				</li>
-				<li><a href="{{ URL::route('getTemperature') }}">Temperatura</a>
+				<li><a href="{{ URL::route('getCo') }}">CO</a>
+				</li>
+				<li><a href="{{ URL::route('getCo2') }}">CO2</a>
+				</li>
+				<li><a href="{{ URL::route('getPm10') }}">PM10</a>
+				</li>
+				<li><a href="{{ URL::route('getPm25') }}">PM2.5</a>
+				</li>
+				<li><a href="{{ URL::route('getPm25') }}">PM0.3</a>
 				</li>
 			</ul>
 		</div>
