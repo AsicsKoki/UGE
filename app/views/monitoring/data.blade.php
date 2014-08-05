@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('main')
 	<div id="wrapper">
-        {{ Former::open()->class('form-inline')->method('GET')->action(URL::route('measurements'))}}
+        {{ Former::open()->class('form-inline')->method('GET')}}
         <div>
             <div class="form-group">
                 <label for="daterange">Date Range</label>
