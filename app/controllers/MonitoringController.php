@@ -19,7 +19,17 @@ class MonitoringController extends BaseController {
 
 	public function getTemperature()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
@@ -28,7 +38,17 @@ class MonitoringController extends BaseController {
 
 	public function getHumidity()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
@@ -37,7 +57,17 @@ class MonitoringController extends BaseController {
 
 	public function getCo()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
@@ -46,7 +76,17 @@ class MonitoringController extends BaseController {
 
 	public function getCo2()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
@@ -55,7 +95,17 @@ class MonitoringController extends BaseController {
 
 	public function getPm10()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
@@ -64,16 +114,36 @@ class MonitoringController extends BaseController {
 
 	public function getPm25()
 	{
-		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_prijema','vrednost')->take(1000)->get();
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
 
-	public function getPm03()
-	{
-		$data = Measure::where('key_tip_merenja', '=', 6)->select('vreme_prijema','vrednost')->take(1000)->get();
+	public function getPm03(){
+
+		if (Input::get('date-start') AND Input::get('date-end')) {
+			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
+			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+		} else {
+			$endDate = Carbon::now()->subDays(5);
+			$startDate = Carbon::now();
+		}
+
+
+		$data = Measure::where('key_tip_merenja', '=', 6)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+
 		foreach ($data as $item) {
 			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
 		}

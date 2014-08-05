@@ -20,3 +20,4 @@ Route::get('co', array('as' => 'getCo', 'uses' => 'MonitoringController@getCo'))
 Route::get('co2', array('as' => 'getCo2', 'uses' => 'MonitoringController@getCo2'));
 Route::get('pm10', array('as' => 'getPm10', 'uses' => 'MonitoringController@getPm10'));
 Route::get('pm25', array('as' => 'getPm25', 'uses' => 'MonitoringController@getPm25'));
+Route::get('pm03', array('as' => 'getPm03', 'uses' => 'MonitoringController@getPm03'));

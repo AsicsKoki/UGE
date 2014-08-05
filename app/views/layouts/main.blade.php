@@ -24,7 +24,7 @@
 				</li>
 				<li><a href="{{ URL::route('getPm25') }}">PM2.5</a>
 				</li>
-				<li><a href="{{ URL::route('getPm25') }}">PM0.3</a>
+				<li><a href="{{ URL::route('getPm03') }}">PM0.3</a>
 				</li>
 			</ul>
 		</div>
