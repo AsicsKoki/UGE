@@ -28,10 +28,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -47,10 +47,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -66,10 +66,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -85,10 +85,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -104,10 +104,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -123,10 +123,10 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}
@@ -136,16 +136,18 @@ class MonitoringController extends BaseController {
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
+			$analyzer = Input::get('key_analizator');
 		} else {
 			$endDate = Carbon::now()->subDays(5);
 			$startDate = Carbon::now();
+			$analyzer = 1;
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 6)->select('vreme_prijema','vrednost')->where('vreme_prijema', '<', $endDate->toDateTimeString())->where('vreme_prijema', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$data = Measure::where('key_tip_merenja', '=', 6)->where('key_analizator', '=', $analyzer)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
 		foreach ($data as $item) {
-			$item['vreme_prijema'] = strtotime($item['vreme_prijema']);
+			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
 		return View::make('monitoring/data')->with('dataSet', $data->toArray());
 	}

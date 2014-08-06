@@ -15,6 +15,15 @@
                {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
                {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
             </div>
+            <div class="form-group">
+             <select id="key_analizator" name="key_analizator">
+                 <option value="1">Uredjaj 1</option>
+                 <option value="2">Uredjaj 2</option>
+                 <option value="3">Uredjaj 3</option>
+                 <option value="4">Uredjaj 4</option>
+                 <option value="5">Uredjaj 5</option>
+             </select>
+            </div>
         </div>
         {{ Former::close() }}
         <div id="chart"></div>
