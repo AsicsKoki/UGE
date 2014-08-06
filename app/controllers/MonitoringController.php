@@ -23,7 +23,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -42,7 +42,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -61,7 +61,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -80,7 +80,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -99,7 +99,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -118,7 +118,7 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 		}
 
@@ -138,7 +138,7 @@ class MonitoringController extends BaseController {
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
 			$analyzer = Input::get('key_analizator');
 		} else {
-			$endDate = Carbon::now();
+			$endDate = Carbon::now()->subDays(1);
 			$startDate = Carbon::now();
 			$analyzer = 1;
 		}
