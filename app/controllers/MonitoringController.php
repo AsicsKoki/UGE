@@ -27,13 +27,18 @@ class MonitoringController extends BaseController {
 			$startDate = Carbon::now()->subDays(5);;
 		}
 
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $typeId) {
+			$data = Measure::where('key_tip_merenja', '=', $typeId)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
 
-		$data = Measure::where('key_tip_merenja', '=', 5)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			$measures[$typeId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures);
 	}
 
 	public function getHumidity()

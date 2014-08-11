@@ -21,17 +21,20 @@
 @stop
 @section('moreScripts')
 {{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
-{{HTML::script('js/momentjs/min/moment.min.js')}}
 {{HTML::script('js/bootstrap-daterangepicker/daterangepicker.js')}}
 <script type="text/javascript">
 $(function () {
     var dataSet = {{json_encode($dataSet)}};
-        dataSet = [{data: dataSet.map(function(item){
+
+    var analizator1 = [];
+    for (var key in dataSet)
+        analizator1.push({data: dataSet[key].map(function(item){
             return {
                 x: new Date(item['vreme_iz_analizatora'] * 1000), // mnozi se sa 1000 da bi se pretvorilo u milisekunde, jer u JS se tako pisu timestamp-ovi
                 y: item['vrednost']
             };
-        })}];
+        })});
+
         $('#chart').highcharts({
             title: {
                 text: '',
@@ -69,7 +72,7 @@ $(function () {
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: dataSet
+            series: analizator1
         });
 
          $('input.date-range').daterangepicker();
