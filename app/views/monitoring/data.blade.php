@@ -54,6 +54,9 @@ $(function () {
                     color: '#808080'
                 }]
             },
+            chart: {
+                zoomType: 'x'
+            },
             xAxis : {
                 title: {
                       text: "Time Span"
