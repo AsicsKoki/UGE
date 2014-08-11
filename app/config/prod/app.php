@@ -13,8 +13,8 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
-	'url' => 'http://uge.dev',
+	'url' => 'http://localhost',
 
 );
