@@ -29,7 +29,7 @@ class MonitoringController extends BaseController {
 
 		$measures = [];
 		foreach ([1, 2, 3, 4, 5] as $typeId) {
-			$data = Measure::where('key_tip_merenja', '=', $typeId)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+			$data = Measure::where('key_analizator', '=', $typeId)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
 			foreach ($data as $item) {
 				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);

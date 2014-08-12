@@ -34,8 +34,10 @@
 		{{ HTML::script('js/momentjs/min/moment.min.js') }}
 		{{ HTML::script('js/bootstrap/dist/js/bootstrap.min.js') }}
 		{{ HTML::script('js/highcharts-release/highcharts.js') }}
-		{{ HTML::script('js/highcharts-release/highcharts-more.js') }}
 		{{ HTML::script('js/highcharts-release/modules/exporting.js') }}
+		{{ HTML::script('js/highcharts-release/highcharts-more.js') }}
+		{{ HTML::script('js/highstock-release/highstock.js') }}
+		{{ HTML::script('js/highstock-release/modules/exporting.js') }}
 		{{ HTML::script('js/highcharts-release/modules/solid-gauge.src.js') }}
 		{{ HTML::script('js/datatables/media/js/jquery.dataTables.js') }}
 		@yield('main')
