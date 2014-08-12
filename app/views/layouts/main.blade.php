@@ -14,7 +14,7 @@
 			<ul class="sidebar-nav">
 				<li><a href="{{ URL::route('getTemperature') }}">Temperatura</a>
 				</li>
-				<li><a href="{{ URL::route('getHumidity') }}">Vlaznost</a>
+				<li><a href="{{ URL::route('getHumidity') }}">Vlažnost</a>
 				</li>
 				<li><a href="{{ URL::route('getCo') }}">CO</a>
 				</li>
@@ -31,6 +31,7 @@
 		@include('partials.status')
 		{{-- SCRIPTS --}}
 		{{ HTML::script('js/jquery/dist/jquery.js') }}
+		{{ HTML::script('js/moment/min/moment.min.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
 		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js') }}
 		<script src="http://code.highcharts.com/highcharts.js"></script>

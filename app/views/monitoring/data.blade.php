@@ -4,7 +4,7 @@
         {{ Former::open()->class('form-inline')->method('GET')}}
         <div>
             <div class="form-group">
-                <label for="daterange">Date Range</label>
+                <label for="daterange">Opseg datuma</label>
             </div>
             <div class="form-group">
                 {{Former::text('daterange')->label('')->class('form-control date-range')}}
@@ -12,17 +12,8 @@
             <div class="form-group">
                {{Former::hidden('date-start')}}
                {{Former::hidden('date-end')}}
-               {{Former::button('Refresh')->class('form-control btn btn-primary submit')}}
-               {{Former::button('Reset')->class('form-control btn btn-primary reset')}}
-            </div>
-            <div class="form-group">
-             <select id="key_analizator" name="key_analizator">
-                 <option value="1">Uredjaj 1</option>
-                 <option value="2">Uredjaj 2</option>
-                 <option value="3">Uredjaj 3</option>
-                 <option value="4">Uredjaj 4</option>
-                 <option value="5">Uredjaj 5</option>
-             </select>
+               {{Former::button('Osveži')->class('form-control btn btn-primary submit')}}
+               {{Former::button('Resetuj')->class('form-control btn btn-primary reset')}}
             </div>
         </div>
         {{ Former::close() }}
@@ -37,11 +28,10 @@ $(function () {
     var dataSet = {{json_encode($dataSet)}};
         dataSet = [{data: dataSet.map(function(item){
             return {
-                x: new Date(item['vreme_prijema']),
+                x: new Date(item['vreme_iz_analizatora'] * 1000), // mnozi se sa 1000 da bi se pretvorilo u milisekunde, jer u JS se tako pisu timestamp-ovi
                 y: item['vrednost']
             };
         })}];
-        console.log(dataSet);
         $('#chart').highcharts({
             title: {
                 text: '',
