@@ -19,6 +19,7 @@ class MonitoringController extends BaseController {
 
 	public function getTemperature()
 	{
+		$title = 'Temperatura';
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -28,21 +29,23 @@ class MonitoringController extends BaseController {
 		}
 
 		$measures = [];
-		foreach ([1, 2, 3, 4, 5] as $typeId) {
-			$data = Measure::where('key_analizator', '=', $typeId)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 5)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
 			foreach ($data as $item) {
 				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 			}
 
-			$measures[$typeId] = $data->toArray();
+			$measures[$analyzerId] = $data->toArray();
 		}
 
-		return View::make('monitoring/data')->with('dataSet', $measures);
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getHumidity()
 	{
+		$title = 'Vlaznost vazduha';
+
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -57,11 +60,13 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getCo()
 	{
+		$title = 'Co';
+
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -76,11 +81,14 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getCo2()
 	{
+
+		$title = 'Co2';
+
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -95,11 +103,13 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getPm10()
 	{
+		$title = 'PM10';
+
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -114,11 +124,13 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getPm25()
 	{
+		$title = 'PM25';
+
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -133,11 +145,12 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getPm03(){
 
+		$title = 'PM03';
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
@@ -154,7 +167,7 @@ class MonitoringController extends BaseController {
 		foreach ($data as $item) {
 			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
 		}
-		return View::make('monitoring/data')->with('dataSet', $data->toArray());
+		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
 	}
 
 	public function getMeasurements()

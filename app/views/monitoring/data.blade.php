@@ -1,4 +1,7 @@
 @extends('layouts/main')
+@section('moreStyles')
+	<title>{{$title}}</title>
+@stop
 @section('main')
 	<div id="wrapper">
 		{{ Former::open()->class('form-inline')->method('GET')}}
