@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('Misa-PC'),
+	'local' => array('Misa-PC', 'Konstantin-pc'),
     'prod' => array('win-9ukldu31dh6'),
 
 ));
