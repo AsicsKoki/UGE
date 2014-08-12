@@ -4,7 +4,7 @@
 @stop
 @section('main')
 	<div id="wrapper">
-		{{ Former::open()->class('form-inline')->method('GET')}}
+		{{ Former::open()->class('form-inline date-pick')->method('GET')}}
 		<div>
 			<div class="form-group">
 				<label for="daterange">Opseg datuma</label>
@@ -20,70 +20,92 @@
 			</div>
 		</div>
 		{{ Former::close() }}
-		<div id="chart"></div>
+		<div class="chart-container">
+			<div id="chart"></div>
+			<div class="no-data hide alert alert-warning" role="alert">Nema dostupnih podataka za odabrani period.</div>
+		</div>
 @stop
 @section('moreScripts')
 {{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
 {{HTML::script('js/bootstrap-daterangepicker/daterangepicker.js')}}
+{{ HTML::script('js/highstock-release/highstock.js') }}
+{{ HTML::script('js/highcharts-release/modules/exporting.js') }}
 
 <script type="text/javascript">
 $(function () {
 	var dataSet = {{json_encode($dataSet)}};
 
-	var analizator1 = [];
-	for (var key in dataSet)
-		analizator1.push({data: dataSet[key].map(function(item){
-			return {
-				x: new Date(item['vreme_iz_analizatora'] * 1000), // mnozi se sa 1000 da bi se pretvorilo u milisekunde, jer u JS se tako pisu timestamp-ovi
-				y: item['vrednost']
-			};
-		})});
+	var analizator1 = [], length = 0;;
 
-		$('#chart').highcharts('StockChart', {
-			rangeSelector: {
-				inputEnabled: $('#chart').width() > 480,
-				selected: 4
-			},
-			yAxis: {
-				labels: {
-					formatter: function () {
-						return (this.value > 0 ? ' + ' : '') + this.value + '%';
-					}
-				},
-				plotLines: [{
-					value: 0,
-					width: 2,
-					color: 'silver'
-				}]
-			},
-			plotOptions: {
-				series: {
-					compare: 'percent'
+	for (var key in dataSet) {
+		analizator1.push({
+			data: dataSet[key].map(function(item){
+				/*return {
+					x: new Date(item['vreme_iz_analizatora'] * 1000), 
+					y: item['vrednost']
+				};*/
+				return [item['vreme_iz_analizatora'] * 1000, item['vrednost']]
+			}),
+			name: 'Merač ' + key,
+			tooltip: {
+				valueDecimals: 2
+			}
+		});
+		length += dataSet[key].length;
+	}
+
+	if (!length) {
+		$('#chart').addClass('hide');
+		$('.no-data').removeClass('hide');
+	}
+
+	$('#chart').highcharts('StockChart', {
+		/*rangeSelector: {
+			inputEnabled: $('#chart').width() > 480,
+			selected: 4
+		},
+		yAxis: {
+			labels: {
+				formatter: function () {
+					return (this.value > 0 ? ' + ' : '') + this.value + '%';
 				}
 			},
-			tooltip: {
-				pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-				valueDecimals: 2
-			},
-			series: analizator1
-		});
-
-		 $('input.date-range').daterangepicker();
-		 $('input.date-range').on('apply.daterangepicker', function(ev, picker) {
-		  $('input[name=date-start]').val(picker.startDate.valueOf());
-		  $('input[name=date-end]').val(picker.endDate.valueOf());
-		});
-
-		$('button.submit').on('click', function(){
-			$(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
-			$(this).parents('form').submit();
-		});
-
-		$('button.reset').on('click', function(){
-			$(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
-			$(this).parents('form').find('input[name=date-start], input[name=date-end]').attr('disabled', 'disabled');
-			$(this).parents('form').submit();
-		});
+			plotLines: [{
+				value: 0,
+				width: 2,
+				color: 'silver'
+			}]
+		},
+		plotOptions: {
+			series: {
+				compare: 'percent'
+			}
+		},
+		tooltip: {
+			pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+			valueDecimals: 2
+		},*/
+		series : analizator1
 	});
+
+	console.log(analizator1[0]);
+
+	 $('input.date-range').daterangepicker();
+	 $('input.date-range').on('apply.daterangepicker', function(ev, picker) {
+	  $('input[name=date-start]').val(picker.startDate.valueOf());
+	  $('input[name=date-end]').val(picker.endDate.valueOf());
+	});
+
+	$('button.submit').on('click', function(){
+		$(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
+		$(this).parents('form').submit();
+	});
+
+	$('button.reset').on('click', function(){
+		$(this).parents('form').find('input.date-range').attr('disabled', 'disabled');
+		$(this).parents('form').find('input[name=date-start], input[name=date-end]').attr('disabled', 'disabled');
+		$(this).parents('form').submit();
+	});
+});
 </script>
 @stop
