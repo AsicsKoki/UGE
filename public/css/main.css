@@ -46,3 +46,11 @@ input.submit-button {
 .measureBox{
 	font-size: 30px;
 } 
+
+div.no-data {
+	margin-top: 10px;
+}
+
+form.date-pick {
+	margin: 5px;
+}
