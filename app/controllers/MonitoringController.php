@@ -55,12 +55,18 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 4)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 4)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getCo()
@@ -76,12 +82,18 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 1)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 1)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getCo2()
@@ -98,12 +110,18 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 3)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 3)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getPm10()
@@ -119,12 +137,18 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 8)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 8)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getPm25()
@@ -140,12 +164,18 @@ class MonitoringController extends BaseController {
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 7)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 7)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getPm03(){
@@ -154,20 +184,24 @@ class MonitoringController extends BaseController {
 		if (Input::get('date-start') AND Input::get('date-end')) {
 			$startDate = Carbon::createFromTimeStamp(Input::get('date-start') / 1000);
 			$endDate = Carbon::createFromTimeStamp(Input::get('date-end') / 1000);
-			$analyzer = Input::get('key_analizator');
 		} else {
 			$endDate = Carbon::now();
 			$startDate = Carbon::now()->subDays(5);;
-			$analyzer = 1;
 		}
 
 
-		$data = Measure::where('key_tip_merenja', '=', 6)->where('key_analizator', '=', $analyzer)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->take(1000)->get();
+		$measures = [];
+		foreach ([1, 2, 3, 4, 5] as $analyzerId) {
+			$data = Measure::where('key_analizator', '=', $analyzerId)->where('key_tip_merenja','=', 6)->select('vreme_iz_analizatora','vrednost')->where('vreme_iz_analizatora', '<', $endDate->toDateTimeString())->where('vreme_iz_analizatora', '>', $startDate->toDateTimeString())->get();
 
-		foreach ($data as $item) {
-			$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			foreach ($data as $item) {
+				$item['vreme_iz_analizatora'] = strtotime($item['vreme_iz_analizatora']);
+			}
+
+			$measures[$analyzerId] = $data->toArray();
 		}
-		return View::make('monitoring/data')->with('title', $title)->with('dataSet', $data->toArray());
+
+		return View::make('monitoring/data')->with('dataSet', $measures)->with('title', $title);
 	}
 
 	public function getMeasurements()
