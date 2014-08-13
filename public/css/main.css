@@ -49,6 +49,7 @@ input.submit-button {
 
 div.no-data {
 	margin-top: 10px;
+	margin-right: 10px;
 }
 
 form.date-pick {

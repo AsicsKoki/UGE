@@ -90,7 +90,20 @@ $(function () {
 
 	console.log(analizator1[0]);
 
-	 $('input.date-range').daterangepicker();
+	moment.locale('sr');
+
+	 $('input.date-range').daterangepicker({locale: {
+                applyLabel: 'Primeni',
+                cancelLabel: 'Otkaži',
+                fromLabel: 'Od',
+                toLabel: 'Do',
+                weekLabel: 'N',
+                customRangeLabel: 'Manuelni opseg',
+                daysOfWeek: moment.weekdaysMin(),
+                monthNames: moment.monthsShort(),
+                firstDay: moment.localeData()._week.dow
+            }
+        });
 	 $('input.date-range').on('apply.daterangepicker', function(ev, picker) {
 	  $('input[name=date-start]').val(picker.startDate.valueOf());
 	  $('input[name=date-end]').val(picker.endDate.valueOf());
