@@ -4,9 +4,9 @@
 		{{-- STYLES --}}
 		{{HTML::style('css/main.css')}}
 		{{HTML::style('css/sidebar.css')}}
-		{{HTML::style('js/bootstrap/dist/css/bootstrap.min.css')}}
-		{{HTML::style('js/bootstrap/dist/css/bootstrap-theme.min.css')}}
-		{{HTML::style('js/datatables/media/css/jquery.dataTables.css')}}
+		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap.min.css')}}
+		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap-theme.min.css')}}
+		{{HTML::style('bower_components/datatables/media/css/jquery.dataTables.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
@@ -30,11 +30,11 @@
 		</div>
 		@include('partials.status')
 		{{-- SCRIPTS --}}
-		{{ HTML::script('js/jquery/dist/jquery.js') }}
-		{{ HTML::script('js/moment/min/moment-with-locales.min.js') }}
-		{{ HTML::script('js/bootstrap/dist/js/bootstrap.min.js') }}
+		{{ HTML::script('bower_components/jquery/dist/jquery.js') }}
+		{{ HTML::script('bower_components/moment/min/moment-with-locales.min.js') }}
+		{{ HTML::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
 
-		{{ HTML::script('js/datatables/media/js/jquery.dataTables.js') }}
+		{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
 		@yield('main')
 		@yield('moreScripts')
 	</body>

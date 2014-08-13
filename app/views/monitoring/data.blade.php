@@ -26,10 +26,10 @@
 		</div>
 @stop
 @section('moreScripts')
-{{HTML::style('js/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
-{{HTML::script('js/bootstrap-daterangepicker/daterangepicker.js')}}
-{{ HTML::script('js/highstock-release/highstock.js') }}
-{{ HTML::script('js/highcharts-release/modules/exporting.js') }}
+{{HTML::style('bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css')}}
+{{HTML::script('bower_components/bootstrap-daterangepicker/daterangepicker.js')}}
+{{ HTML::script('bower_components/highstock-release/highstock.js') }}
+{{ HTML::script('bower_components/highcharts-release/modules/exporting.js') }}
 
 <script type="text/javascript">
 $(function () {
