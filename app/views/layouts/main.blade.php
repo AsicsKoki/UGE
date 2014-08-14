@@ -4,9 +4,9 @@
 		{{-- STYLES --}}
 		{{HTML::style('css/main.css')}}
 		{{HTML::style('css/sidebar.css')}}
-		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')}}
-		{{HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css')}}
-		{{HTML::style('//cdn.datatables.net/1.10.0/css/jquery.dataTables.css')}}
+		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap.min.css')}}
+		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap-theme.min.css')}}
+		{{HTML::style('bower_components/datatables/media/css/jquery.dataTables.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
@@ -50,14 +50,11 @@
 		</div>
 		@include('partials.status')
 		{{-- SCRIPTS --}}
-		{{ HTML::script('js/jquery/dist/jquery.js') }}
-		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
-		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js') }}
-		<script src="http://code.highcharts.com/highcharts.js"></script>
-		<script src="http://code.highcharts.com/highcharts-more.js"></script>
-		<script src="http://code.highcharts.com/modules/exporting.js"></script>
-		<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>
-		<script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+		{{ HTML::script('bower_components/jquery/dist/jquery.js') }}
+		{{ HTML::script('bower_components/moment/min/moment-with-locales.min.js') }}
+		{{ HTML::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
+
+		{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
 		@yield('main')
 		@yield('moreScripts')
 	</body>
