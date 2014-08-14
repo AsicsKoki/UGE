@@ -42,6 +42,7 @@ Route::get('registerClients', array('as' => 'registerClient', 'uses' => 'AdminPa
 Route::post('registerClient', array('as'=>'postNewClient', 'uses' => 'AdminPanelController@postNewClient'));
 Route::put('clients/{clientId}', array('as'=>'putClient', 'uses' => 'AdminPanelController@putClient'))->where('clientId', '\d+');
 Route::get('clients/{clientId}', array('as' => 'getClient',  'uses' => 'AdminPanelController@getCustomer'))->where('clientId', '\d+');
+Route::post('clients/changeClientState', array('as' => 'changeClientState',  'uses' => 'AdminPanelController@changeClientState'));
 
 
 Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'AdminPanelController@getAnalyzerList'));
@@ -49,6 +50,7 @@ Route::get('registerAnalyzer', array('as' => 'registerAnalyzer', 'uses' => 'Admi
 Route::post('registerAnalyzer', array('as'=>'postNewAnalyzer', 'uses' => 'AdminPanelController@postNewAnalyzer'));
 Route::put('analyzers/{analyzerId}', array('as'=>'putAnalyzer', 'uses' => 'AdminPanelController@putAnalyzer'))->where('analyzerId', '\d+');
 Route::get('analyzers/{analyzerId}', array('as' => 'getAnalyzer',  'uses' => 'AdminPanelController@getAnalyzer'))->where('analyzerId', '\d+');
+Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState',  'uses' => 'AdminPanelController@changeAnalyzerState'));
 
 
 
@@ -57,12 +59,15 @@ Route::get('registerHub', array('as' => 'getRegisterHub', 'uses' => 'AdminPanelC
 Route::post('registerHub', array('as'=>'postNewHub', 'uses' => 'AdminPanelController@postNewHub'));
 Route::put('hubs/{hubId}', array('as'=>'putHub', 'uses' => 'AdminPanelController@putHub'))->where('hubId', '\d+');
 Route::get('hubs/{hubId}', array('as' => 'getHub',  'uses' => 'AdminPanelController@getHub'))->where('hubId', '\d+');
+Route::post('hubs/changeHubState', array('as' => 'changeHubState',  'uses' => 'AdminPanelController@changeHubState'));
+
 
 
 
 Route::get('measuresManagement', array('as' => 'getMeasuresManagement', 'uses' => 'AdminPanelController@getMeasuresManagement'));
 Route::post('measuresManagement', array('as'=>'postNewMeasure', 'uses' => 'AdminPanelController@postNewMeasure'));
 Route::get('registerMeasure', array('as'=>'registerMeasure', 'uses' => 'AdminPanelController@getRegisterMeasure'));
+Route::post('measuresManagement/changeMeasureTypeState', array('as' => 'changeMeasureTypeState',  'uses' => 'AdminPanelController@changeMeasureTypeState'));
 
 Route::get('modbusConsole', array('as' => 'getModbusConsole', 'uses' => 'AdminPanelController@getModbusConsole'));
 Route::post('modbusConsole', array('as' => 'sendModbusQuery', 'uses' => 'AdminPanelController@sendModbusQuery'));
@@ -70,7 +75,9 @@ Route::post('modbusConsole', array('as' => 'sendModbusQuery', 'uses' => 'AdminPa
 Route::get('alarmManagement', array('as' => 'getAlarmManagement', 'uses' => 'AdminPanelController@getAlarmManagement'));
 Route::post('alarmManagement', array('as'=>'postNewAlarm', 'uses' => 'AdminPanelController@postNewAlarm'));
 Route::get('registerAlarm', array('as' => 'getRegisterAlarm', 'uses' => 'AdminPanelController@getRegisterAlarm'));
+Route::post('alarmManagement/changeAlarmState', array('as' => 'changeAlarmState',  'uses' => 'AdminPanelController@changeAlarmState'));
 
 Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'AdminPanelController@getSignalManagement'));
 Route::post('signalManagement', array('as'=>'postNewSignal', 'uses' => 'AdminPanelController@postNewSignal'));
 Route::get('registerSignal', array('as' => 'getRegisterSignal', 'uses' => 'AdminPanelController@getRegisterSignal'));
+Route::post('signalManagement/changeSignalState', array('as' => 'changeSignalState',  'uses' => 'AdminPanelController@changeSignalState'));

@@ -29,9 +29,9 @@
 					</td>
 					<td>
 						@if($customer['active']==1)
-							<button type="button" class="btn btn-danger">Deactivate</button>
+							<button data-id="{{$customer['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
 						@else
-							<button type="button" class="btn btn-success">Activate</button>
+							<button data-id="{{$customer['id']}}" type="button" class="status btn btn-success">Activate</button>
 						@endif
 					</td>
 				</tr>
@@ -42,6 +42,35 @@
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-	$('#clientsTable').dataTable();
+$('#clientsTable').dataTable();
+$('.status').on("click",function(e){
+	e.preventDefault();
+	if($(this).hasClass('btn-danger')){
+		var state = 0;
+	} else {
+		var state = 1;
+	}
+	var id = $(this).data('id');
+	var self = this;
+	$.ajax({
+		url: "clients/changeClientState",
+		type: "post",
+		data: {
+			state: state,
+			id: id
+		},
+		success: function(data){
+			if(data == 1){
+				if($(self).hasClass('btn-danger')){
+					$(self).removeClass('btn-danger');
+					$(self).addClass('btn-success').text('Activate');
+				} else {
+					$(self).removeClass('btn-success');
+					$(self).addClass('btn-danger').text('Deactivate');
+				}
+			}
+		}
+	});
+});
 </script>
 @stop

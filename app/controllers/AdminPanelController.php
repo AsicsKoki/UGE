@@ -122,7 +122,6 @@ class AdminPanelController extends BaseController {
 		}
 	}
 
-
 	public function getHubs()
 	{
 		$data = Hub::with('analyzer')->get()->toArray();
@@ -288,5 +287,46 @@ class AdminPanelController extends BaseController {
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
+	}
+	public function changeAnalyzerState(){
+		$analyzer = Analyzer::find(Input::get('id'));
+		$analyzer->active = Input::get('state');
+		$analyzer->save();
+		return 1;
+	}
+
+	public function changeClientState(){
+		$customer = Customer::find(Input::get('id'));
+		$customer->active = Input::get('state');
+		$customer->save();
+		return 1;
+	}
+
+	public function changeHubState(){
+		$hub = Hub::find(Input::get('id'));
+		$hub->active = Input::get('state');
+		$hub->save();
+		return 1;
+	}
+
+	public function changeMeasureTypeState(){
+		$measureType = MeasureType::find(Input::get('id'));
+		$measureType->active = Input::get('state');
+		$measureType->save();
+		return 1;
+	}
+
+	public function changeSignalState(){
+		$signalType = SignalType::find(Input::get('id'));
+		$signalType->active = Input::get('state');
+		$signalType->save();
+		return 1;
+	}
+
+	public function changeAlarmState(){
+		$alarmType = AlarmType::find(Input::get('id'));
+		$alarmType->active = Input::get('state');
+		$alarmType->save();
+		return 1;
 	}
 }

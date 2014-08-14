@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'uge16',
 			'username'  => 'root',
-			'password'  => 'v2R"5p{@/]#2_:K',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
