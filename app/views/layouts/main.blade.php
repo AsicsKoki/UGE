@@ -10,6 +10,9 @@
 		@yield('moreStyles')
 	</head>
 	<body>
+		<header>
+			<img src="img/Baner_header.png" class="headerImage">
+		</header>
 		<nav class="navbar navbar-default" role="navigation">
 				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -57,5 +60,8 @@
 		{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
 		@yield('main')
 		@yield('moreScripts')
+		<footer id="footer">
+			<img src="img/Baner_footer.png" class="footerImage">
+		</footer>
 	</body>
 </html>
