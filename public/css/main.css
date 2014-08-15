@@ -56,7 +56,7 @@ input.submit-button {
 }
 #footer {
 	z-index: 9999;
-	position:relative;
+	position:absolute;
 	left:0px;
 	bottom:-60%;
 	height:100px;

@@ -24,8 +24,12 @@
 		<div class="row">
 			<div class="measureBox" style="left:40%; position: relative; width:20%"><span id="Hz">49.27</span> Hz</div>
 		</div>
+    </div>
 @stop
 @section('moreScripts')
+        {{ HTML::script('bower_components/highcharts-release/highcharts.js') }}
+        {{ HTML::script('bower_components/highcharts-release/highcharts-more.js') }}
+        {{ HTML::script('bower_components/highcharts-release/modules/solid-gauge.js') }}
 <script type="text/javascript">
 "use strict"
 	$(function () {

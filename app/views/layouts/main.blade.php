@@ -34,7 +34,7 @@
 							<li><a href="{{ URL::route('monitoring') }}">Monitoring</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							@if (1)
+							@if (Auth::user()->account_types_id)
 								<li><a href="{{ URL::route('analyzers') }}">Admin Panel</a>
 								</li>
 							@endif
