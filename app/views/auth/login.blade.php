@@ -9,6 +9,11 @@
 	</head>
 	<body class="login">
 		<div class="content">
+			<div class="container login-image col-xs-12 col-md-12">
+				<div class="row ">
+					<img class="" src="img/baner.png" alt="United Green Energy" />
+				</div>
+			</div>
 			<div class="login-form" role="form">
 				{{ Former::open()->method('POST')->rules(array(
 					'username'              => 'required|min:3',
