@@ -1,29 +1,31 @@
 @extends('layouts/main')
 @section('main')
-	<div id="wrapper">
-		<!-- Sidebar -->
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li><a href="{{ URL::route('controlPanel') }}">Dashboard</a>
-				</li>
-				<li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
-				</li>
-			</ul>
-		</div>
-		<div class="row" style="position:relative; left: 20%; width: 50%; background-color:#0F98D8;">
-			<div class="measureBox pull-left"><span id="kWh">6371</span> kWh</div>
-			<div class="measureBox pull-right"><span id="kVArh">6636</span> kVArh</div>
-		</div>
-		<div class="row" style="position:relative; left: 20%; width: 50%; background-color:#0F98D8;">
-		</div>
-		<div class='row'>
-			<div class="widget" id="voltage"></div>
-			<div class="widget" id="power"></div>
-			<div class="widget" id="powerMax"></div>
-		</div>
-		<div class="row">
-			<div class="measureBox" style="left:40%; position: relative; width:20%"><span id="Hz">49.27</span> Hz</div>
-		</div>
+    <div class="col-xs-12 col-sm-9">
+        <div class="row">
+            <div class="alert alert-info current-info" role="alert">
+                <div class="measureBox pull-left"><span id="kWh">6371</span> kWh</div>
+                <div class="measureBox pull-right"><span id="kVArh">6636</span> kVArh</div>
+            </div>
+        </div>
+        <div class="row gauges">
+            <div class="col-md-4">
+                <div class="widget" id="voltage"></div>
+                <label for="">Trenutni napon (V)</label>
+            </div>
+            <div class="col-md-4">
+                <div class="widget" id="power"></div>
+                <label for="">Trenutni snaga (kW)</label>
+            </div>
+            <div class="col-md-4">
+                <div class="widget" id="powerMax"></div>
+                <label for="">Maksimalna snaga (kW)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="alert alert-info current-info" role="alert">
+                <div class="measureBox"><span id="Hz">49.27</span> Hz</div>
+            </div>
+        </div>
     </div>
 @stop
 @section('moreScripts')
@@ -158,11 +160,11 @@ var gaugeOptionsPower = {
 	    series: [{
 	        name: 'Napon',
 	        data: [219],
-	        dataLabels: {
+	        /*dataLabels: {
 	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                   	'<span style="font-size:12px;color:black">trentunti napon (V)</span></div>'
-	        },
+                   	'<span style="font-size:12px;color:black">Trenutni napon (V)</span></div>'
+	        },*/
 	        tooltip: {
 	            valueSuffix: 'V'
 	        }
@@ -183,11 +185,11 @@ var gaugeOptionsPower = {
 	    series: [{
 	        name: 'Power',
 	        data: [1],
-	        dataLabels: {
+	        /*dataLabels: {
 	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                   	'<span style="font-size:12px;color:black">Trentuntna snaga (kW)</span></div>'
-	        },
+                   	'<span style="font-size:12px;color:black">Trenutna snaga (kW)</span></div>'
+	        },*/
 	        tooltip: {
 	            valueSuffix: ' Maximum Power'
 	        }
@@ -265,11 +267,11 @@ var gaugeOptionsPowerMax = {
 	    series: [{
 	        name: 'Max Power',
 	        data: [3.1],
-	        dataLabels: {
+	        /*dataLabels: {
 	        	format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
                    	'<span style="font-size:12px;color:black">Maksimalna snaga(kW)</span></div>'
-	        },
+	        },*/
 	        tooltip: {
 	            valueSuffix: 'kW'
 	        }

@@ -29,7 +29,7 @@ input.submit-button {
 	margin-top: 15px;
 }
 .widget{
-	margin-left: 80px;
+	/* margin-left: 80px; */
 	position: relative;
 	float: left;
 	width: 255px;
@@ -84,4 +84,16 @@ body.login {
 
 .login-form label {
 	color: white;
+}
+
+div.current-info {
+	min-height: 70px;
+}
+
+div.gauges > div {
+	text-align: center;
+}
+
+div.gauges label {
+	margin-right: 20px;
 }
