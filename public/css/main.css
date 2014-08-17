@@ -64,6 +64,10 @@ input.submit-button {
 	background:#999;
 }
 
+.submit-btn {
+	margin-top: 10px;
+}
+
 /* IE 6 */
 * html #footer {
    position:relative;

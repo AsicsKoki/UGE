@@ -17,7 +17,9 @@
 				{{Former::text('username')->required()->label('username')->placeholder('Username')->class('form-control')}}
 				{{Former::password('password')->required()->label('password')->placeholder('Password')->class('form-control')}}
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::submit('Sign in')->class('form-control')}}
+				<div class="control-group submit-btn">
+					{{Former::submit('Sign in')->class('form-control')}}
+				</div>
 				{{ Former::close() }}
 			</div>
 		</div>
