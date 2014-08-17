@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="login">
 	<head>
 		{{-- STYLES --}}
 		{{HTML::style('css/main.css')}}
@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="content">
-			<div class="login-form">
+			<div class="login-form" role="form">
 				{{ Former::open()->method('POST')->rules(array(
 					'username'              => 'required|min:3',
 					'password'              => 'required|min:3',
