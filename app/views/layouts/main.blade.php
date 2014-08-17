@@ -11,7 +11,14 @@
 	</head>
 	<body>
 		<header>
-			<img src="img/Baner_header.png" class="headerImage">
+			<div class="row">
+				<img class="col-xs-4 col-md-4" src="img/baner.png" alt="United Green Energy" />
+				<address class="col-xs-8 col-md-8">
+				  <strong class="name text-uppercase">United <span class="green">Green</span> Energy </strong><br>
+				  <label>Vaša potrošnja, naša briga!</label><br>
+				  <a href="http://www.uge.rs">www.uge.rs</a>
+			  	</address>
+			</div>
 		</header>
 		<nav class="navbar navbar-default" role="navigation">
 				<div class="container-fluid">
@@ -45,17 +52,23 @@
 
 		{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav">
-              <li><a href="{{ URL::route('controlPanel') }}">Control Panel</a>
+            <ul class="nav navbar-default ">
+              <li class="{{Route::is('controlPanel') ? 'bold' : ''}}"><a href="{{ URL::route('controlPanel') }}">Control Panel</a>
 				</li>
-				<li><a href="{{ URL::route('measurements') }}">Current Measurements</a>
+				<li class="{{Route::is('measurements') ? 'bold' : ''}}"><a href="{{ URL::route('measurements') }}">Current Measurements</a>
 				</li>
             </ul>
         </div>
 		@yield('main')
 		@yield('moreScripts')
-		<footer id="footer">
-			<img src="img/Baner_footer.png" class="footerImage">
+		<footer id="footer" class="panel-footer">
+			<address>
+			  <strong class="text-uppercase">United Green Energy DOO Niš</strong><br>
+			  Generala Milojka Lešjanina 43/15<br>
+			  PIB 106741513<br>
+			  <abbr title="Phone">Tel:</abbr> (+381) 064-236-31-31 <br>
+			  Email: <a href="mailto:info@uge.rs">info@uge.rs</a>
+		  	</address>
 		</footer>
 	</body>
 </html>

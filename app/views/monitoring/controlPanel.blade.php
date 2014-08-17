@@ -10,15 +10,15 @@
         <div class="row gauges">
             <div class="col-md-4">
                 <div class="widget" id="voltage"></div>
-                <label for="">Trenutni napon (V)</label>
+                <label for="">Trenutni napon <span class="label label-default">V</span></label>
             </div>
             <div class="col-md-4">
                 <div class="widget" id="power"></div>
-                <label for="">Trenutni snaga (kW)</label>
+                <label for="">Trenutni snaga <span class="label label-default">kW</span></label>
             </div>
             <div class="col-md-4">
                 <div class="widget" id="powerMax"></div>
-                <label for="">Maksimalna snaga (kW)</label>
+                <label for="">Maksimalna snaga <span class="label label-default">kW</span></label>
             </div>
         </div>
         <div class="row">
@@ -320,6 +320,9 @@ var gaugeOptionsPowerMax = {
     		$('#Hz').html((value3 + increment3).toFixed(2));
     	}
     }, 20000);
+
+    $('text:contains(Highcharts.com)').hide();
+
 });
 </script>
 @stop
