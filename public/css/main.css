@@ -71,18 +71,29 @@ input.submit-button {
    top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
 }
 
-body.login {
-	background: url(../img/back.jpg) no-repeat center center fixed;
+body {
+	background: url(../img/back_op.png) no-repeat center center fixed;
   	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
 }
 
+body.login {
+	background: url(../img/back.jpg) no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	opacity: 0.1;
+  	bac
+}
+
 footer#footer {
   	min-height: 150px;
 	background: url(../img/Baner_footer_new.png) 50% 50%;
 	background-size: 100% 100%;
+	background-color: white;
 }
 
 header div.row img {
@@ -93,6 +104,7 @@ header div.row img {
 header {
 	min-height: 150px;
 	background: url(../img/Baner_footer_new.png) 50% 50%;
+	background-color: white;
 	background-size: 100% 100%;
     -moz-transform: scaleY(-1);
     -o-transform: scaleY(-1);
@@ -148,4 +160,20 @@ div.gauges label {
 
 .navbar-default li.bold {
 	font-weight: bold;
+}
+
+.clear {
+	clear:both;
+}
+
+div.main {
+	background-color: white;
+	padding: 20px;
+	border-radius: 4px;
+	position: relative;
+	right: 5px;
+}
+
+header, footer {
+	opacity: 0.85;
 }

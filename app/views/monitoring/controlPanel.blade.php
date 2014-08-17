@@ -1,6 +1,6 @@
 @extends('layouts/main')
 @section('main')
-    <div class="col-xs-12 col-sm-9">
+    <div class="col-xs-12 col-sm-9 main">
         <div class="row">
             <div class="alert alert-info current-info" role="alert">
                 <div class="measureBox pull-left"><span id="kWh">6371</span> kWh</div>
@@ -10,14 +10,17 @@
         <div class="row gauges">
             <div class="col-md-4">
                 <div class="widget" id="voltage"></div>
+                <div class="clear"></div>
                 <label for="">Trenutni napon <span class="label label-default">V</span></label>
             </div>
             <div class="col-md-4">
                 <div class="widget" id="power"></div>
+                <div class="clear"></div>
                 <label for="">Trenutni snaga <span class="label label-default">kW</span></label>
             </div>
             <div class="col-md-4">
                 <div class="widget" id="powerMax"></div>
+                <div class="clear"></div>
                 <label for="">Maksimalna snaga <span class="label label-default">kW</span></label>
             </div>
         </div>
