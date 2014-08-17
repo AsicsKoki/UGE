@@ -16,7 +16,7 @@
             <div class="col-md-4">
                 <div class="widget" id="power"></div>
                 <div class="clear"></div>
-                <label for="">Trenutni snaga <span class="label label-default">kW</span></label>
+                <label for="">Trenutna snaga <span class="label label-default">kW</span></label>
             </div>
             <div class="col-md-4">
                 <div class="widget" id="powerMax"></div>
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="alert alert-info current-info" role="alert">
                 <div class="measureBox"><span id="Hz">49.27</span> Hz</div>
-            </div>
+            </div> 
         </div>
     </div>
 @stop
