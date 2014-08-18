@@ -27,7 +27,7 @@
         <div class="row">
             <div class="alert alert-info current-info" role="alert">
                 <div class="measureBox"><span id="Hz">49.27</span> Hz</div>
-            </div> 
+            </div>
         </div>
     </div>
 @stop

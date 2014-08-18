@@ -37,7 +37,7 @@ input.submit-button {
 	height: 250px;
 }
 .panelContent{
-	position: relative;
+	position: absolute;
 	width: 70%;
 	left: 25%;
 }

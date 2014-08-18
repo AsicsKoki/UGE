@@ -1,4 +1,4 @@
-@extends('layouts/main')
+@extends('layouts/admin')
 @section('main')
 	<div class='col-md-6'>
 		{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putUser', ['userId'=>$user->id]))

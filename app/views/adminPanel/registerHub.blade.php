@@ -1,4 +1,4 @@
-@extends('layouts/main')
+@extends('layouts/admin')
 @section('main')
 	<div>
 	@include('partials.sidebar')
