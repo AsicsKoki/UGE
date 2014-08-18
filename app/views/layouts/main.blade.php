@@ -39,6 +39,11 @@
 							<li><a href="#">About us</a></li>
 							<li><a href="#">Contact</a></li>
 							<li><a href="{{ URL::route('monitoring') }}">Monitoring</a></li>
+							@if (Auth::user()->account_types_id)
+								<li><a href="{{ URL::route('analyzers') }}">Admin Panel</a>
+								</li>
+							@endif
+							<li><a href="{{ URL::route('logout') }}">Log out</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
