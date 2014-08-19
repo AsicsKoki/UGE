@@ -19,7 +19,7 @@ class MonitoringController extends BaseController {
 
 	public function getControlPanel()
 	{
-		$latestVoltage = Measure::select('value')
+		$latestVoltage = Measure::select('value');
 
 		// $latestPower = Analyzer::with(['measures' => function($query){
 		// $query->orderBy('vreme_iz_analizatora','DESC')->first()->where('key_tip_merenja', '=', 10);

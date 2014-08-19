@@ -3,7 +3,7 @@
 	<div>
 	@include('partials.sidebar')
 	</div>
-	<div class="panelContent">
+	<div class="panelContent col-xs-8">
 		<a class="btn btn-primary" href="{{ URL::route('getRegisterHub') }}">New Hub</a>
 		<table id="analyzersTable" class="table table-hover display">
 			<thead>

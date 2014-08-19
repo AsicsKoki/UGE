@@ -3,11 +3,13 @@
 	<div>
 	@include('partials.sidebar')
 	</div>
-	<div class="panelContent">
-		<a class="btn btn-primary" href="{{ URL::route('registerClient') }}">New Client</a>
+	<div class="panelContent clients container col-xs-8">
+		<div class="row col-xs-8">
+			<a class="btn btn-primary new-entry" href="{{ URL::route('registerClient') }}">New Client</a>
+		</div>
 		<table id="clientsTable" class="table table-hover display">
 			<thead>
-				<th>id</th>
+				<th>Id</th>
 				<th>Name</th>
 				<th>Users</th>
 				<th>Contact</th>
@@ -21,8 +23,9 @@
 					<td>{{$customer['name']}}</td>
 					<td>
 						@foreach($customer['user'] as $user)
-							{{$user['name']}}</td>
+							{{$user['name']}}<span class="comma">,</span>
 						@endforeach
+					</td>
 					<td>{{$customer['contact_person']}}</td>
 					<td>
 						<a class="btn btn-primary" href="{{ URL::route('getClient', array('clientId'=>$customer['id'])) }}">Edit</a>

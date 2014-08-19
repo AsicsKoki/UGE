@@ -37,9 +37,11 @@ input.submit-button {
 	height: 250px;
 }
 .panelContent{
-	position: absolute;
+	/* position: absolute;
 	width: 70%;
-	left: 25%;
+	left: 25%; */
+	background-color: white;
+	border-radius: 4px;
 }
 .users-list{
 	width: 70%;
@@ -54,9 +56,9 @@ input.submit-button {
 }
 #footer {
 	z-index: 9999;
-	position:absolute;
+	position:fixed;
 	left:0px;
-	bottom:-20%;
+	bottom:0px;
 	height:100px;
 	width:100%;
 	background:#999;
@@ -193,4 +195,25 @@ div.login-image {
 	/* opacity: 0.5; */
 	padding: 12px;
 	/*background-color: rgba(255, 255, 255, 0.6);*/
+}
+
+table#clientsTable {
+	margin-bottom: 10px;
+}
+
+a.new-entry {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.panelContent.clients div.dataTables_paginate {
+	margin-bottom: 10px;
+}
+
+.panelContent.clients table td span.comma:last-child {
+	display:none;
+}
+
+div.content-container {
+	min-height: 1200px;
 }

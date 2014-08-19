@@ -3,8 +3,8 @@
 	<div>
 	@include('partials.sidebar')
 	</div>
-	<div class="panelContent">
-		<a class="btn btn-primary" href="{{ URL::route('getRegisterSignal') }}">New Signal</a>
+	<div class="panelContent col-xs-8">
+		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterSignal') }}">New Signal</a>
 		<table id="analyzersTable" class="table table-hover display">
 			<thead>
 				<th>id</th>

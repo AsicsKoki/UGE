@@ -4,8 +4,6 @@
         </li>
         <li class="{{Route::is('getHubs') ? 'bold' : ''}}"><a href="{{ URL::route('getHubs') }}">Hubs</a>
         </li>
-        <li class="{{Route::is('getUsers') ? 'bold' : ''}}"><a href="{{ URL::route('getUsers') }}">Users</a>
-        </li>
         <li class="{{Route::is('clients') ? 'bold' : ''}}"><a href="{{ URL::route('clients') }}">Clients</a>
         </li>
          <li class="{{Route::is('getMeasuresManagement') ? 'bold' : ''}}"><a href="{{ URL::route('getMeasuresManagement') }}">Measures Management</a>
