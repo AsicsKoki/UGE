@@ -22,7 +22,35 @@
 				{{Former::submit('Update customer')->class('form-control')}}
 			{{ Former::close() }}
 		</div>
+		<div class='col-md-6'>
+			<div class="users-list panelContent">
+		<div class="form-group pull-right">
+			<a href="{{URL::route('postNewUser')}}" class="btn btn-primary">Create New User</a>
+		</div>
+		<table class='table table-striped'>
+			<thead>
+				<th>Name</th>
+				<th>Account Type</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</thead>
+			<tbody>
+				@foreach ($users as $user)
+					<tr>
+						<td>{{$user->name}}</td>
+						<td>{{$user->username}}</td>
+						<td><a class="btn btn-primary" href="{{ URL::route('getUser', array('userId'=>$user->id)) }}">Edit</a></td>
+						<td><a class="btn btn-danger" href="{{ URL::route('deleteUser', array('userId'=>$user->id)) }}">Delete</a></td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+		</div>
 	</div>
 @stop
 @section('moreScripts')
+<script>
+	$('div.users-list table').dataTable();
+</script>
 @stop

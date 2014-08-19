@@ -49,7 +49,8 @@ class AdminPanelController extends BaseController {
 	}
 
 	public function getCustomer($cid) {
-		return View::make('adminPanel.customerUpdate')->with('customer', Customer::find($cid));
+		$users = User::where('customers_id','=', $cid)->with('account_type');
+		return View::make('adminPanel.customerUpdate')->with('customer', Customer::find($cid))->with('users', $users);
 	}
 
 	public function putClient($cid)
