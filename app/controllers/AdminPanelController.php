@@ -73,7 +73,10 @@ class AdminPanelController extends BaseController {
 
 	public function getRegisterAnalyzer()
 	{
-		return View::make('adminPanel.newAnalyzer');
+		return View::make('adminPanel.newAnalyzer')
+				->with('hubs', Hub::lists('id', 'name'))
+				->with('customers', Customer::lists('id', 'name'))
+				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'));
 	}
 
 	private $validationRulesAnalyzer = [
