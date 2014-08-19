@@ -31,7 +31,7 @@
 					{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
 					
-					{{Former::text('alarm_message_period')->label('Alarm Message Period')->placeholder('Alarm Message Period')->class('form-control')}}
+					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Message Period')->class('form-control')}}
 				</div>
 
 				<div class="col-xs-6">
