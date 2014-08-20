@@ -31,6 +31,7 @@ class Analyzer extends Eloquent {
 
 	public static function createAnalyzer($data){
 		$analyzer = new Analyzer($data);
-   		return $analyzer->save();
+   		$analyzer->save();
+   		return $analyzer;
 	}
 }
