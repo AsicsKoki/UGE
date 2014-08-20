@@ -1,8 +1,6 @@
 @extends('layouts/admin')
 @section('main')
-	<div>
-	@include('partials.sidebar')
-	</div>
+@include('partials.sidebar')
 	<div class="panelContent container col-xs-8">
 		<div class="new-analyzer register-form">
 			{{ Former::open()->class('analyzer row')->method('POST')->enctype('multipart/form-data')->action(URL::route('postNewAnalyzer'))
@@ -17,7 +15,7 @@
 						'customers_id'           => 'required',
 						'active'                 => 'required',
 					])}}
-				<div class="col-xs-6">
+				<div class="col-md-6">
 					{{Former::text('name')->label('name')->placeholder('Analyzer name')->class('form-control')}}
 
 					{{Former::text('description')->label('Description')->placeholder('Analyzer description')->class('form-control')}}
@@ -34,7 +32,7 @@
 					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Message Period')->class('form-control')}}
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-md-6">
 
 					{{Former::text('measures_before_alarm')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
@@ -72,7 +70,11 @@
 
 					{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
+
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
+				</div>
+				<div class="col-md-12">
+					sadasds
 				</div>
 				{{Former::submit('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}

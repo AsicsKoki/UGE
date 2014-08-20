@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 @section('main')
 @include('partials.sidebar')
-	<div class="panelContent">
+	<div class="panelContent container col-xs-8">
 		<div class='col-md-6'>
 			{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putAnalyzer', ['analyzerId'=>$analyzer->id]))
 				->rules([
@@ -42,7 +42,7 @@
 
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::submit('Update customer')->class('form-control')}}
+				{{Former::submit('Update customer')->class('form-control btn btn-info submit-button')}}
 			{{ Former::close() }}
 		</div>
 	</div>
