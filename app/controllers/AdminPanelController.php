@@ -77,12 +77,19 @@ class AdminPanelController extends BaseController {
 				->with('hubs', Hub::lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
 				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
-				->with('measures', DB::table('measure_types')->lists('id', 'name_en'));
+				/*->with('measures', DB::table('measure_types')->lists('id', 'name_en'))*/;
 	}
 
 	public function getAnalyzerMeasureTypes($aid) {
-		$res = MeasureTypeInAnalyzer::where('analyzers_id', $aid)->lists('measure_types_id');
-		return $res;
+		$res = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $aid)->lists('measure_types_id');
+
+		if (count($res))
+			$measures = DB::table('measure_types')->whereIn('id', $res)->lists('id', 'name_en');
+		else
+			$measures = [];
+
+		return View::make('partials.measures')
+				->with('measures', $measures);
 	}
 
 	private $validationRulesAnalyzer = [

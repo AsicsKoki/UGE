@@ -31,7 +31,7 @@
 					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Message Period')->class('form-control')}}
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-6" >
 
 					{{Former::text('measures_before_alarm')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
@@ -72,60 +72,7 @@
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
-				<div class="col-md-12">
-					<table id="measureTableHidden" class="table table-hover hide">
-						<tbody>
-							@foreach($measures as $key => $measure)
-								<tr>
-									<td>
-										<input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
-									<td class="text-center">
-										<input type="checkbox" name="long_message_position[]" value="1"><br>
-										<input type="hidden" name="long_message_position[]" value="0">
-									</td>
-									<td class="text-center">
-										<input type="checkbox" name="short_message_position[]" value="1"><br>
-										<input type="hidden" name="short_message_position[]" value="0">
-									</td>
-									<td class="text-center">
-										<input type="checkbox" name="current_message_position[]" value="1"><br>
-										<input type="hidden" name="current_message_position[]" value="0">
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-				<div class="col-md-12">
-					<table id="measureTable" class="table table-hover display">
-						<thead>
-							<th>Measure type</th>
-							<th>Long message postition <br><input type="checkbox"></th>
-							<th>Short message position <br><input type="checkbox"></th>
-							<th>Current message postition <br><input type="checkbox"></th>
-						</thead>
-						<tbody>
-							@foreach($measures as $key => $measure)
-								<tr>
-									<td>
-										<input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
-									<td class="text-center">
-										<input type="checkbox" name="long_message_position[]" value="1"><br>
-										<input type="hidden" name="long_message_position[]" value="0">
-									</td>
-									<td class="text-center">
-										<input type="checkbox" name="short_message_position[]" value="1"><br>
-										<input type="hidden" name="short_message_position[]" value="0">
-									</td>
-									<td class="text-center">
-										<input type="checkbox" name="current_message_position[]" value="1"><br>
-										<input type="hidden" name="current_message_position[]" value="0">
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
+				
 				{{Former::button('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}
 		</div>
@@ -133,23 +80,8 @@
 @stop
 @section('moreScripts')
 <script>
-	$('#measureTable tbody tr').each(function(index, row) {
-		$(row).attr('data-index', index);
-	});
-
-	$('#measureTableHidden tbody tr').each(function(index, row) {
-		$(row).attr('data-index', index);
-	});
-
-
-	var table = $('#measureTable').dataTable({
-	  "aoColumns": [
-	  null,
-	  { "bSortable": false },
-	  { "bSortable": false },
-	  { "bSortable": false },
-	  ]
-	});
+	
+	var table;
 	$('button.submit-button').on('click', function() {
 		$('#measureTableHidden').find('input[type=checkbox]').each(function(input) {
 		 	if ($(input).is(':checked'))
@@ -161,40 +93,67 @@
 	 	$(this).parents('form').submit();
 	});
 
-	$('table#measureTable').on('click', 'td input[type=checkbox]', function() {
-		var index = $(this).parents('tr').attr('data-index'),
-			name = $(this).attr('name');
-
-		$('table#measureTableHidden tr[data-index="'+index+'"] input[name="'+name+'"]').click();
-	});
-
-	$('table#measureTable thead input[type=checkbox]').click(function() {
-		var columnIndex = $(this).parent().index()
-			checked = $(this).is(':checked');
-
-		table.fnGetNodes().forEach(function(item) {
-			var index = $(item).attr('data-index');
-			if (checked) {
-				$(item).find('td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
-				$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
-			}
-			else {
-				$(item).find('td:eq('+columnIndex+') input[type=checkbox]:checked').click();
-				$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+')  input[type=checkbox]:checked').click();
-			}
-		})
-	})
-
-	$('select[name=analyzer_types_id]').change(function() {
-		var id = $(this).val();
-		$.ajax({
+	var getMeasures = function(id) {
+		 $.ajax({
 				url: 'analyzerMeasureTypes/' + id,
 				type: 'get',
 				data: {},
 				success: function (data) {
-					console.log(data);
+					$('#measureTable').parent().remove();
+					$('#measureTableHidden').parent().remove();
+					
+					$('button.submit-button').before(data);
+					
+					$('#measureTable tbody tr').each(function(index, row) {
+						$(row).attr('data-index', index);
+					});
+
+					$('#measureTableHidden tbody tr').each(function(index, row) {
+						$(row).attr('data-index', index);
+					});
+
+					table = $('#measureTable').dataTable({
+					  "aoColumns": [
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false },
+					  { "bSortable": false },
+					  ]
+					});
+
+					$('table#measureTable').on('click', 'td input[type=checkbox]', function() {
+						var index = $(this).parents('tr').attr('data-index'),
+							name = $(this).attr('name');
+
+						$('table#measureTableHidden tr[data-index="'+index+'"] input[name="'+name+'"]').click();
+					});
+
+					$('table#measureTable thead input[type=checkbox]').click(function() {
+						var columnIndex = $(this).parent().index()
+							checked = $(this).is(':checked');
+
+						table.fnGetNodes().forEach(function(item) {
+							var index = $(item).attr('data-index');
+							if (checked) {
+								$(item).find('td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+								$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+							}
+							else {
+								$(item).find('td:eq('+columnIndex+') input[type=checkbox]:checked').click();
+								$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+')  input[type=checkbox]:checked').click();
+							}
+						})
+					})
+
 				}
 			});
+	}
+
+	getMeasures($('select[name=analyzer_types_id]').val());
+
+	$('select[name=analyzer_types_id]').change(function() {
+		var id = $(this).val();
+		getMeasures(id);
 	})
 
 </script>
