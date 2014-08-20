@@ -99,11 +99,11 @@ class AdminPanelController extends BaseController {
 		    $this->validationRulesAnalyzer
 		);
 		if($validator->passes()){
-			$analyzer = Analyzer::createAnalyzer(Input::all());
-			$measureTypesId = Input::all('measure_types_id');
-			$lMessPos = Input::all('long_message_position');
-			$sMessPos = Input::all('short_message_position');
-			$cMessPos = Input::all('current_message_position');
+			$analyzer = Analyzer::createAnalyzer(Input::get());
+			$measureTypesId = Input::get('measure_types_id');
+			$lMessPos = Input::get('long_message_position');
+			$sMessPos = Input::get('short_message_position');
+			$cMessPos = Input::get('current_message_position');
 
 			foreach ($measureTypesId as $key => $typeId) {
 				MeasureTypeInAnalyzer::createMeasure($lMessPos[$key], $sMessPos[$key], $cMessPos[$key], $analyzer->id, $typeId);

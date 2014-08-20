@@ -83,16 +83,26 @@
 						<tbody>
 							@foreach($measures as $key => $measure)
 								<tr>
-									<td><input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
-									<td class="text-center"><input type="checkbox" name="long_message_position[]" value="1"><br></td>
-									<td class="text-center"><input type="checkbox" name="short_message_position[]" value="1"><br></td>
-									<td class="text-center"><input type="checkbox" name="current_message_position[]" value="1"><br></td>
+									<td>
+										<input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
+									<td class="text-center">
+										<input type="checkbox" name="long_message_position[]" value="1"><br>
+										<input type="hidden" name="long_message_position[]" value="0">
+									</td>
+									<td class="text-center">
+										<input type="checkbox" name="short_message_position[]" value="1"><br>
+										<input type="hidden" name="short_message_position[]" value="0">
+									</td>
+									<td class="text-center">
+										<input type="checkbox" name="current_message_position[]" value="1"><br>
+										<input type="hidden" name="current_message_position[]" value="0">
+									</td>
 								</tr>
 							@endforeach
 						</tbody>
 					</table>
 				</div>
-				{{Former::submit('Submit')->class('form-control submit-button btn btn-info')}}
+				{{Former::button('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}
 		</div>
 	</div>
@@ -100,5 +110,14 @@
 @section('moreScripts')
 <script>
 	$('#measureTable').dataTable();
+	$('button.submit-button').on('click', function() {
+		 $('#measureTable').find('input[type=checkbox]').each(function(input) {
+		 	if ($(input).is(':checked'))
+		 		$(input).siblings('input[type=hidden]').attr('disabled', 'disabled');
+		 	else
+		 		$(input).siblings('input[type=hidden]').removeAttr('disabled');
+		 	$(this).parents('form').submit();
+		 })
+	})
 </script>
 @stop
