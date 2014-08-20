@@ -122,14 +122,15 @@ class AdminPanelController extends BaseController {
 
 	public function getAnalyzer($aid) {
 
-		MeasureType::with(['measureTypeInAnalyzer' => function($query) use ($aid)
+		$measures = MeasureType::with(['measureTypeInAnalyzer' => function($query) use ($aid)
 			{
 			    $query->where('analyzers_id', $aid);
 
 			}] )->get()->toArray();
 
 		return View::make('adminPanel.analyzerUpdate')
-				->with('analyzer', Analyzer::find($aid));
+				->with('analyzer', Analyzer::find($aid))
+				->with('measures', $measures);
 	}
 
 	public function putAnalyzer($aid)
