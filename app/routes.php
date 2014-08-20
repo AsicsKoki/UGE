@@ -52,6 +52,7 @@ Route::put('analyzers/{analyzerId}', array('as'=>'putAnalyzer', 'uses' => 'Admin
 Route::get('analyzers/{analyzerId}', array('as' => 'getAnalyzer',  'uses' => 'AdminPanelController@getAnalyzer'))->where('analyzerId', '\d+');
 Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState',  'uses' => 'AdminPanelController@changeAnalyzerState'));
 
+Route::get('analyzerMeasureTypes/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypes'))->where('aid', '\d+');
 
 
 Route::get('hubs', array('as' => 'getHubs', 'uses' => 'AdminPanelController@getHubs'));

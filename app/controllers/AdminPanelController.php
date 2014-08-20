@@ -80,6 +80,11 @@ class AdminPanelController extends BaseController {
 				->with('measures', DB::table('measure_types')->lists('id', 'name_en'));
 	}
 
+	public function getAnalyzerMeasureTypes($aid) {
+		$res = MeasureTypeInAnalyzer::where('analyzers_id', $aid)->lists('measure_types_id');
+		return $res;
+	}
+
 	private $validationRulesAnalyzer = [
 		'name'                   => 'required|min:3',
 		'modbus_slave_address'   => 'required',

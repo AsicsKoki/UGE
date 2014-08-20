@@ -185,5 +185,17 @@
 		})
 	})
 
+	$('select[name=analyzer_types_id]').change(function() {
+		var id = $(this).val();
+		$.ajax({
+				url: 'analyzerMeasureTypes/' + id,
+				type: 'get',
+				data: {},
+				success: function (data) {
+					console.log(data);
+				}
+			});
+	})
+
 </script>
 @stop
