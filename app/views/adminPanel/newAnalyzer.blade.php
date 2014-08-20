@@ -73,7 +73,7 @@
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
 				<div class="col-md-12">
-					<table id="measureTableHidden" class="table table-hover">
+					<table id="measureTableHidden" class="table table-hover hide">
 						<tbody>
 							@foreach($measures as $key => $measure)
 								<tr>
@@ -97,7 +97,7 @@
 					</table>
 				</div>
 				<div class="col-md-12">
-					<table id="measureTable" class="table table-hover hide">
+					<table id="measureTable" class="table table-hover display">
 						<thead>
 							<th>Measure type</th>
 							<th>Long message postition <br><input type="checkbox"></th>
