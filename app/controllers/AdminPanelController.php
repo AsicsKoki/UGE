@@ -85,7 +85,7 @@ class AdminPanelController extends BaseController {
 		'modbus_slave_address'   => 'required',
 		'current_measure_period' => 'required',
 		'short_message_period'   => 'required',
-		'alarm_message_period'   => 'required',
+		'alarm_measure_period'   => 'required',
 		'measures_before_alarm'  => 'required',
 		'hubs_id'                => 'required',
 		'input_position'         => 'required',
@@ -106,9 +106,7 @@ class AdminPanelController extends BaseController {
 			$cMessPos = Input::all('current_message_position');
 
 			foreach ($measureTypesId as $key => $typeId) {
-				$lMessPos[$key];
-				$sMessPos[$key];
-				$cMessPos[$key];
+				MeasureTypeInAnalyzer::createMeasure($lMessPos[$key], $sMessPos[$key], $cMessPos[$key], $analyzer->id, $typeId);
 			}
 			Session::flash('status_success', 'Analyzer successfully created');
 			return Redirect::route('analyzers');
