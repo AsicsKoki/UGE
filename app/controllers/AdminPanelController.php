@@ -77,7 +77,7 @@ class AdminPanelController extends BaseController {
 				->with('hubs', Hub::lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
 				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
-				->with('measures', DB::table('measure_types')->lists('name_en'));
+				->with('measures', DB::table('measure_types')->lists('id', 'name_en'));
 	}
 
 	private $validationRulesAnalyzer = [
@@ -99,7 +99,17 @@ class AdminPanelController extends BaseController {
 		    $this->validationRulesAnalyzer
 		);
 		if($validator->passes()){
-			Analyzer::createAnalyzer(Input::all());
+			$analyzer = Analyzer::createAnalyzer(Input::all());
+			$measureTypesId = Input::all('measure_types_id');
+			$lMessPos = Input::all('long_message_position');
+			$sMessPos = Input::all('short_message_position');
+			$cMessPos = Input::all('current_message_position');
+
+			foreach ($measureTypesId as $key => $typeId) {
+				$lMessPos[$key];
+				$sMessPos[$key];
+				$cMessPos[$key];
+			}
 			Session::flash('status_success', 'Analyzer successfully created');
 			return Redirect::route('analyzers');
 		} else {

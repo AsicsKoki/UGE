@@ -83,10 +83,10 @@
 						<tbody>
 							@foreach($measures as $key => $measure)
 								<tr>
-									<td>{{$measure}}</td>
-									<td class="text-center"><input type="checkbox" name="long_message_position" value="1"><br></td>
-									<td class="text-center"><input type="checkbox" name="short_message_position" value="1"><br></td>
-									<td class="text-center"><input type="checkbox" name="current_message_position" value="1"><br></td>
+									<td><input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
+									<td class="text-center"><input type="checkbox" name="long_message_position[]" value="1"><br></td>
+									<td class="text-center"><input type="checkbox" name="short_message_position[]" value="1"><br></td>
+									<td class="text-center"><input type="checkbox" name="current_message_position[]" value="1"><br></td>
 								</tr>
 							@endforeach
 						</tbody>
