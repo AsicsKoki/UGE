@@ -40,7 +40,6 @@ input.submit-button {
 	/* position: absolute;
 	width: 70%;
 	left: 25%; */
-	background-color: white;
 	border-radius: 4px;
 	margin-bottom: 200px;
 }
@@ -59,7 +58,7 @@ input.submit-button {
 	z-index: 9999;
 	position:fixed;
 	left:0px;
-	bottom:0px;
+	bottom:0%;
 	height:100px;
 	width:100%;
 	background:#999;

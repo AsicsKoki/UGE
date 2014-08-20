@@ -1,5 +1,6 @@
 @extends('layouts/admin')
 @section('main')
+<div class="panelContent col-xs-8">
 	<div class='col-md-6'>
 		{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putUser', ['userId'=>$user->id]))
 		->rules([
@@ -26,6 +27,7 @@
 			{{Former::hidden()->name('_token')->value(csrf_token())}}
 			{{Former::submit('Update User')->class('form-control')}}
 		{{ Former::close() }}
+	</div>
 	</div>
 @stop
 @section('moreScripts')
