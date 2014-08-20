@@ -8,4 +8,9 @@ class MeasureType extends Eloquent {
 		$measureType = new MeasureType($data);
    		return $measureType->save();
 	}
+
+	public function measureTypeInAnalyzer()
+	{
+		return $this->hasMany('MeasureTypeInAnalyzer', 'measure_types_id');
+	}
 }
