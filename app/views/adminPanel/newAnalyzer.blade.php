@@ -73,12 +73,36 @@
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
 				<div class="col-md-12">
-					<table id="measureTable" class="table table-hover display">
+					<table id="measureTableHidden" class="table table-hover">
+						<tbody>
+							@foreach($measures as $key => $measure)
+								<tr>
+									<td>
+										<input type="hidden" name="measure_types_id[]" value="{{$measure}}"> {{$key}}</td>
+									<td class="text-center">
+										<input type="checkbox" name="long_message_position[]" value="1"><br>
+										<input type="hidden" name="long_message_position[]" value="0">
+									</td>
+									<td class="text-center">
+										<input type="checkbox" name="short_message_position[]" value="1"><br>
+										<input type="hidden" name="short_message_position[]" value="0">
+									</td>
+									<td class="text-center">
+										<input type="checkbox" name="current_message_position[]" value="1"><br>
+										<input type="hidden" name="current_message_position[]" value="0">
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-12">
+					<table id="measureTable" class="table table-hover hide">
 						<thead>
 							<th>Measure type</th>
-							<th>Long message postition</th>
-							<th>Short message position</th>
-							<th>Current message postition</th>
+							<th>Long message postition <br><input type="checkbox"></th>
+							<th>Short message position <br><input type="checkbox"></th>
+							<th>Current message postition <br><input type="checkbox"></th>
 						</thead>
 						<tbody>
 							@foreach($measures as $key => $measure)
@@ -109,15 +133,57 @@
 @stop
 @section('moreScripts')
 <script>
-	$('#measureTable').dataTable();
+	$('#measureTable tbody tr').each(function(index, row) {
+		$(row).attr('data-index', index);
+	});
+
+	$('#measureTableHidden tbody tr').each(function(index, row) {
+		$(row).attr('data-index', index);
+	});
+
+
+	var table = $('#measureTable').dataTable({
+	  "aoColumns": [
+	  null,
+	  { "bSortable": false },
+	  { "bSortable": false },
+	  { "bSortable": false },
+	  ]
+	});
 	$('button.submit-button').on('click', function() {
-		 $('#measureTable').find('input[type=checkbox]').each(function(input) {
+		$('#measureTableHidden').find('input[type=checkbox]').each(function(input) {
 		 	if ($(input).is(':checked'))
 		 		$(input).siblings('input[type=hidden]').attr('disabled', 'disabled');
 		 	else
 		 		$(input).siblings('input[type=hidden]').removeAttr('disabled');
-		 	$(this).parents('form').submit();
-		 })
+		});
+		$('#measureTable input').attr('disabled', 'disabled');
+	 	$(this).parents('form').submit();
+	});
+
+	$('table#measureTable').on('click', 'td input[type=checkbox]', function() {
+		var index = $(this).parents('tr').attr('data-index'),
+			name = $(this).attr('name');
+
+		$('table#measureTableHidden tr[data-index="'+index+'"] input[name="'+name+'"]').click();
+	});
+
+	$('table#measureTable thead input[type=checkbox]').click(function() {
+		var columnIndex = $(this).parent().index()
+			checked = $(this).is(':checked');
+
+		table.fnGetNodes().forEach(function(item) {
+			var index = $(item).attr('data-index');
+			if (checked) {
+				$(item).find('td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+				$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+			}
+			else {
+				$(item).find('td:eq('+columnIndex+') input[type=checkbox]:checked').click();
+				$('table#measureTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+')  input[type=checkbox]:checked').click();
+			}
+		})
 	})
+
 </script>
 @stop

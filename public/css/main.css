@@ -229,3 +229,7 @@ div.new-analyzer div#measureTable_wrapper {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+table#measureTable th.sorting_asc, table#measureTable th.sorting_desc, table#measureTable th.sorting_disabled {
+	text-align: center;
+}
