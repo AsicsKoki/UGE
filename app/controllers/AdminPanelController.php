@@ -76,7 +76,8 @@ class AdminPanelController extends BaseController {
 		return View::make('adminPanel.newAnalyzer')
 				->with('hubs', Hub::lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
-				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'));
+				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
+				->with('measures', DB::table('measure_types')->lists('name_sr'));
 	}
 
 	private $validationRulesAnalyzer = [

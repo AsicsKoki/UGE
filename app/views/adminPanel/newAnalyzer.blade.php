@@ -28,7 +28,6 @@
 
 					{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
-					
 					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Message Period')->class('form-control')}}
 				</div>
 
@@ -74,10 +73,32 @@
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
 				<div class="col-md-12">
-					sadasds
+					<table id="measureTable" class="table table-hover display">
+						<thead>
+							<th>Measure type</th>
+							<th>Long message postition</th>
+							<th>Short message position</th>
+							<th>Current message postition</th>
+						</thead>
+						<tbody>
+							@foreach($measures as $key => $measure)
+								<tr>
+									<td>{{$measure}}</td>
+									<td><input type="checkbox" name="long_message_position" value="1"><br></td>
+									<td><input type="checkbox" name="short_message_position" value="1"><br></td>
+									<td><input type="checkbox" name="current_message_position" value="1"><br></td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
 				</div>
 				{{Former::submit('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}
 		</div>
 	</div>
+@stop
+@section('moreScripts')
+<script>
+	$('measureTable').dataTable();
+</script>
 @stop
