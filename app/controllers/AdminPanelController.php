@@ -84,12 +84,35 @@ class AdminPanelController extends BaseController {
 		$res = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $aid)->lists('measure_types_id');
 
 		if (count($res))
-			$measures = DB::table('measure_types')->whereIn('id', $res)->lists('id', 'name_en');
+			$measures = MeasureType::whereIn('id', $res)->lists('id', 'name_en');
 		else
 			$measures = [];
 
 		return View::make('partials.measures')
 				->with('measures', $measures);
+	}
+
+	public function getAnalyzerMeasureTypesEdit($atid, $aid) {
+		$analyzer = Analyzer::find($aid);
+
+		if ($analyzer->analyzer_types_id != $atid) {
+			return $this->getAnalyzerMeasureTypes($atid);
+		} else {
+			$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureType')->get()->toArray();
+
+			if (!count($measures))
+				/*$measures = MeasureType::whereIn('id', $measures)->with(['measureTypeInAnalyzer' => function($query) use ($aid)
+					{
+					    $query->where('analyzers_id', $aid);
+
+					}] )->get()->toArray();
+			else*/
+				$measures = [];
+			return View::make('partials.measuresEdit')
+					->with('measures', $measures);
+		}
+
+
 	}
 
 	private $validationRulesAnalyzer = [
@@ -129,27 +152,53 @@ class AdminPanelController extends BaseController {
 
 	public function getAnalyzer($aid) {
 
-		$measures = MeasureType::with(['measureTypeInAnalyzer' => function($query) use ($aid)
-			{
-			    $query->where('analyzers_id', $aid);
-
-			}] )->get()->toArray();
+		$analyzer = Analyzer::find($aid);
 
 		return View::make('adminPanel.analyzerUpdate')
-				->with('analyzer', Analyzer::find($aid))
-				->with('measures', $measures);
+				->with('analyzer', $analyzer)
+				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
+				->with('customers', Customer::lists('id', 'name'))
+				->with('hubs', Hub::lists('id', 'name'));
 	}
 
 	public function putAnalyzer($aid)
 	{
 		$analyzer = Analyzer::find($aid);
 		$validator = Validator::make(Input::all(),
-		    $this->validationRules
+		    $this->validationRulesAnalyzer
 		);
-
 
 		if($validator->passes()){
 			$analyzer->update(Input::all());
+
+			$lMessPos = Input::get('long_message_position');
+			$sMessPos = Input::get('short_message_position');
+			$cMessPos = Input::get('current_message_position');
+
+			if (Input::get('measure_types_in_analyzers_id')) {
+				foreach (Input::get('measure_types_in_analyzers_id') as $index => $key) {
+					$measure = MeasureTypeInAnalyzer::find($key);
+					if ($measure) {
+						$measure->update([
+							'long_message_position' => $lMessPos[$index],
+							'short_message_position' => $sMessPos[$index],
+							'current_message_position' => $cMessPos[$index],
+						]);
+					}
+				}
+			}
+			else {
+				MeasureTypeInAnalyzer::where('analyzers_id', $aid)->delete();
+				$measureTypesId = Input::get('measure_types_id');
+				$lMessPos = Input::get('long_message_position');
+				$sMessPos = Input::get('short_message_position');
+				$cMessPos = Input::get('current_message_position');
+
+				foreach ($measureTypesId as $key => $typeId) {
+					MeasureTypeInAnalyzer::createMeasure($lMessPos[$key], $sMessPos[$key], $cMessPos[$key], $analyzer->id, $typeId);
+				}
+			}
+
 			Session::flash('status_success', 'Analyzer updated');
 			return Redirect::route('analyzers');
 		} else {

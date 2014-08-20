@@ -12,7 +12,7 @@ class MeasureTypeInAnalyzer extends Eloquent {
 
 	public function measureType()
 	{
-		return $this->belongsTo('measureType');
+		return $this->belongsTo('measureType', 'measure_types_id');
 	}
 	public function analyzer()
 	{

@@ -28,75 +28,68 @@
 					{{Former::text('current_measure_period')->label('Current Measure Period')->placeholder('Analyzer Current Measure Period')->class('form-control')}}
 
 					{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
+
+					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Measure Period')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
-					{{Former::text('analyzer_types_id')->label('Analyzer type')->placeholder('Analyzer type id')->class('form-control')}}
-
-					{{Former::text('alarm_message_period')->label('Alarm Message Period')->placeholder('Alarm Message Period')->class('form-control')}}
-
 					{{Former::text('measures_before_alarm')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
-					{{Former::text('hubs_id')->label('Hub Id')->placeholder('Enter Id')->class('form-control')}}
+					<div class="control-group required">
+						<label for="hubs_id" class="control-label">Hub<sup>*</sup>
+							</label>
+						<select name="hubs_id" id="" class="form-control">
+						@foreach ($hubs as $key => $hub)
+							@if ($hub == $analyzer->hubs_id)
+								<option selected value="{{$hub}}">{{$key}}</option>
+							@else
+								<option value="{{$hub}}">{{$key}}</option>
+							@endif
+						@endforeach
+						</select>
+					</div>
 
 					{{Former::text('input_position')->label('Input Position')->placeholder('Nullable')->class('form-control')}}
 
-					{{Former::text('customers_id')->label('Customer Id')->placeholder('Enter Customer Id')->class('form-control')}}
+					<div class="control-group required">
+						<label for="hubs_id" class="control-label">Customer<sup>*</sup>
+							</label>
+						<select name="customers_id" id="" class="form-control">
+						@foreach ($customers as $key => $customer)
+							@if ($customer == $analyzer->customers_id)
+								<option selected value="{{$customer}}">{{$key}}</option>
+							@else
+								<option value="{{$customer}}">{{$key}}</option>
+							@endif
+						@endforeach
+						</select>
+					</div>
+
+					<div class="control-group required">
+						<label for="hubs_id" class="control-label">Analyzer type<sup>*</sup>
+							</label>
+						<select name="analyzer_types_id" id="" class="form-control">
+						@foreach ($analyzers as $key => $analyzerItem)
+							@if ($analyzerItem == $analyzer->analyzer_types_id)
+								<option selected value="{{$analyzerItem}}">{{$key}}</option>
+							@else
+								<option value="{{$analyzerItem}}">{{$key}}</option>
+							@endif
+						@endforeach
+						</select>
+					</div>
 
 					{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
-				<div class="col-md-12">
-					<table id="measureTable" class="table table-hover display">
-						<thead>
-							<th>Measure type</th>
-							<th>Long message postition <br><input type="checkbox"></th>
-							<th>Short message position <br><input type="checkbox"></th>
-							<th>Current message postition <br><input type="checkbox"></th>
-						</thead>
-						<tbody>
-							@foreach($measures as $measure)
-								<tr>
-									<td>
-										<input type="hidden" name="measure_types_id[]" value="{{$measure['id']}}"> {{$measure['name_en']}}</td>
-									<td class="text-center">
-										@if($measure['long_message_position'] = 1)
-										    <input type="checkbox" name="long_message_position[]" value="1" checked><br>
-											<input type="hidden" name="long_message_position[]" value="0">
-										@else
-											<input type="checkbox" name="long_message_position[]" value="1"><br>
-											<input type="hidden" name="long_message_position[]" value="0">
-										@endif
-									</td>
-									<td class="text-center">
-										@if($measure['short_message_position'] = 1)
-										    <input type="checkbox" name="short_message_position[]" value="1" checked><br>
-											<input type="hidden" name="short_message_position[]" value="0">
-										@else
-											<input type="checkbox" name="short_message_position[]" value="1"><br>
-											<input type="hidden" name="short_message_position[]" value="0">
-										@endif
-									</td>
-									<td class="text-center">
-										@if($measure['current_message_position'] = 1)
-										    <input type="checkbox" name="current_message_position[]" value="1" checked><br>
-											<input type="hidden" name="current_message_position[]" value="0">
-										@else
-											<input type="checkbox" name="current_message_position[]" value="1"><br>
-											<input type="hidden" name="current_message_position[]" value="0">
-										@endif
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-				{{Former::submit('Update customer')->class('form-control btn btn-info submit-button')}}
+				{{Former::button('Update Analyzer')->class('form-control btn btn-info submit-button')}}
 			{{ Former::close() }}
 		</div>
 	</div>
 @stop
 @section('moreScripts')
 <script>
-	$('#measureTable').dataTable();
+	var link = '/analyzerMeasureTypesEdit/';
+	var analyzerId = {{$analyzer->id}};
 </script>
+{{ HTML::script('js/measures.js') }}
 @stop

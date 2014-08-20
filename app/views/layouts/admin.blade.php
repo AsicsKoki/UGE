@@ -12,7 +12,7 @@
 	<body>
 		<header>
 			<div class="row">
-				<img class="col-xs-4 col-md-4" src="img/baner.png" alt="United Green Energy" />
+				<img class="col-xs-4 col-md-4" src="/img/baner.png" alt="United Green Energy" />
 				<address class="col-xs-8 col-md-8">
 				  <strong class="name text-uppercase">United <span class="green">Green</span> Energy </strong><br>
 				  <label>Vaša potrošnja, naša briga!</label><br>
