@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Support\MessageBag;
 class UsersController extends BaseController {
 
 	/*
@@ -22,6 +24,7 @@ class UsersController extends BaseController {
 	}
 
 	public function authenticate(){
+		$errors = new MessageBag;
 
 		$validator = Validator::make(
 		Input::all(),
@@ -33,13 +36,15 @@ class UsersController extends BaseController {
 		if($validator->passes()){
 			$credentials = array(
 				'username' => Input::get('username'),
-				'password' => Input::get('password')
+				'password' => Input::get('password'),
+				'active' => 1
 			);
 
 			if(Auth::attempt($credentials)){
 				return Redirect::intended('/');
 			} else {
-				return Redirect::intended('/login');
+				$errors = new MessageBag(['password' => ['User and/or password invalid.']]);
+				return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
 			}
 		} else {
 			return Redirect::intended('/login');

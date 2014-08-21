@@ -8,6 +8,11 @@
 		@yield('moreStyles')
 	</head>
 	<body class="login">
+		@if ($error = $errors->first('password'))
+			<div class="alert alert-danger">
+				{{ $error }}
+			</div>
+		@endif
 		<div class="content">
 			<div class="container login-image col-xs-12 col-md-12">
 				<div class="row ">
