@@ -14,9 +14,13 @@ $('button.submit-button').on('click', function(e) {
 
 var getMeasures = function(id) {
 	if (typeof link == 'undefined') link = '/analyzerMeasureTypes/';
-	if (typeof analyzerId == 'undefined') analyzerId = -1;
+	var url;
+	if (typeof analyzerId == 'undefined')
+		url = link + id;
+	else
+		url = link + id + '/' + analyzerId;
 	 $.ajax({
-			url: link + id + '/' + analyzerId,
+			url: url,
 			type: 'get',
 			data: {
 			},
