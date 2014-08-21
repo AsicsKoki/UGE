@@ -16,7 +16,7 @@ class MeasureTypeInAnalyzer extends Eloquent {
 	}
 	public function analyzer()
 	{
-		return $this->belongsTo('analyzer');
+		return $this->belongsTo('analyzer', 'analyzers_id');
 	}
 
 	public static function createMeasure($short, $long, $current, $analyzerId, $typeId){

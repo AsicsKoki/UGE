@@ -7,17 +7,19 @@
 				->rules([
 						'name'                   => 'required|min:3',
 						'modbus_slave_address'   => 'required',
-						'current_message_period' => 'required',
+						'current_measure_period' => 'required',
 						'short_message_period'   => 'required',
-						'alarm_message_period'   => 'required',
+						'long_message_period'   => 'required',
+						'alarm_measure_period'   => 'required',
 						'measures_before_alarm'  => 'required',
 						'hubs_id'                => 'required',
-						'customers_id'           => 'requiresd',
+						'input_position'         => 'required',
+						'customers_id'           => 'required',
 						'active'                 => 'required',
 					])}}
 				<div class="col-md-6">
 					{{Former::populate($analyzer)}}
-						{{Former::text('name')->label('name')->placeholder('Analyzer name')->class('form-control')}}
+					{{Former::text('name')->label('name')->placeholder('Analyzer name')->class('form-control')}}
 
 					{{Former::text('description')->label('Description')->placeholder('Analyzer description')->class('form-control')}}
 
@@ -25,14 +27,18 @@
 
 					{{Former::text('modbus_slave_address')->label('Modbus Slave Address')->placeholder('Modbus Slave Address')->class('form-control')}}
 
-					{{Former::text('current_measure_period')->label('Current Measure Period')->placeholder('Analyzer Current Measure Period')->class('form-control')}}
+					{{Former::text('current_measure_period')->label('Current Measure Period')->placeholder('Current Measure Period')->class('form-control')}}
 
 					{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
-					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Measure Period')->class('form-control')}}
+					{{Former::text('long_message_period')->label('Long Message Period')->placeholder('Long Message Period')->class('form-control')}}
+
 				</div>
 				<div class="col-md-6">
-					{{Former::text('measures_before_alarm')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
+
+					{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Measure Period')->class('form-control')}}
+
+					{{Former::text('measures_before_alarm')->label('Measures Before Alarm')->placeholder('Measures before alarm')->class('form-control')}}
 
 					<div class="control-group required">
 						<label for="hubs_id" class="control-label">Hub<sup>*</sup>
@@ -48,7 +54,7 @@
 						</select>
 					</div>
 
-					{{Former::text('input_position')->label('Input Position')->placeholder('Nullable')->class('form-control')}}
+					{{Former::text('input_position')->label('Input Position')->placeholder('Nullable')->class('form-control')->value('null')}}
 
 					<div class="control-group required">
 						<label for="hubs_id" class="control-label">Customer<sup>*</sup>

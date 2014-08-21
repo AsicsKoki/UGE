@@ -16,7 +16,7 @@ class Analyzer extends Eloquent {
 
 	public function measureTypeInAnalyzer()
 	{
-		return $this->hasMany('MeasureTypeInAnalyzer', 'analyzer_id');
+		return $this->hasMany('MeasureTypeInAnalyzer', 'analyzers_id');
 	}
 
 	public function measures()

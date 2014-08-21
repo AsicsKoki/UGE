@@ -120,6 +120,7 @@ class AdminPanelController extends BaseController {
 		'modbus_slave_address'   => 'required',
 		'current_measure_period' => 'required',
 		'short_message_period'   => 'required',
+		'long_message_period'   => 'required',
 		'alarm_measure_period'   => 'required',
 		'measures_before_alarm'  => 'required',
 		'hubs_id'                => 'required',
