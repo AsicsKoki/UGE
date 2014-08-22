@@ -233,3 +233,8 @@ div.new-analyzer div#measureTable_wrapper {
 table#measureTable th.sorting_asc, table#measureTable th.sorting_desc, table#measureTable th.sorting_disabled {
 	text-align: center;
 }
+span.help-inline{
+	margin-top: 5px;
+	font-size: 12px;
+	color: red;
+}

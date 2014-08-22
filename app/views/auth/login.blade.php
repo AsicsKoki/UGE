@@ -8,11 +8,6 @@
 		@yield('moreStyles')
 	</head>
 	<body class="login">
-		@if ($error = $errors->first('password'))
-			<div class="alert alert-danger">
-				{{ $error }}
-			</div>
-		@endif
 		<div class="content">
 			<div class="container login-image col-xs-12 col-md-12">
 				<div class="row ">
@@ -38,6 +33,9 @@
 		{{ HTML::script('https://code.jquery.com/jquery-1.11.1.min.js') }}
 		{{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
 		{{ HTML::script('js/main.js') }}
+		<script>
+			$('span.help-inline').addClass('form-control');
+		</script>
 		@yield('moreScripts')
 	</body>
 </html>

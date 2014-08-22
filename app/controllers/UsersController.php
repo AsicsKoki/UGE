@@ -43,7 +43,7 @@ class UsersController extends BaseController {
 			if(Auth::attempt($credentials)){
 				return Redirect::intended('/');
 			} else {
-				$errors = new MessageBag(['password' => ['User and/or password invalid.']]);
+				$errors = new MessageBag(['password' => ['Username and/or password invalid.']]);
 				return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
 			}
 		} else {
