@@ -55,6 +55,10 @@ Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState'
 Route::get('analyzerMeasureTypes/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypes'))->where('aid', '\d+');
 Route::get('analyzerMeasureTypesEdit/{atid}/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypesEdit'))->where('aid', '\d+')->where('atid', '\d+');
 
+Route::get('analyzerAlarmTypes/{aid}', array('as' => 'analyzerAlarmTypes', 'uses' => 'AdminPanelController@getAnalyzerAlarmTypes'))->where('aid', '\d+');
+
+Route::get('analyzerAlarmTypesEdit/{atid}/{aid}', array('as' => 'analyzerAlarmTypes', 'uses' => 'AdminPanelController@getAnalyzerAlarmTypesEdit'))->where('aid', '\d+')->where('atid', '\d+');
+
 
 Route::get('hubs', array('as' => 'getHubs', 'uses' => 'AdminPanelController@getHubs'));
 Route::get('registerHub', array('as' => 'getRegisterHub', 'uses' => 'AdminPanelController@getRegisterHub'));

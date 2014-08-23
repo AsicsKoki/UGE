@@ -8,5 +8,6 @@ class AlarmType extends Eloquent {
 		$alarm = new AlarmType($data);
    		return $alarm->save();
 	}
+	
 
 }

@@ -80,6 +80,34 @@ class AdminPanelController extends BaseController {
 				/*->with('measures', DB::table('measure_types')->lists('id', 'name_en'))*/;
 	}
 
+	public function getAnalyzerAlarmTypes($aid) {
+		$res = DB::table('alarm_types_for_measure_types_in_analyzer_types')->where('measure_types_in_analyzer_types_id', $aid)->lists('alarm_types_id');
+
+		if (count($res))
+			$alarms = AlarmType::whereIn('id', $res)->lists('id', 'name_en');
+		else
+			$alarms = [];
+
+		return View::make('partials.alarms')
+				->with('alarms', $alarms);
+	}
+
+	public function getAnalyzerAlarmTypesEdit($atid, $aid) {
+		$analyzer = Analyzer::find($aid);
+
+		if ($analyzer->analyzer_types_id != $atid) {
+			return $this->getAnalyzerAlarmTypes($atid);
+		} else {
+			$alarms = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('alarmsType')->get()->toArray();
+
+			$if (!count(alarms))
+				$alarms = [];
+			return View::make('partials.alarmsEdit')
+					$->with('alarmss', alarms);
+		}
+	}
+
+
 	public function getAnalyzerMeasureTypes($aid) {
 		$res = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $aid)->lists('measure_types_id');
 
@@ -101,18 +129,10 @@ class AdminPanelController extends BaseController {
 			$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureType')->get()->toArray();
 
 			if (!count($measures))
-				/*$measures = MeasureType::whereIn('id', $measures)->with(['measureTypeInAnalyzer' => function($query) use ($aid)
-					{
-					    $query->where('analyzers_id', $aid);
-
-					}] )->get()->toArray();
-			else*/
 				$measures = [];
 			return View::make('partials.measuresEdit')
 					->with('measures', $measures);
 		}
-
-
 	}
 
 	private $validationRulesAnalyzer = [
