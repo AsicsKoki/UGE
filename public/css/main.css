@@ -30,19 +30,15 @@ input.submit-button {
 	margin-top: 15px;
 }
 .widget{
-	/* margin-left: 80px; */
 	position: relative;
 	float: left;
 	width: 255px;
 	height: 250px;
 }
 .panelContent{
-	/* position: absolute;
-	width: 70%;
-	left: 25%; */
 	background-color: white;
 	border-radius: 4px;
-	margin-bottom: 200px;
+	margin-bottom: 20px;
 }
 .users-list{
 	width: 70%;
@@ -56,13 +52,14 @@ input.submit-button {
 	height: 135px;
 }
 #footer {
-	z-index: 9999;
-	position:fixed;
-	left:0px;
-	bottom:0%;
 	height:100px;
-	width:100%;
+	width:100%; 
 	background:#999;
+
+	position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	clear:both;
+	padding-top:20px;
 }
 
 .submit-btn {
