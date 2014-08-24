@@ -81,15 +81,29 @@ class AdminPanelController extends BaseController {
 	}
 
 	public function getAnalyzerAlarmTypes($aid) {
-		$res = DB::table('alarm_types_for_measure_types_in_analyzer_types')->where('measure_types_in_analyzer_types_id', $aid)->lists('alarm_types_id');
+		$analyzer = Analyzer::find($aid);
 
-		if (count($res))
-			$alarms = AlarmType::whereIn('id', $res)->lists('id', 'name_en');
-		else
+		$mtatId = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $analyzer->analyzer_types_id)->lists('id');
+
+		if (!count($mtatId )) $mtatId = [];
+
+
+		if (count($mtatId))	{
+			$res = DB::table('alarm_types_for_measure_types_in_analyzer_types')->whereIn('measure_types_in_analyzer_types_id', $mtatId)->lists('alarm_types_id');
+
+			if (count($res))
+				$alarms = AlarmType::whereIn('id', $res)->lists('id', 'name_en');
+			else
+				$alarms = [];
+		} else {
 			$alarms = [];
+		}
+
+		// dd(MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
 
 		return View::make('partials.alarms')
-				->with('alarms', $alarms);
+				->with('alarms', $alarms)
+				->with('measureTypeInAnalyzerIds', MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
 	}
 
 	public function getAnalyzerAlarmTypesEdit($atid, $aid) {

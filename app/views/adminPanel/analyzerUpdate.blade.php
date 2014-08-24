@@ -87,6 +87,12 @@
 					{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
+				<div class="measures">
+
+				</div>
+				<div class="alarms">
+
+				</div>
 				{{Former::button('Update Analyzer')->class('form-control btn btn-info submit-button')}}
 			{{ Former::close() }}
 		</div>

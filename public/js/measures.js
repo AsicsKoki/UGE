@@ -7,8 +7,6 @@ $('button.submit-button').on('click', function(e) {
 	 		$(input).siblings('input[type=hidden]').removeAttr('disabled');
 	});
 	$('#measureTable input').attr('disabled', 'disabled');
-	/*e.preventDefault();
-	return;*/
  	$(this).parents('form').submit();
 });
 
@@ -28,7 +26,7 @@ var getMeasures = function(id) {
 				$('#measureTable').parent().remove();
 				$('#measureTableHidden').parent().remove();
 
-				$('button.submit-button').before(data);
+				$('div.measures').html(data);
 
 				$('#measureTable tbody tr').each(function(index, row) {
 					$(row).attr('data-index', index);
@@ -80,4 +78,71 @@ getMeasures($('select[name=analyzer_types_id]').val());
 $('select[name=analyzer_types_id]').change(function() {
 	var id = $(this).val();
 	getMeasures(id);
+	$('div.alarms').remove();
 })
+
+var getAlarms = function() {
+	var url = '/analyzerAlarmTypes/' + analyzerId;
+	 $.ajax({
+			url: url,
+			type: 'get',
+			data: {
+			},
+			success: function (data) {
+				$('div.alarms').html(data);
+				$('#alarmTable tbody tr').each(function(index, row) {
+					$(row).attr('data-index', index);
+				});
+
+				$('#alarmTableHidden tbody tr').each(function(index, row) {
+					$(row).attr('data-index', index);
+				});
+
+				var table = $('#alarmTable').dataTable({
+				  "aoColumns": [
+				  null,
+				  { "bSortable": false },
+				  { "bSortable": false }
+				  ]
+				});
+
+				$('table#alarmTable').on('click', 'td input[type=checkbox]', function() {
+					var index = $(this).parents('tr').attr('data-index'),
+						name = $(this).attr('name');
+
+					$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=checkbox][name="'+name+'"]').click();
+				});
+
+				$('table#alarmTable thead input[type=checkbox]').click(function() {
+					var columnIndex = $(this).parent().index(),
+						checked = $(this).is(':checked');
+
+					table.fnGetNodes().forEach(function(item) {
+						var index = $(item).attr('data-index');
+						if (checked) {
+							$(item).find('td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+							$('table#alarmTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+						}
+						else {
+							$(item).find('td:eq('+columnIndex+') input[type=checkbox]:checked').click();
+							$('table#alarmTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+')  input[type=checkbox]:checked').click();
+						}
+					})
+				});
+
+				table.fnGetNodes().forEach(function(row) {
+					$(row).find('select[name="measure_type_in_analyzer_id[]"]').change(function() {
+						var index = $(this).parents('tr').attr('data-index');
+						$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=text][name="measure_type_in_analyzer_id[]"]').val($(this).val());
+					});
+
+					$(row).find('select[name="measure_type_in_analyzer_id[]"]').change();
+				});
+
+
+			}
+		});
+}
+
+
+getAlarms();

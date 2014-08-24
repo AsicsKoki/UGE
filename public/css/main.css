@@ -204,7 +204,7 @@ a.new-entry {
 	margin-bottom: 10px;
 }
 
-.panelContent.clients div.dataTables_paginate {
+.panelContent div.dataTables_paginate {
 	margin-bottom: 10px;
 }
 
@@ -230,6 +230,20 @@ div.new-analyzer div#measureTable_wrapper {
 table#measureTable th.sorting_asc, table#measureTable th.sorting_desc, table#measureTable th.sorting_disabled {
 	text-align: center;
 }
+
+table#alarmTable th, table#alarmTable th.sorting_asc, table#alarmTable th.sorting_desc, table#alarmTable th.sorting_disabled {
+	text-align: center;
+}
+
+table#alarmTable tbody td:nth-child(2) {
+	text-align: center;
+}
+
+table#alarmTable tbody td:nth-child(2) select {
+	width: 165px;
+}
+
+
 span.help-inline{
 	margin-top: 5px;
 	font-size: 12px;

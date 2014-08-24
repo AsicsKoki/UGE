@@ -76,6 +76,12 @@
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
+				<div class="measures">
+
+				</div>
+				<div class="alarms">
+
+				</div>
 
 				{{Former::button('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}
