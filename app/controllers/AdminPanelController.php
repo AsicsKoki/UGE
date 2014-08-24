@@ -100,10 +100,11 @@ class AdminPanelController extends BaseController {
 		} else {
 			$alarms = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('alarmsType')->get()->toArray();
 
-			$if (!count(alarms))
+			if (!count($alarms))
 				$alarms = [];
+
 			return View::make('partials.alarmsEdit')
-					$->with('alarmss', alarms);
+					->with('alarms', $alarms);
 		}
 	}
 
