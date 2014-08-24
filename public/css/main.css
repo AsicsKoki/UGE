@@ -26,7 +26,7 @@ body {
 	height:80%;
 }
 
-input.submit-button {
+button.submit-button, input.submit-button {
 	margin-top: 15px;
 }
 .widget{
@@ -254,4 +254,8 @@ div.content-container {
 	min-height: 100%;
 	height: 100%
 	margin: 0 auto -120px;
+}
+
+.new-analyzer div.tab-pane {
+	padding: 10px;
 }

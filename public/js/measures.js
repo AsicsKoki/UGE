@@ -82,6 +82,7 @@ $('select[name=analyzer_types_id]').change(function() {
 })
 
 var getAlarms = function() {
+	if (typeof analyzerId) return;
 	var url = '/analyzerAlarmTypes/' + analyzerId;
 	 $.ajax({
 			url: url,
@@ -100,9 +101,9 @@ var getAlarms = function() {
 
 				var table = $('#alarmTable').dataTable({
 				  "aoColumns": [
-				  null,
-				  { "bSortable": false },
-				  { "bSortable": false }
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false }
 				  ]
 				});
 
@@ -131,12 +132,12 @@ var getAlarms = function() {
 				});
 
 				table.fnGetNodes().forEach(function(row) {
-					$(row).find('select[name="measure_type_in_analyzer_id[]"]').change(function() {
+					$(row).find('select[name="measure_type_in_analyzer_id_alarm[]"]').change(function() {
 						var index = $(this).parents('tr').attr('data-index');
-						$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=text][name="measure_type_in_analyzer_id[]"]').val($(this).val());
+						$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=text][name="measure_type_in_analyzer_id_alarm[]"]').val($(this).val());
 					});
 
-					$(row).find('select[name="measure_type_in_analyzer_id[]"]').change();
+					$(row).find('select[name="measure_type_in_analyzer_id_alarm[]"]').change();
 				});
 
 
@@ -146,3 +147,8 @@ var getAlarms = function() {
 
 
 getAlarms();
+
+$('.nav-tabs li a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})

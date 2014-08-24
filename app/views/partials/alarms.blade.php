@@ -1,13 +1,14 @@
 <div class="col-md-12">
-	<table id="alarmTableHidden" class="table table-hover">
+	<table id="alarmTableHidden" class="table hide table-hover">
 		<tbody>
 			@foreach($alarms as $key => $alarm)
 				<tr>
 					<td>
 						{{$key}}
+						<input type="hidden" name="alarm_type_id[]" value="{{$alarm}}">
 					</td>
 					<td>
-						<input type="text" name="measure_type_in_analyzer_id[]" value="">
+						<input type="text" name="measure_type_in_analyzer_id_alarm[]" value="">
 					</td>
 					<td class="text-center">
 						<input type="checkbox" name="alarm_level[]" value="1"><br>
@@ -33,7 +34,7 @@
 						{{Former::hidden()->name('alarm_ids[]')->value($alarm)}}
 					</td>
 					<td>
-						<select class="" type="hidden" name="measure_type_in_analyzer_id[]" >
+						<select class="" type="hidden" name="measure_type_in_analyzer_id_alarm[]" >
 							@foreach ($measureTypeInAnalyzerIds as $mtiai)
 								<option value="{{$mtiai['id']}}">{{$mtiai['id']}} - {{$mtiai['measure_type']['name_en']}}</option>
 							@endforeach

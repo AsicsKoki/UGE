@@ -99,8 +99,6 @@ class AdminPanelController extends BaseController {
 			$alarms = [];
 		}
 
-		// dd(MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
-
 		return View::make('partials.alarms')
 				->with('alarms', $alarms)
 				->with('measureTypeInAnalyzerIds', MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
@@ -222,6 +220,14 @@ class AdminPanelController extends BaseController {
 						]);
 					}
 				}
+
+				/*foreach (Input::get('measure_type_in_analyzer_id_alarm') as $index => $key) {
+					$alarm = new AlarmTypeForMeasureTypeInAnalyzers;
+					$alarm->alarm_level = Input::get('alarm_level')[$index];
+					$alarm->alarm_type_id = Input::get('alarm_type_id')[$index];
+					$alarm->measure_types_in_analyzers_id = $key;
+					$alarm->save();
+				}*/
 			}
 			else {
 				MeasureTypeInAnalyzer::where('analyzers_id', $aid)->delete();

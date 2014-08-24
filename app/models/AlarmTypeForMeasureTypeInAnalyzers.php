@@ -1,5 +1,5 @@
 <?php
-class AlarmType extends Eloquent {
+class AlarmTypeForMeasureTypeInAnalyzers extends Eloquent {
 	protected $fillable = array('*');
 	protected $table = 'alarm_types_for_measure_types_in_analyzer';
 	public $timestamps = false;
