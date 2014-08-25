@@ -2,7 +2,7 @@
 @section('main')
 @include('partials.sidebar')
 	<div class="panelContent container col-xs-8">
-		<span><h4>Add new alarm</h4></span>
+		<span><h4>Add new alarm (Analyzer {{link_to_route('getAnalyzer', $analyzer->name, ['id' => $analyzer->id])}})</h4></span>
 		{{ Former::open()->class('form')->method('post')->enctype('multipart/form-data')
 			->rules([
 				])}}
@@ -20,19 +20,19 @@
 						<label for="active" class="control-label">Select state<sup>*</sup>
 						</label>
 						<select name="active" class="form-control">
-								<option value="1">Active</option>
-								<option value="0">Inactive</option>
+							<option value="1">Active</option>
+							<option value="0">Inactive</option>
 						</select>
 					</div>
 
 					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')}}
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
-					{{Former::button('Update Analyzer')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+					{{Former::button('Add Alarm')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 				</div>
 		{{ Former::close() }}
 	</div>
 @stop
 @section('moreScripts')
-{{ HTML::script('js/measures.js') }}
+
 @stop

@@ -44,7 +44,7 @@
 			<th>Long message postition <br><input type="checkbox"></th>
 			<th>Short message position <br><input type="checkbox"></th>
 			<th>Current message postition <br><input type="checkbox"></th>
-			<th>Assign alarm</th>
+			<th>Alarm</th>
 			<th>Status</th>
 		</thead>
 		<tbody>

@@ -149,13 +149,33 @@ class AdminPanelController extends BaseController {
 		}
 	}
 
+	private function listAlarms($analyzerTypesId) {
+		$measureTypesInAnalyzerTypesIds = MeasureTypeInAnalyzerType::where('analyzer_types_id', $analyzerTypesId)->lists('id');
+
+		if (!count($measureTypesInAnalyzerTypesIds)) return [];
+
+		$alarmTypes = AlarmTypeForMeasureTypeInAnalyzersType::whereIn('measure_types_in_analyzer_types_id', $measureTypesInAnalyzerTypesIds)->lists('alarm_types_id');
+
+		if (!count($alarmTypes)) return [];
+
+		return  AlarmType::whereIn('id', $alarmTypes)->get();
+	}
+
 	public function getMeasureAlarmTypes($atid, $aid) {
+		$analyzer = Analyzer::find($atid);
+
 		return View::make('adminPanel.measureAlarms')
-				->with('alarmTypes', AlarmType::all());
+				->with('analyzer', $analyzer)
+				->with('alarmTypes', $this->listAlarms($analyzer->analyzer_types_id));
 	}
 
 	public function postMeasureAlarmTypes($atid, $aid) {
-		dd();
+		$alarmTypes = AlarmTypeForMeasureTypeInAnalyzers::create([
+			'alarm_type_id' => Input::get('alarm_id'),
+			'active' => Input::get('active'),
+			'measure_types_in_analyzer_id' => Input::get('active'),
+		]);
+
 		exit;
 	}
 
@@ -165,7 +185,7 @@ class AdminPanelController extends BaseController {
 		'modbus_slave_address'   => 'required',
 		'current_measure_period' => 'required',
 		'short_message_period'   => 'required',
-		'long_message_period'   => 'required',
+		'long_message_period'    => 'required',
 		'alarm_measure_period'   => 'required',
 		'measures_before_alarm'  => 'required',
 		'hubs_id'                => 'required',
