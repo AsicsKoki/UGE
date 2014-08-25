@@ -51,6 +51,7 @@ Route::post('registerAnalyzer', array('as'=>'postNewAnalyzer', 'uses' => 'AdminP
 Route::put('analyzers/{analyzerId}', array('as'=>'putAnalyzer', 'uses' => 'AdminPanelController@putAnalyzer'))->where('analyzerId', '\d+');
 Route::get('analyzers/{analyzerId}', array('as' => 'getAnalyzer',  'uses' => 'AdminPanelController@getAnalyzer'))->where('analyzerId', '\d+');
 Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState',  'uses' => 'AdminPanelController@changeAnalyzerState'));
+Route::post('analyzers/changeMeasureState', array('as' => 'changeMeasureState',  'uses' => 'AdminPanelController@changeMeasureState'));
 
 Route::get('analyzerMeasureTypes/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypes'))->where('aid', '\d+');
 Route::get('analyzerMeasureTypesEdit/{atid}/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypesEdit'))->where('aid', '\d+')->where('atid', '\d+');

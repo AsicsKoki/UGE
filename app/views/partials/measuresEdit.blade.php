@@ -44,6 +44,7 @@
 			<th>Long message postition <br><input type="checkbox"></th>
 			<th>Short message position <br><input type="checkbox"></th>
 			<th>Current message postition <br><input type="checkbox"></th>
+			<th>Status</th>
 		</thead>
 		<tbody>
 			@foreach($measures as $key => $measure)
@@ -75,6 +76,13 @@
 						@else
 							<input type="checkbox" name="current_message_position[]" value="1">
 							<input type="hidden" name="current_message_position[]" value="0">
+						@endif
+					</td>
+					<td>
+						@if($measure['active'] ==1 )
+							<button data-id="{{$measure['id']}}" name="active[]" type="button" class="status btn btn-danger">Deactivate</button>
+						@else
+							<button data-id="{{$measure['id']}}" name="active[]" type="button" class="status btn btn-success">Activate</button>
 						@endif
 					</td>
 				</tr>

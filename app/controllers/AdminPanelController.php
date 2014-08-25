@@ -455,4 +455,11 @@ class AdminPanelController extends BaseController {
 		$alarmType->save();
 		return 1;
 	}
+
+	public function changeMeasureState(){
+		$measure = MeasureTypeInAnalyzer::find(Input::get('id'));
+		$measure->active = Input::get('state');
+		$measure->save();
+		return 1;
+	}
 }
