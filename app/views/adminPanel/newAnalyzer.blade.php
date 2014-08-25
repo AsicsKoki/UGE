@@ -88,6 +88,7 @@
 
 							</div>
 						</div>
+				</div>
 
 				{{Former::button('Submit')->class('form-control submit-button btn btn-info')}}
 			{{ Former::close() }}
