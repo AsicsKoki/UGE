@@ -79,7 +79,10 @@ getMeasures($('select[name=analyzer_types_id]').val());
 $('select[name=analyzer_types_id]').change(function() {
 	var id = $(this).val();
 	getMeasures(id);
-	$('div.alarms').remove();
+	if (id != analyzerTypesId)
+		$('table#alarmTable').parent().hide();
+	else
+		$('table#alarmTable').parent().show();
 })
 
 var getAlarms = function() {

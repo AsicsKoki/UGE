@@ -116,6 +116,7 @@
 <script>
 	var link = '/analyzerMeasureTypesEdit/';
 	var analyzerId = {{$analyzer->id}};
+	var analyzerTypesId = {{$analyzer->analyzer_types_id}};
 	$('div.panelContent').on("click",'#measureTable button.status' ,function(e){
 		e.preventDefault();
 		if($(this).hasClass('btn-danger')){
