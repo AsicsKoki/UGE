@@ -144,9 +144,21 @@ class AdminPanelController extends BaseController {
 			if (!count($measures))
 				$measures = [];
 			return View::make('partials.measuresEdit')
-					->with('measures', $measures);
+					->with('measures', $measures)
+					->with('analyzerId', $analyzer->id);
 		}
 	}
+
+	public function getMeasureAlarmTypes($atid, $aid) {
+		return View::make('adminPanel.measureAlarms')
+				->with('alarmTypes', AlarmType::all());
+	}
+
+	public function postMeasureAlarmTypes($atid, $aid) {
+		dd();
+		exit;
+	}
+
 
 	private $validationRulesAnalyzer = [
 		'name'                   => 'required|min:3',

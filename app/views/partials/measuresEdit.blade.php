@@ -44,6 +44,7 @@
 			<th>Long message postition <br><input type="checkbox"></th>
 			<th>Short message position <br><input type="checkbox"></th>
 			<th>Current message postition <br><input type="checkbox"></th>
+			<th>Assign alarm</th>
 			<th>Status</th>
 		</thead>
 		<tbody>
@@ -77,6 +78,9 @@
 							<input type="checkbox" name="current_message_position[]" value="1">
 							<input type="hidden" name="current_message_position[]" value="0">
 						@endif
+					</td>
+					<td>
+						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypes', array('aid'=>$analyzerId, 'mid' => $measure['id'])) }}">Add alarm</a>
 					</td>
 					<td>
 						@if($measure['active'] ==1 )
