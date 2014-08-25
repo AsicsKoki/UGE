@@ -135,8 +135,6 @@ var getAlarms = function() {
 						}
 					});
 				});
-
-
 			}
 		});
 }

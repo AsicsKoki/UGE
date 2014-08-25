@@ -203,6 +203,7 @@ class AdminPanelController extends BaseController {
 	private $validationMeasureAlarm = [
 		'active'            => 'required',
 		'alarm_level'       => 'required|numeric',
+		'alarm_id' => 'required'
 	];
 
 
@@ -293,6 +294,10 @@ class AdminPanelController extends BaseController {
 				}*/
 			}
 			else {
+				$mes = MeasureTypeInAnalyzer::where('analyzers_id', $aid)->lists('id');
+				if (count($mes))
+					AlarmTypeForMeasureTypeInAnalyzers::whereIn('measure_types_in_analyzers_id', $mes)->delete();
+
 				MeasureTypeInAnalyzer::where('analyzers_id', $aid)->delete();
 				$measureTypesId = Input::get('measure_types_id');
 				$lMessPos = Input::get('long_message_position');

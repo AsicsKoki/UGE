@@ -79,10 +79,10 @@
 							<input type="hidden" name="current_message_position[]" value="0">
 						@endif
 					</td>
-					<td>
+					<td class="text-center">
 						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypes', array('aid'=>$analyzerId, 'mid' => $measure['id'])) }}">Add alarm</a>
 					</td>
-					<td>
+					<td class="text-center">
 						@if($measure['active'] ==1 )
 							<button data-id="{{$measure['id']}}" name="active[]" type="button" class="status btn btn-danger">Deactivate</button>
 						@else
