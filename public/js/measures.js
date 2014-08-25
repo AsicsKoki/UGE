@@ -83,8 +83,8 @@ $('select[name=analyzer_types_id]').change(function() {
 })
 
 var getAlarms = function() {
-	if (typeof analyzerId) return;
-	var url = '/analyzerAlarmTypes/' + analyzerId;
+	if (typeof analyzerId == 'undefined') return;
+	var url = '/analyzerAlarmTypesEdit/' + analyzerId;
 	 $.ajax({
 			url: url,
 			type: 'get',
@@ -92,53 +92,45 @@ var getAlarms = function() {
 			},
 			success: function (data) {
 				$('div.alarms').html(data);
-				$('#alarmTable tbody tr').each(function(index, row) {
-					$(row).attr('data-index', index);
-				});
-
-				$('#alarmTableHidden tbody tr').each(function(index, row) {
-					$(row).attr('data-index', index);
-				});
 
 				var table = $('#alarmTable').dataTable({
 				  "aoColumns": [
+					  null,
+					  null,
 					  null,
 					  { "bSortable": false },
 					  { "bSortable": false }
 				  ]
 				});
 
-				$('table#alarmTable').on('click', 'td input[type=checkbox]', function() {
-					var index = $(this).parents('tr').attr('data-index'),
-						name = $(this).attr('name');
-
-					$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=checkbox][name="'+name+'"]').click();
-				});
-
-				$('table#alarmTable thead input[type=checkbox]').click(function() {
-					var columnIndex = $(this).parent().index(),
-						checked = $(this).is(':checked');
-
-					table.fnGetNodes().forEach(function(item) {
-						var index = $(item).attr('data-index');
-						if (checked) {
-							$(item).find('td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
-							$('table#alarmTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+') input[type=checkbox]:not(:checked)').click();
+				$('div.panelContent').on("click",'table#alarmTable button.status' ,function(e){
+					e.preventDefault();
+					if($(this).hasClass('btn-danger')){
+						var state = 0;
+					} else {
+						var state = 1;
+					}
+					var id = $(this).data('id');
+					var self = this;
+					$.ajax({
+						url: "changeAlarmForMeasureState",
+						type: "post",
+						data: {
+							state: state,
+							id: id
+						},
+						success: function(data){
+							if(data == 1){
+								if($(self).hasClass('btn-danger')){
+									$(self).removeClass('btn-danger');
+									$(self).addClass('btn-success').text('Activate');
+								} else {
+									$(self).removeClass('btn-success');
+									$(self).addClass('btn-danger').text('Deactivate');
+								}
+							}
 						}
-						else {
-							$(item).find('td:eq('+columnIndex+') input[type=checkbox]:checked').click();
-							$('table#alarmTableHidden tr[data-index="'+index+'"] td:eq('+columnIndex+')  input[type=checkbox]:checked').click();
-						}
-					})
-				});
-
-				table.fnGetNodes().forEach(function(row) {
-					$(row).find('select[name="measure_type_in_analyzer_id_alarm[]"]').change(function() {
-						var index = $(this).parents('tr').attr('data-index');
-						$('table#alarmTableHidden tr[data-index="'+index+'"] input[type=text][name="measure_type_in_analyzer_id_alarm[]"]').val($(this).val());
 					});
-
-					$(row).find('select[name="measure_type_in_analyzer_id_alarm[]"]').change();
 				});
 
 

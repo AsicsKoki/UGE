@@ -28,7 +28,7 @@
 					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')}}
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
-					{{Former::button('Add Alarm')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+					{{Former::submit('Add Alarm')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 				</div>
 		{{ Former::close() }}
 	</div>

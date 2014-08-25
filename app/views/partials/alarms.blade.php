@@ -1,48 +1,33 @@
 <div class="col-md-12">
-	<table id="alarmTableHidden" class="table hide table-hover">
-		<tbody>
-			@foreach($alarms as $key => $alarm)
-				<tr>
-					<td>
-						{{$key}}
-						<input type="hidden" name="alarm_type_id[]" value="{{$alarm}}">
-					</td>
-					<td>
-						<input type="text" name="measure_type_in_analyzer_id_alarm[]" value="">
-					</td>
-					<td class="text-center">
-						<input type="checkbox" name="alarm_level[]" value="1"><br>
-						<input type="hidden" name="alarm_level[]" value="0">
-					</td>
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
-</div>
-<div class="col-md-12">
 	<table id="alarmTable" class="table table-hover display">
 		<thead>
 			<th>Alarm Type</th>
-			<th>Measure Type In Analyzer</th>
-			<th>Alarm Level <br><input type="checkbox"></th>
+			<th>Measure Type</th>
+			<th>Alarm Level</th>
+			<th>Operation</th>
+			<th>Status</th>
 		</thead>
 		<tbody>
-			@foreach($alarms as $key => $alarm)
+			@foreach($alarms as $alarm)
 				<tr>
 					<td>
-						<label for="">{{$key}}</label>
-						{{Former::hidden()->name('alarm_ids[]')->value($alarm)}}
+						{{$alarm['alarm_type']['name_en']}}
 					</td>
 					<td>
-						<select class="" type="hidden" name="measure_type_in_analyzer_id_alarm[]" >
-							@foreach ($measureTypeInAnalyzerIds as $mtiai)
-								<option value="{{$mtiai['id']}}">{{$mtiai['id']}} - {{$mtiai['measure_type']['name_en']}}</option>
-							@endforeach
-						</select>
+						{{$alarm['measure_type_in_analyzer']['measure_type']['name_en']}}
 					</td>
 					<td class="text-center">
-						<input type="checkbox" name="alarm_level[]" value="1"><br>
-						<input type="hidden" name="alarm_level[]" value="0">
+						{{$alarm['alarm_level']}}
+					</td>
+					<td class="text-center">
+						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypes', array('aid'=>6, 'mid' => $alarm['id'])) }}">Edit</a>
+					</td>
+					<td class="text-center">
+						@if($alarm['active'] ==1 )
+							<button data-id="{{$alarm['id']}}" name="active[]" type="button" class="status btn btn-danger">Deactivate</button>
+						@else
+							<button data-id="{{$alarm['id']}}" name="active[]" type="button" class="status btn btn-success">Activate</button>
+						@endif
 					</td>
 				</tr>
 			@endforeach

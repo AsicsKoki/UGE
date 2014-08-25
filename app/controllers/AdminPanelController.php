@@ -104,20 +104,27 @@ class AdminPanelController extends BaseController {
 				->with('measureTypeInAnalyzerIds', MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
 	}
 
-	public function getAnalyzerAlarmTypesEdit($atid, $aid) {
+	private function listAnalyzerAlarms($analyzerId) {
+		$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzerId)->lists('id');
+
+		if (!count($measures)) return [];
+
+		$alarms = AlarmTypeForMeasureTypeInAnalyzers::whereIn('measure_types_in_analyzers_id', $measures)->with('alarmType', 'measureTypeInAnalyzer.measureType')->get()->toArray();
+
+		if (!count($alarms)) return [];
+
+		return $alarms;
+	}
+
+	public function getAnalyzerAlarmTypesEdit($aid) {
 		$analyzer = Analyzer::find($aid);
 
-		if ($analyzer->analyzer_types_id != $atid) {
-			return $this->getAnalyzerAlarmTypes($atid);
-		} else {
-			$alarms = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('alarmsType')->get()->toArray();
+		$alarms = $this->listAnalyzerAlarms($aid);
 
-			if (!count($alarms))
-				$alarms = [];
+		// dd($alarms);
 
-			return View::make('partials.alarmsEdit')
-					->with('alarms', $alarms);
-		}
+		return View::make('partials.alarms')
+				->with('alarms', $alarms);
 	}
 
 
@@ -161,7 +168,7 @@ class AdminPanelController extends BaseController {
 		return  AlarmType::whereIn('id', $alarmTypes)->get();
 	}
 
-	public function getMeasureAlarmTypes($atid, $aid) {
+	public function getMeasureAlarmTypes($atid) {
 		$analyzer = Analyzer::find($atid);
 
 		return View::make('adminPanel.measureAlarms')
@@ -170,14 +177,33 @@ class AdminPanelController extends BaseController {
 	}
 
 	public function postMeasureAlarmTypes($atid, $aid) {
-		$alarmTypes = AlarmTypeForMeasureTypeInAnalyzers::create([
-			'alarm_type_id' => Input::get('alarm_id'),
-			'active' => Input::get('active'),
-			'measure_types_in_analyzer_id' => Input::get('active'),
-		]);
+		if (!MeasureTypeInAnalyzer::find($aid)) {
+			Session::flash('status_error', 'The measure type for analyzer does not exist');
+			return Redirect::route('analyzers');
+		}
 
-		exit;
+		$validator = Validator::make(Input::all(),
+		    $this->validationMeasureAlarm
+		);
+
+		if($validator->fails()) return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+
+		$alarmTypes = new AlarmTypeForMeasureTypeInAnalyzers;
+		$alarmTypes->alarm_types_id                = Input::get('alarm_id');
+		$alarmTypes->active                        = Input::get('active');
+		$alarmTypes->alarm_level                   = Input::get('alarm_level');
+		$alarmTypes->measure_types_in_analyzers_id = $aid;
+		$alarmTypes->save();
+
+		Session::flash('status_success', 'Measure Alarm successfully created');
+		return Redirect::route('getAnalyzer', ['analyzerId' => $atid]);
+
 	}
+
+	private $validationMeasureAlarm = [
+		'active'            => 'required',
+		'alarm_level'       => 'required|numeric',
+	];
 
 
 	private $validationRulesAnalyzer = [
@@ -200,11 +226,11 @@ class AdminPanelController extends BaseController {
 		    $this->validationRulesAnalyzer
 		);
 		if($validator->passes()){
-			$analyzer = Analyzer::createAnalyzer(Input::get());
+			$analyzer       = Analyzer::createAnalyzer(Input::get());
 			$measureTypesId = Input::get('measure_types_id');
-			$lMessPos = Input::get('long_message_position');
-			$sMessPos = Input::get('short_message_position');
-			$cMessPos = Input::get('current_message_position');
+			$lMessPos       = Input::get('long_message_position');
+			$sMessPos       = Input::get('short_message_position');
+			$cMessPos       = Input::get('current_message_position');
 
 			foreach ($measureTypesId as $key => $typeId) {
 				MeasureTypeInAnalyzer::createMeasure($lMessPos[$key], $sMessPos[$key], $cMessPos[$key], $analyzer->id, $typeId);
@@ -451,6 +477,14 @@ class AdminPanelController extends BaseController {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
 	}
+
+	public function changeAlarmForMeasureState(){
+		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find(Input::get('id'));
+		$alarm->active = Input::get('state');
+		$alarm->save();
+		return 1;
+	}
+
 	public function changeAnalyzerState(){
 		$analyzer = Analyzer::find(Input::get('id'));
 		$analyzer->active = Input::get('state');

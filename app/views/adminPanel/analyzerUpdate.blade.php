@@ -6,7 +6,7 @@
 			<ul class="nav nav-tabs" role="tablist">
 			  <li class="active"><a href="#section1">Basic</a></li>
 			  <li><a href="#section2">Measure Types in Analyzer</a></li>
-			  <li class="hide"><a href="#section3">Alarms</a></li>
+			  <li class=""><a href="#section3">Alarms</a></li>
 			</ul>
 
 			{{ Former::open()->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putAnalyzer', ['analyzerId'=>$analyzer->id]))
@@ -116,7 +116,7 @@
 <script>
 	var link = '/analyzerMeasureTypesEdit/';
 	var analyzerId = {{$analyzer->id}};
-	$('div.panelContent').on("click",'button.status' ,function(e){
+	$('div.panelContent').on("click",'#measureTable button.status' ,function(e){
 		e.preventDefault();
 		if($(this).hasClass('btn-danger')){
 			var state = 0;

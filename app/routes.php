@@ -53,12 +53,14 @@ Route::get('analyzers/{analyzerId}', array('as' => 'getAnalyzer',  'uses' => 'Ad
 Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState',  'uses' => 'AdminPanelController@changeAnalyzerState'));
 Route::post('analyzers/changeMeasureState', array('as' => 'changeMeasureState',  'uses' => 'AdminPanelController@changeMeasureState'));
 
+Route::post('analyzers/changeAlarmForMeasureState', array('as' => 'changeAlarmForMeasureState',  'uses' => 'AdminPanelController@changeAlarmForMeasureState'));
+
 Route::get('analyzerMeasureTypes/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypes'))->where('aid', '\d+');
 Route::get('analyzerMeasureTypesEdit/{atid}/{aid}', array('as' => 'analyzerMeasureTypes', 'uses' => 'AdminPanelController@getAnalyzerMeasureTypesEdit'))->where('aid', '\d+')->where('atid', '\d+');
 
 Route::get('analyzerAlarmTypes/{aid}', array('as' => 'analyzerAlarmTypes', 'uses' => 'AdminPanelController@getAnalyzerAlarmTypes'))->where('aid', '\d+');
 
-Route::get('analyzerAlarmTypesEdit/{atid}/{aid}', array('as' => 'analyzerAlarmTypes', 'uses' => 'AdminPanelController@getAnalyzerAlarmTypesEdit'))->where('aid', '\d+')->where('atid', '\d+');
+Route::get('analyzerAlarmTypesEdit/{aid}', array('as' => 'analyzerAlarmTypes', 'uses' => 'AdminPanelController@getAnalyzerAlarmTypesEdit'))->where('aid', '\d+');
 Route::get('analyzer/{aid}/measure/{mid}/alarms', array('as' => 'analyzerMeasureAlarmTypes', 'uses' => 'AdminPanelController@getMeasureAlarmTypes'))->where('aid', '\d+')->where('atid', '\d+');
 Route::post('analyzer/{aid}/measure/{mid}/alarms', array('as' => 'analyzerMeasureAlarmTypes', 'uses' => 'AdminPanelController@postMeasureAlarmTypes'))->where('aid', '\d+')->where('atid', '\d+');
 
