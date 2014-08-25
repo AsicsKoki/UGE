@@ -188,6 +188,11 @@ class AdminPanelController extends BaseController {
 
 		$analyzer = Analyzer::find($aid);
 
+		if (!$analyzer) {
+			Session::flash('status_error', 'The analyzer does not exist');
+			return Redirect::route('analyzers');
+		}
+
 		return View::make('adminPanel.analyzerUpdate')
 				->with('analyzer', $analyzer)
 				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))

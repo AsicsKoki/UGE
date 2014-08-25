@@ -36,14 +36,25 @@ var getMeasures = function(id) {
 					$(row).attr('data-index', index);
 				});
 
-				table = $('#measureTable').dataTable({
-				  "aoColumns": [
-				  null,
-				  { "bSortable": false },
-				  { "bSortable": false },
-				  { "bSortable": false },
-				  ]
-				});
+				if ($('#measureTable th').length == 4) 
+					table = $('#measureTable').dataTable({
+					  "aoColumns": [
+						null,
+						{ "bSortable": false },
+						{ "bSortable": false },
+						{ "bSortable": false }
+					  ]
+					});
+				else
+					table = $('#measureTable').dataTable({
+					  "aoColumns": [
+						null,
+						{ "bSortable": false },
+						{ "bSortable": false },
+						{ "bSortable": false },
+						{ "bSortable": false }
+					  ]
+					});
 
 				$('table#measureTable').on('click', 'td input[type=checkbox]', function() {
 					var index = $(this).parents('tr').attr('data-index'),
