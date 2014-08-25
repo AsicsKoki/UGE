@@ -4,7 +4,7 @@
 	@include('partials.sidebar')
 	</div>
 	<div>
-		<div style="left:20%" class="register-form">
+		<div class="panelContent container col-xs-8">
 			{{ Former::open()->class('form-horizontal')->method('POST')->enctype('multipart/form-data')->action(URL::route('postNewAlarm'))
 				->rules([
 						'name_sr' => 'required',
@@ -18,7 +18,7 @@
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::submit('Submit')->class('form-control submit-button')}}
+				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 			{{ Former::close() }}
 		</div>
 	</div>

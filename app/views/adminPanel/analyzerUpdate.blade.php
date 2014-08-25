@@ -9,7 +9,7 @@
 			  <li class="hide"><a href="#section3">Alarms</a></li>
 			</ul>
 
-			{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putAnalyzer', ['analyzerId'=>$analyzer->id]))
+			{{ Former::open()->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putAnalyzer', ['analyzerId'=>$analyzer->id]))
 				->rules([
 						'name'                   => 'required|min:3',
 						'modbus_slave_address'   => 'required',

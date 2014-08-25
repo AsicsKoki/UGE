@@ -1,10 +1,8 @@
 @extends('layouts/admin')
 @section('main')
-	<div>
 	@include('partials.sidebar')
-	</div>
 	<div class="panelContent col-xs-8">
-		<a class="btn btn-primary" href="{{ URL::route('getRegisterHub') }}">New Hub</a>
+		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterHub') }}">New Hub</a>
 		<table id="analyzersTable" class="table table-hover display">
 			<thead>
 				<th>id</th>
@@ -23,7 +21,7 @@
 					<td>
 						@if($hub['active']==1)
 							<button data-id="{{$hub['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
-						@else;
+						@else
 							<button data-id="{{$hub['id']}}" type="button" class="status btn btn-success">Activate</button>
 						@endif
 					</td>

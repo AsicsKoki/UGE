@@ -3,7 +3,7 @@
 @include('partials.sidebar')
 	<div class="panelContent container col-xs-8">
 		<div class='row col-xs-8'>
-			{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putClient', ['clientId'=>$customer->id]))
+			{{ Former::open()->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putClient', ['clientId'=>$customer->id]))
 				->rules([
 						'name'           => 'required|min:3',
 						'address'        => 'required',

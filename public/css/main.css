@@ -62,6 +62,10 @@ button.submit-button, input.submit-button {
 	padding-top:20px;
 }
 
+button.submit-button-margin-bottom, input.submit-button-margin-bottom {
+	margin-bottom: 15px;
+}
+
 .submit-btn {
 	margin-top: 10px;
 }

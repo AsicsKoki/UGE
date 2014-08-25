@@ -1,9 +1,9 @@
 @extends('layouts/admin')
 @section('main')
 @include('partials.sidebar')
-	<div class="panelContent">
+	<div class="panelContent panelContent container col-xs-8">
 		<div class='col-md-6'>
-			{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putHub', ['hubId'=>$hub->id]))
+			{{ Former::open()->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putHub', ['hubId'=>$hub->id]))
 				->rules([
 						'name'                  => 'required|min:3',
 						'interface_type'        => 'required',
@@ -25,9 +25,10 @@
 				{{Former::text('postal_address')->label('Address')->placeholder('Address')->class('form-control')}}
 
 				{{Former::text('interface_type')->label('Interface Type')->placeholder('Interface Type')->class('form-control')}}
-
 				{{Former::text('ip_address')->label('IP')->placeholder('Enter IP')->class('form-control')}}
 
+		</div>
+		<div class='col-md-6'>
 				{{Former::text('port')->label('Port')->placeholder('Enter port')->class('form-control')}}
 
 				{{Former::text('rc_address')->label('RC Address')->placeholder('RC Address')->class('form-control')}}
@@ -40,9 +41,9 @@
 
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::submit('Update customer')->class('form-control')}}
-			{{ Former::close() }}
 		</div>
+				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+			{{ Former::close() }}
 	</div>
 @stop
 @section('moreScripts')
