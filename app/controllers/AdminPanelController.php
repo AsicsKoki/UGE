@@ -80,30 +80,6 @@ class AdminPanelController extends BaseController {
 				/*->with('measures', DB::table('measure_types')->lists('id', 'name_en'))*/;
 	}
 
-	public function getAnalyzerAlarmTypes($aid) {
-		$analyzer = Analyzer::find($aid);
-
-		$mtatId = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $analyzer->analyzer_types_id)->lists('id');
-
-		if (!count($mtatId )) $mtatId = [];
-
-
-		if (count($mtatId))	{
-			$res = DB::table('alarm_types_for_measure_types_in_analyzer_types')->whereIn('measure_types_in_analyzer_types_id', $mtatId)->lists('alarm_types_id');
-
-			if (count($res))
-				$alarms = AlarmType::whereIn('id', $res)->lists('id', 'name_en');
-			else
-				$alarms = [];
-		} else {
-			$alarms = [];
-		}
-
-		return View::make('partials.alarms')
-				->with('alarms', $alarms)
-				->with('measureTypeInAnalyzerIds', MeasureTypeInAnalyzer::where('analyzers_id', $aid)->with('measureType')->get()->toArray());
-	}
-
 	private function listAnalyzerAlarms($analyzerId) {
 		$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzerId)->lists('id');
 
@@ -124,9 +100,9 @@ class AdminPanelController extends BaseController {
 		// dd($alarms);
 
 		return View::make('partials.alarms')
-				->with('alarms', $alarms);
+				->with('alarms', $alarms)
+				->with('analyzerId', $aid);
 	}
-
 
 	public function getAnalyzerMeasureTypes($aid) {
 		$res = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $aid)->lists('measure_types_id');
@@ -176,6 +152,15 @@ class AdminPanelController extends BaseController {
 				->with('alarmTypes', $this->listAlarms($analyzer->analyzer_types_id));
 	}
 
+	public function getMeasureAlarmTypesEdit($aid, $mid, $alid) {
+		$analyzer = Analyzer::find($aid);
+		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find($alid);
+		return View::make('adminPanel.editMeasureAlarm')
+			->with('analyzer', $analyzer)
+			->with('alarm', $alarm)
+			->with('alarmTypes', $this->listAlarms($analyzer->analyzer_types_id));
+	}
+
 	public function postMeasureAlarmTypes($atid, $aid) {
 		if (!MeasureTypeInAnalyzer::find($aid)) {
 			Session::flash('status_error', 'The measure type for analyzer does not exist');
@@ -197,7 +182,22 @@ class AdminPanelController extends BaseController {
 
 		Session::flash('status_success', 'Measure Alarm successfully created');
 		return Redirect::route('getAnalyzer', ['analyzerId' => $atid]);
+	}
 
+	public function postMeasureAlarmTypesEdit($alid) {
+		$validator = Validator::make(Input::all(),
+		    $this->validationMeasureAlarm
+		);
+
+		if($validator->fails()) return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+
+		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find($alid);;
+		$alarm->active              = Input::get('active');
+		$alarm->alarm_types_id      = Input::get('alarm_id');
+		$alarm->alarm_level         = Input::get('alarm_level');
+		$alarm->save();
+		Session::flash('status_success', 'Measure Alarm successfully updated');
+		return Redirect::back();
 	}
 
 	private $validationMeasureAlarm = [

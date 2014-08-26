@@ -20,7 +20,7 @@
 						{{$alarm['alarm_level']}}
 					</td>
 					<td class="text-center">
-						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypes', array('aid'=>6, 'mid' => $alarm['id'])) }}">Edit</a>
+						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypesEdit', ['alid' => $alarm['id'], 'mid' => $alarm['measure_type_in_analyzer']['id'], 'aid' => $analyzerId ])}}">Edit</a>
 						<a class="btn btn-danger" href="{{ URL::route('deleteMeasureTypeAlarm', array('alid'=> $alarm['id'] )) }}">Delete</a>
 					</td>
 					<td class="text-center">
