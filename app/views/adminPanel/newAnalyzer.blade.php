@@ -37,10 +37,6 @@
 								{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
 								{{Former::text('long_message_period')->label('Long Message Period')->placeholder('Long Message Period')->class('form-control')}}
-								<div class="control-group">
-									<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelAnalyzerAction')}}">Cancel</a>
-								</div>
-
 							</div>
 
 							<div class="col-md-6" >
@@ -84,12 +80,19 @@
 
 
 								{{Former::hidden()->name('_token')->value(csrf_token())}}
-								{{Former::button('Submit')->class('form-control submit-button btn btn-info')}}
 							</div>
 						</div>
 						<div class="tab-pane fade" id="section2">
 							<div class="measures">
 
+							</div>
+						</div>
+						<div>
+							<div class="control-group col-md-6">
+								<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelAnalyzerAction')}}">Cancel</a>
+							</div>
+							<div class="control-group col-md-6">
+								{{Former::button('Create Analyzer')->class('col-md-6 form-control submit-button submit-button-margin-bottom btn btn-info')}}
 							</div>
 						</div>
 				</div>

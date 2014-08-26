@@ -119,13 +119,7 @@ class AdminPanelController extends BaseController {
 	public function getAnalyzerMeasureTypesEdit($atid, $aid) {
 		$analyzer = Analyzer::find($aid);
 
-		$exist = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureTypeInAnalyzerType')->get();
-
-		$exist->filter(function($item) use($atid) {
-			return $item->measureTypeInAnalyzerType->analyzer_types_id == $atid;
-		});
-
-		if ($analyzer->analyzer_types_id != $atid AND !count($exist->toArray())) {
+		if ($analyzer->analyzer_types_id != $atid) {
 			return $this->getAnalyzerMeasureTypes($atid);
 		} else {
 			$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureType')->get()->toArray();
@@ -249,11 +243,10 @@ class AdminPanelController extends BaseController {
 		}
 	}
 
-	private function isAnalyzerTypeCangeDisabled($analyzer) {
+	private function isAnalyzerTypeDisabled($analyzer) {
 		$list = $analyzer->measureTypeInAnalyzer()->lists('id');
 		if (!count($list)) return false;
-
-		return Measure::whereIn('measure_types_in_analyzers_id', $list)->count() > 1;
+		return Measure::whereIn('measure_types_in_analyzers_id', $list)->count() > 0;
 
 	}
 
@@ -270,7 +263,7 @@ class AdminPanelController extends BaseController {
 				->with('analyzer', $analyzer)
 				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
-				->with('analyzerTypeDisabled', $this->isAnalyzerTypeCangeDisabled($analyzer))
+				->with('analyzerTypeDisabled', $this->isAnalyzerTypeDisabled($analyzer))
 				->with('hubs', Hub::lists('id', 'name'));
 	}
 
@@ -285,7 +278,7 @@ class AdminPanelController extends BaseController {
 			$type = $analyzer->analyzer_types_id;
 			$analyzer->update(Input::all());
 
-			if (!$this->isAnalyzerTypeCangeDisabled($analyzer)) {
+			if ($this->isAnalyzerTypeDisabled($analyzer)) {
 				$analyzer->analyzer_types_id = $type;
 				$analyzer->save();
 			}
@@ -321,10 +314,6 @@ class AdminPanelController extends BaseController {
 
 				MeasureTypeInAnalyzer::where('analyzers_id', $aid)->delete();
 				$measureTypesId = Input::get('measure_types_id');
-				$lMessPos = Input::get('long_message_position');
-				$sMessPos = Input::get('short_message_position');
-				$cMessPos = Input::get('current_message_position');
-
 				foreach ($measureTypesId as $key => $typeId) {
 					MeasureTypeInAnalyzer::createMeasure($lMessPos[$key], $sMessPos[$key], $cMessPos[$key], $analyzer->id, $typeId);
 				}
