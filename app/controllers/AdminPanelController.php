@@ -316,6 +316,12 @@ class AdminPanelController extends BaseController {
 		}
 	}
 
+	public function deleteMeasureTypeAlarm($alid){
+		AlarmTypeForMeasureTypeInAnalyzers::find($alid)->delete();
+		Session::flash('status_success', 'Alarm successfully deleted');
+		return Redirect::back();
+	}
+
 	public function getHubs()
 	{
 		$data = Hub::with('analyzer')->get()->toArray();
