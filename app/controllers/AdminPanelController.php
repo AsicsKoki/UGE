@@ -119,7 +119,13 @@ class AdminPanelController extends BaseController {
 	public function getAnalyzerMeasureTypesEdit($atid, $aid) {
 		$analyzer = Analyzer::find($aid);
 
-		if ($analyzer->analyzer_types_id != $atid) {
+		$exist = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureTypeInAnalyzerType')->get();
+
+		$exist->filter(function($item) use($atid) {
+			return $item->measureTypeInAnalyzerType->analyzer_types_id == $atid;
+		});
+
+		if ($analyzer->analyzer_types_id != $atid AND !count($exist->toArray())) {
 			return $this->getAnalyzerMeasureTypes($atid);
 		} else {
 			$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzer->id)->with('measureType')->get()->toArray();
@@ -243,6 +249,14 @@ class AdminPanelController extends BaseController {
 		}
 	}
 
+	private function isAnalyzerTypeCangeDisabled($analyzer) {
+		$list = $analyzer->measureTypeInAnalyzer()->lists('id');
+		if (!count($list)) return false;
+
+		return Measure::whereIn('measure_types_in_analyzers_id', $list)->count() > 1;
+
+	}
+
 	public function getAnalyzer($aid) {
 
 		$analyzer = Analyzer::find($aid);
@@ -256,6 +270,7 @@ class AdminPanelController extends BaseController {
 				->with('analyzer', $analyzer)
 				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
+				->with('analyzerTypeDisabled', $this->isAnalyzerTypeCangeDisabled($analyzer))
 				->with('hubs', Hub::lists('id', 'name'));
 	}
 
@@ -267,7 +282,13 @@ class AdminPanelController extends BaseController {
 		);
 
 		if($validator->passes()){
+			$type = $analyzer->analyzer_types_id;
 			$analyzer->update(Input::all());
+
+			if (!$this->isAnalyzerTypeCangeDisabled($analyzer)) {
+				$analyzer->analyzer_types_id = $type;
+				$analyzer->save();
+			}
 
 			$lMessPos = Input::get('long_message_position');
 			$sMessPos = Input::get('short_message_position');

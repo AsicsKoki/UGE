@@ -40,9 +40,6 @@
 								{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
 								{{Former::text('long_message_period')->label('Long Message Period')->placeholder('Long Message Period')->class('form-control')}}
-								<div class="control-group">
-									<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelAnalyzerAction')}}">Cancel</a>
-								</div>
 							</div>
 							<div class="col-md-6">
 
@@ -82,7 +79,7 @@
 								<div class="control-group required">
 									<label for="hubs_id" class="control-label">Analyzer type<sup>*</sup>
 										</label>
-									<select name="analyzer_types_id" id="" class="form-control">
+									<select {{$analyzerTypeDisabled ? 'disabled' : ''}} name="analyzer_types_id" id="" class="form-control">
 									@foreach ($analyzers as $key => $analyzerItem)
 										@if ($analyzerItem == $analyzer->analyzer_types_id)
 											<option selected value="{{$analyzerItem}}">{{$key}}</option>
@@ -95,7 +92,6 @@
 
 								{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 								{{Former::hidden()->name('_token')->value(csrf_token())}}
-								{{Former::button('Update Analyzer')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 							</div>
 						</div>
 						<div class="tab-pane fade" id="section2">
@@ -108,6 +104,15 @@
 
 							</div>
 						</div>
+						<div>
+							<div class="control-group col-md-6">
+								<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelAnalyzerAction')}}">Cancel</a>
+							</div>
+							<div class="control-group col-md-6">
+								{{Former::button('Update Analyzer')->class('col-md-6 form-control submit-button submit-button-margin-bottom btn btn-info')}}
+							</div>
+						</div>
+
 					</div>
 			{{ Former::close() }}
 		</div>
