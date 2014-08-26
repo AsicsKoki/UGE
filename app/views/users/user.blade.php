@@ -1,5 +1,6 @@
 @extends('layouts/admin')
 @section('main')
+@include('partials.sidebar')
 <div class="panelContent col-xs-8">
 	<div class='col-md-6'>
 		{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putUser', ['userId'=>$user->id]))
@@ -25,9 +26,12 @@
 			{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
 			{{Former::select('account_type_id')->options([1=>'Admin', 0=>'User'])->label('Account Type')->class('form-control')}}
 			{{Former::hidden()->name('_token')->value(csrf_token())}}
-			{{Former::submit('Update User')->class('form-control')}}
+			<div class="control-group">
+				<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelUserAction')}}">Cancel</a>
+			</div>
+			{{Former::submit('Update User')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 		{{ Former::close() }}
-	</div>
+		</div>
 	</div>
 @stop
 @section('moreScripts')

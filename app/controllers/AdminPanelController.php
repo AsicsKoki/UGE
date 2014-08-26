@@ -550,4 +550,8 @@ class AdminPanelController extends BaseController {
 	public function cancelClientAction(){
 		return Redirect::intended('clients');
 	}
+
+	public function cancelUserAction(){
+		return Redirect::intended('clients');
+	}
 }
