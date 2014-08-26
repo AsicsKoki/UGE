@@ -26,7 +26,7 @@ body {
 	height:80%;
 }
 
-button.submit-button, input.submit-button {
+button.submit-button, input.submit-button, a.submit-button {
 	margin-top: 15px;
 }
 .widget{

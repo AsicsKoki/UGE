@@ -43,6 +43,7 @@ Route::post('registerClient', array('as'=>'postNewClient', 'uses' => 'AdminPanel
 Route::put('clients/{clientId}', array('as'=>'putClient', 'uses' => 'AdminPanelController@putClient'))->where('clientId', '\d+');
 Route::get('clients/{clientId}', array('as' => 'getClient',  'uses' => 'AdminPanelController@getCustomer'))->where('clientId', '\d+');
 Route::post('clients/changeClientState', array('as' => 'changeClientState',  'uses' => 'AdminPanelController@changeClientState'));
+Route::get('clientCancel', array('as' => 'cancelClientAction',  'uses' => 'AdminPanelController@cancelClientAction'));
 
 
 Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'AdminPanelController@getAnalyzerList'));
@@ -52,6 +53,8 @@ Route::put('analyzers/{analyzerId}', array('as'=>'putAnalyzer', 'uses' => 'Admin
 Route::get('analyzers/{analyzerId}', array('as' => 'getAnalyzer',  'uses' => 'AdminPanelController@getAnalyzer'))->where('analyzerId', '\d+');
 Route::post('analyzers/changeAnalyzerState', array('as' => 'changeAnalyzerState',  'uses' => 'AdminPanelController@changeAnalyzerState'));
 Route::post('analyzers/changeMeasureState', array('as' => 'changeMeasureState',  'uses' => 'AdminPanelController@changeMeasureState'));
+Route::get('analyzersCancel', array('as' => 'cancelAnalyzerAction',  'uses' => 'AdminPanelController@cancelAnalyzerAction'));
+
 
 Route::post('analyzers/changeAlarmForMeasureState', array('as' => 'changeAlarmForMeasureState',  'uses' => 'AdminPanelController@changeAlarmForMeasureState'));
 
@@ -71,6 +74,7 @@ Route::post('registerHub', array('as'=>'postNewHub', 'uses' => 'AdminPanelContro
 Route::put('hubs/{hubId}', array('as'=>'putHub', 'uses' => 'AdminPanelController@putHub'))->where('hubId', '\d+');
 Route::get('hubs/{hubId}', array('as' => 'getHub',  'uses' => 'AdminPanelController@getHub'))->where('hubId', '\d+');
 Route::post('hubs/changeHubState', array('as' => 'changeHubState',  'uses' => 'AdminPanelController@changeHubState'));
+Route::get('hubsCancel', array('as' => 'cancelHubAction',  'uses' => 'AdminPanelController@cancelHubAction'));
 
 
 

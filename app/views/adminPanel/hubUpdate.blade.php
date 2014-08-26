@@ -26,7 +26,9 @@
 
 				{{Former::text('interface_type')->label('Interface Type')->placeholder('Interface Type')->class('form-control')}}
 				{{Former::text('ip_address')->label('IP')->placeholder('Enter IP')->class('form-control')}}
-
+				<div class="control-group">
+					<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelHubAction')}}">Cancel</a>
+				</div>
 		</div>
 		<div class='col-md-6'>
 				{{Former::text('port')->label('Port')->placeholder('Enter port')->class('form-control')}}
@@ -41,8 +43,8 @@
 
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-		</div>
 				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+		</div>
 			{{ Former::close() }}
 	</div>
 @stop

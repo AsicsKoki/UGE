@@ -538,4 +538,16 @@ class AdminPanelController extends BaseController {
 		$measure->save();
 		return 1;
 	}
+
+	public function cancelAnalyzerAction(){
+		return Redirect::intended('analyzers');
+	}
+
+	public function cancelHubAction(){
+		return Redirect::intended('hubs');
+	}
+
+	public function cancelClientAction(){
+		return Redirect::intended('clients');
+	}
 }

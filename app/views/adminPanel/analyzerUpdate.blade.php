@@ -40,14 +40,15 @@
 								{{Former::text('short_message_period')->label('Short Message Period')->placeholder('Short Message Period')->class('form-control')}}
 
 								{{Former::text('long_message_period')->label('Long Message Period')->placeholder('Long Message Period')->class('form-control')}}
-
+								<div class="control-group">
+									<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelAnalyzerAction')}}">Cancel</a>
+								</div>
 							</div>
 							<div class="col-md-6">
 
 								{{Former::text('alarm_measure_period')->label('Alarm Measure Period')->placeholder('Alarm Measure Period')->class('form-control')}}
 
 								{{Former::text('measures_before_alarm')->label('Measures Before Alarm')->placeholder('Measures before alarm')->class('form-control')}}
-
 								<div class="control-group required">
 									<label for="hubs_id" class="control-label">Hub<sup>*</sup>
 										</label>
@@ -94,6 +95,7 @@
 
 								{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 								{{Former::hidden()->name('_token')->value(csrf_token())}}
+								{{Former::button('Update Analyzer')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 							</div>
 						</div>
 						<div class="tab-pane fade" id="section2">
@@ -107,7 +109,6 @@
 							</div>
 						</div>
 					</div>
-				{{Former::button('Update Analyzer')->class('form-control btn btn-info submit-button')}}
 			{{ Former::close() }}
 		</div>
 	</div>

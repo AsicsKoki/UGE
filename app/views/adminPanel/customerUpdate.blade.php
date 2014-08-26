@@ -18,6 +18,9 @@
 					{{Former::text('contact_email')->label('Contact Email')->placeholder('Contact Email')->class('form-control')}}
 
 					{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
+					<div class="control-group">
+					<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelClientAction')}}">Cancel</a>
+				</div>
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
 				<div class="control-group submit-btn">
 				{{Former::submit('Update customer')->class('form-control btn btn-info')}}
