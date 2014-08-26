@@ -10,8 +10,8 @@
 						</label>
 						<select name="alarm_id" class="form-control">
 							@foreach ($alarmTypes as $alarmType)
-								@if($alarmType['id'] == $alarm['id'])
-								<option selected value="{{$alarmType['id']}}">{{$alarmType['name_en']}}</option>
+								@if($alarmType['id'] == $alarm['alarm_types_id'])
+									obro<option selected value="{{$alarmType['id']}}">{{$alarmType['name_en']}}</option>
 								@else
 									<option value="{{$alarmType['id']}}">{{$alarmType['name_en']}}</option>
 								@endif
