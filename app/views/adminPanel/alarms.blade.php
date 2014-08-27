@@ -1,15 +1,18 @@
 @extends('layouts/admin')
 @section('main')
-	<div>
-	@include('partials.sidebar')
-	</div>
-	<div class="panelContent col-xs-8">
+@include('partials.sidebar')
+	<div class="panelContent container col-xs-8">
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active"><a href="#section1">Alarms</a></li>
+			<li><a href="#section2">Analyzer alarms</a></li>
+		</ul>
 		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterAlarm') }}">New Alarm</a>
 		<table id="analyzersTable" class="table table-hover display">
 			<thead>
 				<th>id</th>
 				<th>Name</th>
 				<th>Name</th>
+				<th>Action</th>
 				<th>Status</th>
 			</thead>
 			<tbody>
@@ -18,6 +21,10 @@
 					<td>{{$alarm['id']}}</td>
 					<td>{{$alarm['name_en']}}</td>
 					<td>{{$alarm['name_sr']}}</td>
+					<td>
+						<a class="btn btn-primary" href="{{ URL::route('getEditAlarm', ['id' => $alarm['id']])}}">Edit</a>
+						<a class="btn btn-danger" href="{{ URL::route('deleteAlarmType', ['id'=> $alarm['id']]) }}">Delete</a>
+					</td>
 					<td>
 						@if($alarm['active']==1)
 							<button type="button" class="btn btn-danger">Deactivate</button>

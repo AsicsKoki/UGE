@@ -200,6 +200,12 @@ class AdminPanelController extends BaseController {
 		return Redirect::to('analyzers/'.$aid.'#section3');
 	}
 
+	public function deleteAlarmType($id){
+		AlarmType::find($id)->delete();
+		Session::flash('status_success', 'Alarm successfully deleted');
+		return Redirect::to('alarmManagement');
+	}
+
 	private $validationMeasureAlarm = [
 		'active'            => 'required',
 		'alarm_level'       => 'required|numeric',

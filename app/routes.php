@@ -94,10 +94,15 @@ Route::post('measuresManagement/changeMeasureTypeState', array('as' => 'changeMe
 Route::get('modbusConsole', array('as' => 'getModbusConsole', 'uses' => 'AdminPanelController@getModbusConsole'));
 Route::post('modbusConsole', array('as' => 'sendModbusQuery', 'uses' => 'AdminPanelController@sendModbusQuery'));
 
+Route::get('alarmManagement/{$id}/delete', array('as' => 'deleteAlarmType', 'uses' => 'AdminPanelController@deleteAlarmType'))->where('id', '\d+');
 Route::get('alarmManagement', array('as' => 'getAlarmManagement', 'uses' => 'AdminPanelController@getAlarmManagement'));
 Route::post('alarmManagement', array('as'=>'postNewAlarm', 'uses' => 'AdminPanelController@postNewAlarm'));
 Route::get('registerAlarm', array('as' => 'getRegisterAlarm', 'uses' => 'AdminPanelController@getRegisterAlarm'));
 Route::post('alarmManagement/changeAlarmState', array('as' => 'changeAlarmState',  'uses' => 'AdminPanelController@changeAlarmState'));
+Route::get('alarmManagement/{$id}', array('as' => 'getEditAlarm', 'uses' => 'AdminPanelController@getEditAlarm'));
+
+
+
 
 Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'AdminPanelController@getSignalManagement'));
 Route::post('signalManagement', array('as'=>'postNewSignal', 'uses' => 'AdminPanelController@postNewSignal'));
