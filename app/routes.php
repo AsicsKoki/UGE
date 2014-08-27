@@ -67,7 +67,7 @@ Route::get('analyzer/{aid}/measure/{mid}/alarms', array('as' => 'analyzerMeasure
 Route::post('analyzer/{aid}/measure/{mid}/alarms', array('as' => 'analyzerMeasureAlarmTypes', 'uses' => 'AdminPanelController@postMeasureAlarmTypes'))->where('aid', '\d+')->where('atid', '\d+');
 Route::get('analyzer/alarms/{alid}', array('as' => 'deleteMeasureTypeAlarm', 'uses' => 'AdminPanelController@deleteMeasureTypeAlarm'))->where('alid', '\d+');
 Route::get('analyzer/{aid}/measure/{mid}/alarms/{alid}', array('as' => 'analyzerMeasureAlarmTypesEdit', 'uses' => 'AdminPanelController@getMeasureAlarmTypesEdit'));
-Route::post('analyzer/{aid}/alarms/{alid}/edit', array('as' => 'postAnalyzerMeasureAlarmTypesEdit', 'uses' => 'AdminPanelController@postMeasureAlarmTypesEdit'));
+Route::post('analyzer/{aid}/alarms/{alid}', array('as' => 'postAnalyzerMeasureAlarmTypesEdit', 'uses' => 'AdminPanelController@postMeasureAlarmTypesEdit'));
 
 
 

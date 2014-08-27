@@ -181,23 +181,23 @@ class AdminPanelController extends BaseController {
 		$alarmTypes->save();
 
 		Session::flash('status_success', 'Measure Alarm successfully created');
-		return Redirect::to('analyzers/4#section3');
+		return Redirect::to('analyzers/'.$aid.'#section3');
 	}
 
-	public function postMeasureAlarmTypesEdit($alid) {
+	public function postMeasureAlarmTypesEdit($aid, $alid) {
 		$validator = Validator::make(Input::all(),
 		    $this->validationMeasureAlarm
 		);
 
 		if($validator->fails()) return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 
-		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find($alid);;
+		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find($alid);
 		$alarm->active              = Input::get('active');
 		$alarm->alarm_types_id      = Input::get('alarm_id');
 		$alarm->alarm_level         = Input::get('alarm_level');
 		$alarm->save();
 		Session::flash('status_success', 'Measure Alarm successfully updated');
-		return Redirect::to('analyzers/4#section3');
+		return Redirect::to('analyzers/'.$aid.'#section3');
 	}
 
 	private $validationMeasureAlarm = [
