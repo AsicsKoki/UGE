@@ -200,8 +200,8 @@ class AdminPanelController extends BaseController {
 		return Redirect::to('analyzers/'.$aid.'#section3');
 	}
 
-	public function deleteAlarmType($id){
-		AlarmType::find($id)->delete();
+	public function removeAlarmType($aid){
+		AlarmType::find($aid)->delete();
 		Session::flash('status_success', 'Alarm successfully deleted');
 		return Redirect::to('alarmManagement');
 	}

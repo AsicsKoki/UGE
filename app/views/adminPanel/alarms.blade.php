@@ -22,8 +22,8 @@
 					<td>{{$alarm['name_en']}}</td>
 					<td>{{$alarm['name_sr']}}</td>
 					<td>
-						<a class="btn btn-primary" href="{{ URL::route('getEditAlarm', ['id' => $alarm['id']])}}">Edit</a>
-						<a class="btn btn-danger" href="{{ URL::route('deleteAlarmType', ['id'=> $alarm['id']]) }}">Delete</a>
+						<a class="btn btn-primary" href="{{ URL::route('getEditAlarm', ['aid' => $alarm['id']])}}">Edit</a>
+						<a class="btn btn-danger" href="{{ URL::route('removeAlarmType', ['aid'=> $alarm['id']]) }}">Delete</a>
 					</td>
 					<td>
 						@if($alarm['active']==1)
