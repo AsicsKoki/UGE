@@ -26,8 +26,7 @@
 							<option value="0">Inactive</option>
 						</select>
 					</div>
-
-					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')->value($alarm['alarm_level'])}}
+					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')->value(round($alarm['alarm_level'], $precision = 2))}}
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
 					{{Former::submit('Save')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}

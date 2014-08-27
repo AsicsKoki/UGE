@@ -17,7 +17,7 @@
 						{{$alarm['measure_type_in_analyzer']['measure_type']['name_en']}}
 					</td>
 					<td class="text-center">
-						{{$alarm['alarm_level']}}
+						{{round($alarm['alarm_level'], $precision = 2)}}
 					</td>
 					<td class="text-center">
 						<a class="btn btn-primary" href="{{ URL::route('analyzerMeasureAlarmTypesEdit', ['alid' => $alarm['id'], 'mid' => $alarm['measure_type_in_analyzer']['id'], 'aid' => $analyzerId ])}}">Edit</a>
