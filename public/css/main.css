@@ -29,6 +29,9 @@ body {
 button.submit-button, input.submit-button, a.submit-button {
 	margin-top: 15px;
 }
+.tab-margin{
+	margin-top: 15px;
+}
 .widget{
 	position: relative;
 	float: left;
