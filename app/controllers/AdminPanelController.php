@@ -206,6 +206,20 @@ class AdminPanelController extends BaseController {
 		return Redirect::to('alarmManagement');
 	}
 
+	public function getEditAlarm($aid){
+		return View::make('adminPanel.editAlarm')->with('alarmType', AlarmType::find($aid));
+	}
+
+	public function postEditAlarm($aid){
+		$alarm = AlarmType::find($aid);
+		$alarm->name_en = Input::get('name_en');
+		$alarm->name_sr = Input::get('name_sr');
+		$alarm->active = Input::get('active');
+		$alarm->save();
+		Session::flash('status_success', 'Alarm successfully updated');
+		return Redirect::to('alarmManagement');
+	}
+
 	private $validationMeasureAlarm = [
 		'active'            => 'required',
 		'alarm_level'       => 'required|numeric',

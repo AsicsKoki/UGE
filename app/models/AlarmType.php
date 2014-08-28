@@ -8,6 +8,13 @@ class AlarmType extends Eloquent {
 		$alarm = new AlarmType($data);
    		return $alarm->save();
 	}
-	
+
+	public function alarmTypeForMeasureTypeInAnalyzer() {
+		return $this->hasMany('alarmTypeForMeasureTypeInAnalyzer', 'alarm_type_id');
+	}
+
+	public function alarmTypeForMeasureTypeInAnalyzerTypes() {
+		return $this->hasMany('alarmTypeForMeasureTypeInAnalyzerTypes', 'alarm_type_id');
+	}
 
 }
