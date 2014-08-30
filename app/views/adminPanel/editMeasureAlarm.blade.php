@@ -22,10 +22,20 @@
 						<label for="active" class="control-label">Select state<sup>*</sup>
 						</label>
 						<select name="active" class="form-control">
-							<option value="1">Active</option>
-							<option value="0">Inactive</option>
+							<option {{$alarm['active'] ? 'selected' : ''}} value="1">Active</option>
+							<option {{!$alarm['active'] ? 'selected' : ''}} value="0">Inactive</option>
 						</select>
 					</div>
+
+					<div class="control-group">
+						<label for="active" class="control-label">Alarm High Flag<sup>*</sup>
+						</label>
+						<select name="alarm_high_flag" class="form-control">
+							<option {{$alarm['alarm_high_flag'] ? 'selected' : ''}} value="1">1</option>
+							<option {{!$alarm['alarm_high_flag'] ? 'selected' : ''}} value="0">0</option>
+						</select>
+					</div>
+
 					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')->value(round($alarm['alarm_level'], $precision = 2))}}
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}

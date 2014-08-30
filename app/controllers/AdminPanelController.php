@@ -156,7 +156,7 @@ class AdminPanelController extends BaseController {
 		$alarm = AlarmTypeForMeasureTypeInAnalyzers::find($alid);
 		return View::make('adminPanel.editMeasureAlarm')
 			->with('analyzer', $analyzer)
-			->with('alarm', $alarm)
+			->with('alarm', $alarm->toArray())
 			->with('alarmTypes', $this->listAlarms($analyzer->analyzer_types_id));
 	}
 
@@ -176,6 +176,7 @@ class AdminPanelController extends BaseController {
 		$alarmTypes->alarm_types_id                = Input::get('alarm_id');
 		$alarmTypes->active                        = Input::get('active');
 		$alarmTypes->alarm_level                   = Input::get('alarm_level');
+		$alarmTypes->alarm_high_flag               = Input::get('alarm_high_flag');
 		$alarmTypes->measure_types_in_analyzers_id = $aid;
 		$alarmTypes->save();
 
@@ -194,6 +195,7 @@ class AdminPanelController extends BaseController {
 		$alarm->active              = Input::get('active');
 		$alarm->alarm_types_id      = Input::get('alarm_id');
 		$alarm->alarm_level         = Input::get('alarm_level');
+		$alarm->alarm_high_flag               = Input::get('alarm_high_flag');
 		$alarm->save();
 		Session::flash('status_success', 'Measure Alarm successfully updated');
 		return Redirect::to('analyzers/'.$aid.'#section3');

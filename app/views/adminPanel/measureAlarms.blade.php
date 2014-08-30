@@ -25,6 +25,15 @@
 						</select>
 					</div>
 
+					<div class="control-group">
+						<label for="active" class="control-label">Alarm High Flag<sup>*</sup>
+						</label>
+						<select name="alarm_high_flag" class="form-control">
+							<option value="1">1</option>
+							<option value="0">0</option>
+						</select>
+					</div>
+
 					{{Former::number('alarm_level')->label('Alarm level')->class('form-control')->step('any')}}
 
 					{{Former::hidden()->name('_token')->value(csrf_token())}}
