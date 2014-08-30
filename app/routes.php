@@ -70,21 +70,13 @@ Route::get('analyzer/{aid}/measure/{mid}/alarms/{alid}', array('as' => 'analyzer
 Route::post('analyzer/{aid}/alarms/{alid}', array('as' => 'postAnalyzerMeasureAlarmTypesEdit', 'uses' => 'AdminPanelController@postMeasureAlarmTypesEdit'));
 
 
-
-
-
-
-
 Route::get('hubs', array('as' => 'getHubs', 'uses' => 'AdminPanelController@getHubs'));
 Route::get('registerHub', array('as' => 'getRegisterHub', 'uses' => 'AdminPanelController@getRegisterHub'));
-Route::post('registerHub', array('as'=>'postNewHub', 'uses' => 'AdminPanelController@postNewHub'));
-Route::put('hubs/{hubId}', array('as'=>'putHub', 'uses' => 'AdminPanelController@putHub'))->where('hubId', '\d+');
+Route::put('registerHub', array('as'=>'putNewHub', 'uses' => 'AdminPanelController@putHub'));
+Route::post('hubs/{hubId}', array('as'=>'postHub', 'uses' => 'AdminPanelController@postHub'))->where('hubId', '\d+');
 Route::get('hubs/{hubId}', array('as' => 'getHub',  'uses' => 'AdminPanelController@getHub'))->where('hubId', '\d+');
 Route::post('hubs/changeHubState', array('as' => 'changeHubState',  'uses' => 'AdminPanelController@changeHubState'));
 Route::get('hubsCancel', array('as' => 'cancelHubAction',  'uses' => 'AdminPanelController@cancelHubAction'));
-
-
-
 
 Route::get('measuresManagement', array('as' => 'getMeasuresManagement', 'uses' => 'AdminPanelController@getMeasuresManagement'));
 Route::post('measuresManagement', array('as'=>'postNewMeasure', 'uses' => 'AdminPanelController@postNewMeasure'));

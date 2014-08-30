@@ -29,8 +29,7 @@ class AdminPanelController extends BaseController {
 
 	private $validationRules = [
 			'name'           => 'required|min:3',
-			'address'        => 'required',
-			'contact_person' => 'required',
+			'postal_address' => 'required',
 			'active'         => 'required',
 		];
 
@@ -376,27 +375,12 @@ class AdminPanelController extends BaseController {
 		'serial_port_stop_bits' => 'required',
 	];
 
-	public function postNewHub(){
-
-		$validator = Validator::make(Input::all(),
-		    $this->validationRulesHub
-		);
-		if($validator->passes()){
-			Hub::createHub(Input::all());
-			Session::flash('status_success', 'Hub successfully created');
-			return Redirect::route('getHubs');
-		} else {
-			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
-		}
-	}
-
 	public function getHub($hid) {
 		return View::make('adminPanel.hubUpdate')->with('hub', Hub::find($hid));
 	}
 
-	public function putHub($hid)
-	{
-		$hub = Hub::find($hid);
+	public function postHub($hubId){
+		$hub = Hub::find($hubId);
 		$validator = Validator::make(Input::all(),
 		    $this->validationRules
 		);
@@ -405,7 +389,21 @@ class AdminPanelController extends BaseController {
 		if($validator->passes()){
 			$hub->update(Input::all());
 			Session::flash('status_success', 'Hub updated');
-			return Redirect::route('hubs');
+			return Redirect::route('getHubs');
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+	}
+
+	public function putHub()
+	{
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesHub
+		);
+		if($validator->passes()){
+			Hub::createHub(Input::all());
+			Session::flash('status_success', 'Hub successfully created');
+			return Redirect::route('getHubs');
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}

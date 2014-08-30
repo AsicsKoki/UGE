@@ -4,8 +4,9 @@
 	@include('partials.sidebar')
 	</div>
 	<div class="panelContent container col-xs-8">
+		<h4>Create New Hub</h4>
 		<div class="col-md-6">
-			{{ Former::open()->role('form')->class('form')->method('POST')->enctype('multipart/form-data')->action(URL::route('postNewHub'))
+			{{ Former::open()->role('form')->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putNewHub'))
 				->rules([
 						'name'                  => 'required|min:3',
 						'interface_type'        => 'required',
@@ -46,7 +47,7 @@
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::button('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 		</div>
 			{{ Former::close() }}
 	</div>

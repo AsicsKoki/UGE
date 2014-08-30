@@ -2,8 +2,9 @@
 @section('main')
 @include('partials.sidebar')
 	<div class="panelContent panelContent container col-xs-8">
+		<h4>Update Hub</h4>
 		<div class='col-md-6'>
-			{{ Former::open()->class('form')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putHub', ['hubId'=>$hub->id]))
+			{{ Former::open()->class('form')->method('POST')->enctype('multipart/form-data')->action(URL::route('postHub', ['hubId'=>$hub->id]))
 				->rules([
 						'name'                  => 'required|min:3',
 						'interface_type'        => 'required',
