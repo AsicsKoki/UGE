@@ -96,8 +96,6 @@ class AdminPanelController extends BaseController {
 
 		$alarms = $this->listAnalyzerAlarms($aid);
 
-		// dd($alarms);
-
 		return View::make('partials.alarms')
 				->with('alarms', $alarms)
 				->with('analyzerId', $aid);
@@ -462,7 +460,22 @@ class AdminPanelController extends BaseController {
 	public function getAlarmManagement()
 	{
 		$alarms = AlarmType::all();
-		return View::make('adminPanel.alarms')->with('alarms', $alarms);
+		return View::make('adminPanel.alarms')
+			->with('alarms', $alarms)
+			->with('analyzerTypes', AnalyzerType::all());
+	}
+
+	public function getAlarmTypesForMeasureTypesInAnalyzer($atid) {
+		$mes = MeasureTypeInAnalyzerType::where('analyzer_types_id', $atid)->lists('id');
+
+		$res = [];
+
+		if (count($mes)) {
+			$res = AlarmTypeForMeasureTypeInAnalyzersType::with('alarmType')->with('measureTypeInAnalyzerType.measureType')->whereIn('measure_types_in_analyzer_types_id', $mes)->get()->toArray();
+		}
+
+		return View::make('partials.AlarmTypesForMeasureTypesInAnalyzer')
+					->with('alarms', $res);
 	}
 
 	private $validationRulesAlarm = [

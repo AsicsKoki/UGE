@@ -9,7 +9,7 @@
 		<div class="tab-content">
 			<div class="tab-pane active in fade alarms" id="section1">
 				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterAlarm') }}">New Alarm</a>
-				<table id="analyzersTable" class="table table-hover display">
+				<table id="alarmTypesTable" class="table table-hover display">
 					<thead>
 						<th>id</th>
 						<th>Name (English)</th>
@@ -40,16 +40,37 @@
 				</table>
 			</div>
 			<div class="tab-pane fade" id="section2">
-				<div class="analyzerAlarms">
-					123
+				<div class="analyzerAlarms container">
+					<div class="row">
+						<form action="" class="form-inline" role="form">
+							<div class="form-group">
+								<label for="active" class="control-label">Analyzer Type
+								</label>
+								<select name="analyzer_types_id" class="form-control">
+									@foreach ($analyzerTypes as $type)
+										<option value="{{$type->id}}">{{$type->name}}</option>
+									@endforeach
+								</select>
+							</div>
+						</form>
+					</div>
 				</div>
+				<div class="alarm_measures"></div>
 			</div>
 		</div>
 	</div>
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-$('#analyzersTable').dataTable();
+$('#alarmTypesTable').dataTable({
+				  "aoColumns": [
+					  null,
+					  null,
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false }
+				  ]
+				});
 $('div.alarms').on("click",'button.status', function(e){
 	e.preventDefault();
 	if($(this).hasClass('btn-danger')){

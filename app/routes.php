@@ -94,6 +94,8 @@ Route::get('alarmManagement/{aid}/delete', array('as' => 'removeAlarmType', 'use
 Route::get('alarmManagement/{aid}', array('as' => 'getEditAlarm', 'uses' => 'AdminPanelController@getEditAlarm'));
 Route::post('alarmManagement/{aid}', array('as' => 'postEditAlarm', 'uses' => 'AdminPanelController@postEditAlarm'));
 
+Route::get('alarmManagement/alarmTypes/{atid}', array('as' => 'getAlarmTypesForMeasureTypesInAnalyzer', 'uses' => 'AdminPanelController@getAlarmTypesForMeasureTypesInAnalyzer'))->where('atid', '\d+');
+
 
 
 Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'AdminPanelController@getSignalManagement'));

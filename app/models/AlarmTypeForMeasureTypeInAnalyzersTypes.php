@@ -9,9 +9,12 @@ class AlarmTypeForMeasureTypeInAnalyzersType extends Eloquent {
    		return $alarm->save();
 	}
 
-	public function alarmType()
-	{
+	public function alarmType()	{
 		return $this->belongsTo('AlarmType', 'alarm_types_id');
+	}
+
+	public function measureTypeInAnalyzerType() {
+		return $this->belongsTo('MeasureTypeInAnalyzerType', 'measure_types_in_analyzer_types_id');
 	}
 
 }
