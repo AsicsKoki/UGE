@@ -36,7 +36,14 @@
 				{{Former::text('modbus_alarm_state_register')->label('Modbus Register')->class('form-control')}}
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
-				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+				<div>
+					<div class="control-group col-md-6">
+						<a href="{{URL::to('alarmManagement')}}" class="form-control submit-button submit-button-margin-bottom btn btn-danger">Cancel</a>
+					</div>
+					<div class="control-group col-md-6">
+						{{Former::submit('Submit')->class('col-xs-6 form-control submit-button submit-button-margin-bottom btn btn-info')}}
+					</div>
+				</div>
 			{{ Former::close() }}
 		</div>
 	</div>
