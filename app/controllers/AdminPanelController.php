@@ -181,7 +181,7 @@ class AdminPanelController extends BaseController {
 		$alarmTypes->save();
 
 		Session::flash('status_success', 'Measure Alarm successfully created');
-		return Redirect::to('analyzers/'.$aid.'#section3');
+		return Redirect::to('analyzers/'.$atid.'#section3');
 	}
 
 	public function postMeasureAlarmTypesEdit($aid, $alid) {
