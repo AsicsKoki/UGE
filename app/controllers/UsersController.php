@@ -43,11 +43,11 @@ class UsersController extends BaseController {
 			if(Auth::attempt($credentials)){
 				return Redirect::intended('/');
 			} else {
-				$errors = new MessageBag(['password' => ['Username and/or password invalid.']]);
-				return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
+				Session::flash('status_error', 'Your Username and/or password is invalid.');
+				return Redirect::intended('/login');
 			}
 		} else {
-			return Redirect::intended('/login');
+			return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
 		}
 	}
 

@@ -1,4 +1,4 @@
-<div class="container" id="errorsStatus">
+<div class="" id="errorsStatus">
 
     <div class="row">
         <div class="span12 errorsStatusWrap">

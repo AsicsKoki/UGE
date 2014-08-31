@@ -14,7 +14,8 @@
 					<img class="" src="img/baner.png" alt="United Green Energy" />
 				</div>
 			</div>
-			<div class="login-form" role="form">
+			<div class="login-form col-xs-4" role="form">
+				@include('partials.status')
 				{{ Former::open()->method('POST')->rules(array(
 					'username'              => 'required|min:3',
 					'password'              => 'required|min:3',
