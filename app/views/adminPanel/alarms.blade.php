@@ -7,13 +7,13 @@
 			<li><a href="#section2">Analyzer alarms</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane active in fade" id="section1">
+			<div class="tab-pane active in fade alarms" id="section1">
 				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterAlarm') }}">New Alarm</a>
 				<table id="analyzersTable" class="table table-hover display">
 					<thead>
 						<th>id</th>
-						<th>Name</th>
-						<th>Name</th>
+						<th>Name (English)</th>
+						<th>Name (Serbian)</th>
 						<th>Action</th>
 						<th>Status</th>
 					</thead>
@@ -29,9 +29,9 @@
 							</td>
 							<td>
 								@if($alarm['active']==1)
-									<button type="button" class="btn btn-danger">Deactivate</button>
-								@else;
-									<button type="button" class="btn btn-success">Activate</button>
+									<button data-id="{{$alarm['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
+								@else
+									<button data-id="{{$alarm['id']}}" type="button" class="status btn btn-success">Activate</button>
 								@endif
 							</td>
 						</tr>
@@ -50,7 +50,7 @@
 @section('moreScripts')
 <script type="text/javascript">
 $('#analyzersTable').dataTable();
-$('.status').on("click",function(e){
+$('div.alarms').on("click",'button.status', function(e){
 	e.preventDefault();
 	if($(this).hasClass('btn-danger')){
 		var state = 0;
