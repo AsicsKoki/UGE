@@ -465,7 +465,7 @@ class AdminPanelController extends BaseController {
 			->with('analyzerTypes', AnalyzerType::all());
 	}
 
-	public function getAlarmTypesForMeasureTypesInAnalyzer($atid) {
+	public function getAlarmTypesForMeasureTypesInAnalyzerList($atid) {
 		$mes = MeasureTypeInAnalyzerType::where('analyzer_types_id', $atid)->lists('id');
 
 		$res = [];
@@ -475,8 +475,37 @@ class AdminPanelController extends BaseController {
 		}
 
 		return View::make('partials.AlarmTypesForMeasureTypesInAnalyzer')
-					->with('alarms', $res);
+					->with('alarms', $res)
+					->with('atid', $atid);
 	}
+
+	public function getAlarmTypesForMeasureTypesInAnalyzer($atid, $mid) {
+		return View::make('adminPanel.editAlarmTypesForMeasureTypesInAnalyzerTypes')
+					->with('atmtat', AlarmTypeForMeasureTypeInAnalyzersType::find($mid))
+					->with('alarmTypes', AlarmType::all())
+					->with('measureTypes', MeasureTypeInAnalyzerType::with('measureType')->where('analyzer_types_id', $atid)->get());
+	}
+
+	public function postAlarmTypesForMeasureTypesInAnalyzer($atid, $mid) {
+
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesAlarmTypesForMeasureTypesInAnalyzer
+		);
+		if ($validator->fails()) return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+
+		$alarmType = AlarmTypeForMeasureTypeInAnalyzersType::find($mid);
+
+		$alarmType->update(Input::all());
+		Session::flash('status_success', 'Alarm Type for Measure Type in Analyzer Type successfully updated');
+		return Redirect::route('getAlarmManagement');
+	}
+
+	private $validationRulesAlarmTypesForMeasureTypesInAnalyzer = [
+		'measure_types_in_analyzer_types_id' => 'required',
+		'modbus_alarm_state_function'        => 'required',
+		'modbus_alarm_state_function'        => 'required',
+		'alarm_types_id'                     => 'required'
+	];
 
 	private $validationRulesAlarm = [
 		'name_sr' => 'required',
