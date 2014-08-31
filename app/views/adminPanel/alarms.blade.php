@@ -41,7 +41,7 @@
 			</div>
 			<div class="tab-pane fade" id="section2">
 				<div class="analyzerAlarms container">
-					<div class="row">
+					<div class="analyzer-type-dropdown">
 						<form action="" class="form-inline" role="form">
 							<div class="form-group">
 								<label for="active" class="control-label">Analyzer Type

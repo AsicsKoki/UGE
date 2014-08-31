@@ -272,3 +272,8 @@ div.content-container #errorsStatus{
 .new-analyzer div.tab-pane {
 	padding: 10px;
 }
+
+.analyzer-type-dropdown {
+	margin-top:10px;
+	margin-bottom:10px;
+}
