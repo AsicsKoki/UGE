@@ -531,6 +531,32 @@ class AdminPanelController extends BaseController {
 		return View::make('adminPanel.newAlarmType');
 	}
 
+	public function getRegisterAlarmTypesForMeasureTypesInAnalyzer($aid)
+	{
+		$analyzer = AnalyzerType::find($aid);
+		$analyzerTypes = AnalyzerType::all();
+		$alarmType = AlarmType::all();
+		$measureType = MeasureTypeInAnalyzerType::with('measureType')->where('analyzer_types_id', $aid)->get()->toArray();
+		return View::make('adminPanel.newAlarmTypesForMeasureTypesInAnalyzer')->with('alarms', $alarmType)->with('measures', $measureType)->with('analyzerTypes', $analyzerTypes)->with('analyzer', $analyzer)->with('aid', $aid);
+	}
+
+	public function putAlarmTypesForMeasureTypesInAnalyzer($aid) {
+
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesAlarmTypesForMeasureTypesInAnalyzer
+		);
+		if ($validator->fails()) return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+
+		$alarmType = new AlarmTypeForMeasureTypeInAnalyzersType;
+		$alarmType->alarm_types_id = Input::get('alarm_types_id');
+		$alarmType->measure_types_in_analyzer_types_id = Input::get('measure_types_in_analyzer_types_id');
+		$alarmType->modbus_alarm_state_function = Input::get('modbus_alarm_state_function');
+		$alarmType->modbus_alarm_state_register = Input::get('modbus_alarm_state_register');
+		$alarmType->save();
+		Session::flash('status_success', 'Alarm Type for Measure Type in Analyzer Type successfully added');
+		return Redirect::route('getAlarmManagement');
+	}
+
 	public function getRegisterSignal()
 	{
 		return View::make('adminPanel.newSignalType');

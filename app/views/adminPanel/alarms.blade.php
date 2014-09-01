@@ -40,15 +40,16 @@
 				</table>
 			</div>
 			<div class="tab-pane fade" id="section2">
+				<a class="newAlarm btn btn-primary new-entry pull-right" href="/registerAnalyzerAlarm/">New Alarm</a>
 				<div class="analyzerAlarms container">
 					<div class="analyzer-type-dropdown">
 						<form action="" class="form-inline" role="form">
 							<div class="form-group">
 								<label for="active" class="control-label">Analyzer Type
 								</label>
-								<select name="analyzer_types_id" class="form-control">
+								<select name="analyzer_types_id" class="analyzerType form-control">
 									@foreach ($analyzerTypes as $type)
-										<option value="{{$type->id}}">{{$type->name}}</option>
+										<option class="analyzerId" value="{{$type->id}}">{{$type->name}}</option>
 									@endforeach
 								</select>
 							</div>

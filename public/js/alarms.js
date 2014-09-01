@@ -57,10 +57,11 @@ var getAlarms = function(analyzerTypeId) {
 			}
 		});
 }
-
-
+var id = $('select[name=analyzer_types_id]').val();
+$('a.newAlarm').attr('href', '/registerAnalyzerAlarm/'+id)
 $('select[name=analyzer_types_id]').change(function() {
 	var id = $(this).val();
+	$('a.newAlarm').attr('href', '/registerAnalyzerAlarm/'+id)
 	getAlarms(id);
 })
 

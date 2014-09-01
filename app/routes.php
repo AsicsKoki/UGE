@@ -99,6 +99,9 @@ Route::get('alarmManagement/alarmTypes/{atid}', array('as' => 'getAlarmTypesForM
 Route::get('alarmManagement/alarmTypes/{atid}/{mid}', array('as' => 'getAlarmTypesForMeasureTypesInAnalyzer', 'uses' => 'AdminPanelController@getAlarmTypesForMeasureTypesInAnalyzer'))->where('atid', '\d+')->where('mid', '\d+');
 Route::post('alarmManagement/alarmTypes/{atid}/{mid}', array('as' => 'postAlarmTypesForMeasureTypesInAnalyzer', 'uses' => 'AdminPanelController@postAlarmTypesForMeasureTypesInAnalyzer'))->where('atid', '\d+')->where('mid', '\d+');
 
+//////////////////////
+Route::get('registerAnalyzerAlarm/{aid}', array('as' => 'getRegisterAlarmTypesForMeasureTypesInAnalyzer', 'uses' => 'AdminPanelController@getRegisterAlarmTypesForMeasureTypesInAnalyzer'));
+Route::post('registerAnalyzerAlarm/{aid}', array('as' => 'putAlarmTypesForMeasureTypesInAnalyzer', 'uses' => 'AdminPanelController@putAlarmTypesForMeasureTypesInAnalyzer'));
 
 
 Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'AdminPanelController@getSignalManagement'));
