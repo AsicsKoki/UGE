@@ -501,10 +501,10 @@ class AdminPanelController extends BaseController {
 	}
 
 	private $validationRulesAlarmTypesForMeasureTypesInAnalyzer = [
-		'measure_types_in_analyzer_types_id' => 'required',
-		'modbus_alarm_state_function'        => 'required',
-		'modbus_alarm_state_function'        => 'required',
-		'alarm_types_id'                     => 'required'
+		'measure_types_in_analyzer_types_id' => 'required|integer',
+		'modbus_alarm_state_function'        => 'required|integer',
+		'modbus_alarm_state_register'        => 'required|integer',
+		'alarm_types_id'                     => 'required|integer'
 	];
 
 	private $validationRulesAlarm = [
@@ -534,6 +534,10 @@ class AdminPanelController extends BaseController {
 	public function getRegisterAlarmTypesForMeasureTypesInAnalyzer($aid)
 	{
 		$analyzer = AnalyzerType::find($aid);
+		if(!$analyzer){
+			Session::flash('status_error', 'Analyzer type not found');
+			return Redirect::to('alarmManagement');
+		}
 		$analyzerTypes = AnalyzerType::all();
 		$alarmType = AlarmType::all();
 		$measureType = MeasureTypeInAnalyzerType::with('measureType')->where('analyzer_types_id', $aid)->get()->toArray();

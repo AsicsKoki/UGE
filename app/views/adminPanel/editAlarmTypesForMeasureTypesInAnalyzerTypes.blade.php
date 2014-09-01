@@ -8,8 +8,10 @@
 			<h4>Edit Alarm Type in Measure Type for Analyzer Type</h4>
 			{{ Former::open()->class('form-horizontal')->method('POST')->action(URL::route('postAlarmTypesForMeasureTypesInAnalyzer', ['atid'=> $atmtat->alarm_types_id, 'mid' => $atmtat->id]))
 				->rules([
-						'name_sr' => 'required',
-						'active'  => 'required',
+						'measure_types_in_analyzer_types_id' => 'required|integer',
+						'modbus_alarm_state_function'        => 'required|integer',
+						'modbus_alarm_state_register'        => 'required|integer',
+						'alarm_types_id'                     => 'required|integer'
 					])}}
 				{{Former::populate($atmtat)}}
 				<div class="control-group">

@@ -10,7 +10,7 @@
 				->rules([
 						'measure_types_in_analyzer_types_id' => 'required',
 						'modbus_alarm_state_function'        => 'required',
-						'modbus_alarm_state_function'        => 'required',
+						'modbus_alarm_state_register'        => 'required',
 						'alarm_types_id'                     => 'required'
 					])}}
 				<div class="control-group">
