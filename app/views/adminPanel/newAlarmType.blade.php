@@ -18,6 +18,7 @@
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
+					<a href="{{URL::to('alarmManagement')}}" class="form-control submit-button submit-button-margin-bottom btn btn-danger">Cancel</a>
 				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 			{{ Former::close() }}
 		</div>

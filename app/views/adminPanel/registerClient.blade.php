@@ -31,8 +31,6 @@
 						{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
 			</div>
-		</div>
-		<div class="tab-content">
 			<div class="tab-pane fade" id="section2">
 				<div class="col-md-6">
 					{{Former::text('username')->label('username')->placeholder('Username')->class('form-control')}}
@@ -45,7 +43,6 @@
 					{{Former::text('contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
 					{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
 					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
-					
 				</div>
 			</div>
 		</div>

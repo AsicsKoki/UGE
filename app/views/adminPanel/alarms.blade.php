@@ -4,7 +4,7 @@
 	<div class="panelContent container col-xs-8">
 		<ul class="tab-margin nav nav-tabs" role="tablist">
 			<li class="active"><a href="#section1">Alarms</a></li>
-			<li><a href="#section2">Analyzer alarms</a></li>
+			<li><a href="#section2">Alarms for analyzer types</a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active in fade alarms" id="section1">
