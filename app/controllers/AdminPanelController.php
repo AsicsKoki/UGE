@@ -31,7 +31,6 @@ class AdminPanelController extends BaseController {
 			'name'     => 'required|min:3',
 			'password' => 'required|min:5',
 			'username' => 'required|min:4',
-			'contact_phone' => 'required',
 			'contact_email' => 'required',
 		];
 

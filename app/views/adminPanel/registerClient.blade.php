@@ -51,7 +51,9 @@
 				</div>
 			</div>
 			<div class="col-md-6">
+				<div class="control-group">
 				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
+				</div>
 			</div>
 		</div>
 			{{ Former::close() }}
