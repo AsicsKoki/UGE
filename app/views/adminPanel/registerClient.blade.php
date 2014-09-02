@@ -18,15 +18,14 @@
 								'contact_person' => 'required',
 								'active'         => 'required',
 							])}}
-						{{Former::text('name')->label('name')->placeholder('Client name')->class('form-control')}}
+						{{Former::text('client_name')->label('name')->placeholder('Client name')->class('form-control')}}
 						{{Former::text('contact_person')->label('Contact person')->placeholder('Contact person')->class('form-control')}}
-						{{Former::text('address')->label('Address')->placeholder('Client Adress')->class('form-control')}}
+						{{Former::text('client_address')->label('Address')->placeholder('Client Adress')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
-						{{Former::text('contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
-						{{Former::text('contact_email')->label('Contact Email')->placeholder('Contact Email')->class('form-control')}}
-
-						{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
+						{{Former::text('client_contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
+						{{Former::text('client_contact_email')->label('Contact Email')->placeholder('Contact Email')->class('form-control')}}
+						{{Former::select('client_active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
 						{{Former::hidden()->name('_token')->value(csrf_token())}}
 				</div>
@@ -39,9 +38,8 @@
 					{{Former::text('name')->label('Client name')->placeholder('Client name')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
-					{{Former::text('contact_address')->label('Address')->placeholder('Client Adress')->class('form-control')}}
-					{{Former::text('contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
 					{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
+					{{Former::text('contact_email')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
 					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
 				</div>
 			</div>

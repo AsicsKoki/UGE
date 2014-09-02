@@ -28,9 +28,11 @@ class AdminPanelController extends BaseController {
 	}
 
 	private $validationRules = [
-			'name'           => 'required|min:3',
-			'postal_address' => 'required',
-			'active'         => 'required',
+			'name'     => 'required|min:3',
+			'password' => 'required|min:5',
+			'username' => 'required|min:4',
+			'contact_phone' => 'required',
+			'contact_email' => 'required',
 		];
 
 	public function postNewClient(){
@@ -38,13 +40,29 @@ class AdminPanelController extends BaseController {
 		$validator = Validator::make(Input::all(),
 		    $this->validationRules
 		);
-		if($validator->passes()){
-			customer::createCustomer(Input::all());
-			Session::flash('status_success', 'Client successfully created');
-			return Redirect::route('clients');
-		} else {
+		if($validator->fails()){
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
+		$customer = new Customer;
+		$customer->name = Input::get('client_name');
+		$customer->contact_person = Input::get('contact_person');
+		$customer->address = Input::get('client_address');
+		$customer->contact_phone = Input::get('client_contact_phone');
+		$customer->contact_email = Input::get('client_contact_email');
+		$customer->active = Input::get('client_active');
+		$customer->save();
+
+		$user = new User;
+		$user->customers_id = $customer->id;
+		$user->username = Input::get('username');
+		$user->password = Hash::make(Input::get('password'));
+		$user->name = Input::get('name');
+		$user->contact_sms = Input::get('contact_sms');
+		$user->contact_email = Input::get('contact_email');
+		$user->account_types_id = Input::get('account_type_id');
+		$user->save();
+		Session::flash('status_success', 'Client successfully created');
+		return Redirect::route('clients');
 	}
 
 	public function getCustomer($cid) {
