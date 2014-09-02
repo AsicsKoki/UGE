@@ -28,7 +28,7 @@
 					</label>
 					<select name="measure_types_in_analyzer_types_id" class="form-control">
 						@foreach ($measures as $measure)
-							<option value="{{$measure['measure_type']['id']}}">{{$measure['measure_type']['name_en']}}</option>
+							<option value="{{$measure['id']}}">{{$measure['measure_type']['name_en']}}</option>
 						@endforeach
 					</select>
 				</div>
