@@ -43,14 +43,14 @@
 					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
 				</div>
 			</div>
-			<div>
-			</div>
+			<div class="col-md-12">
 				<div class="control-group col-md-6">
 						<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelClientAction')}}">Cancel</a>
 				</div>
 				<div class="control-group col-md-6">
 					{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn btn-info')}}
 				</div>
+			</div>
 		</div>
 			{{ Former::close() }}
 	</div>
