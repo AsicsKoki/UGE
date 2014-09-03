@@ -44,7 +44,7 @@ class UsersController extends BaseController {
 				return Redirect::intended('/');
 			} else {
 				Session::flash('status_error', 'Your Username and/or password is invalid.');
-				return Redirect::intended('/login');
+				return Redirect::back();
 			}
 		} else {
 			return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
