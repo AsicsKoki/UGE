@@ -18,8 +18,8 @@
 								'contact_person' => 'required',
 								'active'         => 'required',
 							])}}
-						{{Former::text('client_name')->label('name')->placeholder('Client name')->class('form-control')}}
-						{{Former::text('contact_person')->label('Contact person')->placeholder('Contact person')->class('form-control')}}
+						{{Former::text('client_name')->label('Name')->placeholder('Client Name')->class('form-control')}}
+						{{Former::text('contact_person')->label('Contact Person')->placeholder('Contact Person')->class('form-control')}}
 						{{Former::text('client_address')->label('Address')->placeholder('Client Adress')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
@@ -32,14 +32,14 @@
 			</div>
 			<div class="tab-pane fade" id="section2">
 				<div class="col-md-6">
-					{{Former::text('username')->label('username')->placeholder('Username')->class('form-control')}}
-					{{Former::password('password')->label('password')->placeholder('Password')->class('form-control')}}
-					{{Former::password('password_confirmation')->label('password')->placeholder('Retype your password')->class('form-control')}}
-					{{Former::text('name')->label('Client name')->placeholder('Client name')->class('form-control')}}
+					{{Former::text('username')->label('Username')->placeholder('Username')->class('form-control')}}
+					{{Former::password('password')->label('Password')->placeholder('Password')->class('form-control')}}
+					{{Former::password('password_confirmation')->label('Password')->placeholder('Retype your password')->class('form-control')}}
+					{{Former::text('name')->label('Client Name')->placeholder('Client Name')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
 					{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
-					{{Former::text('contact_email')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
+					{{Former::text('contact_email')->label('Email')->placeholder('Email')->class('form-control')}}
 					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
 				</div>
 			</div>
