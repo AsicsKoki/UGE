@@ -468,9 +468,19 @@ class AdminPanelController extends BaseController {
 		// exit;
 		return View::make('adminPanel.modbusConsole')->with('analyzerData', $analyzerData);
 	}
-
+	private $validationRulesModbus = [
+		'function' => 'required|max:2|min:2',
+		'comment'    => 'required',
+		'data_bytes'  => 'required',
+	];
 	public function sendModbusQuery()
 	{
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesModbus
+		);
+		if($validator->fails()){
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
 		$data = Input::all();
 		$data['time'] = Carbon::now();
 		ModbusQuery::create($data);

@@ -7,6 +7,9 @@
             <div class="row col-md-6">
  			{{ Former::open()->class('form tab-margin')->method('POST')->enctype('multipart/form-data')->action(URL::route('sendModbusQuery'))
 				->rules([
+					'function' => 'required|max:2|min:2',
+					'comment'    => 'required',
+					'data_bytes'  => 'required',
 					])}}
 	                <select name="analyzers_id" id="input" class="form-control" required="required">
 	                	@foreach($analyzerData as $analyzer)
