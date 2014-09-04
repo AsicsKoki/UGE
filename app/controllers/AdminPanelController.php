@@ -474,6 +474,7 @@ class AdminPanelController extends BaseController {
 		$data = Input::all();
 		$data['time'] = Carbon::now();
 		ModbusQuery::create($data);
+		Session::flash('status_success', 'Query successfully created');
 		return Redirect::back();
 	}
 
