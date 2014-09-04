@@ -134,6 +134,6 @@ class UsersController extends BaseController {
 
 		$user->delete();
 		Session::flash('status_success', 'User successfully deleted');
-		return Redirect::route('getUsers');
+		return Redirect::back();
 	}
 }

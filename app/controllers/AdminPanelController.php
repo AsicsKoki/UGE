@@ -700,10 +700,10 @@ class AdminPanelController extends BaseController {
 
 
 	private $validationRulesUser = [
-			'username'              => 'required|min:3|unique:user,username',
+			'username'              => 'required|min:3|unique:name,username',
 			'password'              => 'required|min:3',
 			'password_confirmation' => 'required|min:3',
-			'account_type_id'       => 'required'
+			'account_types_id'       => 'required'
 		];
 
 	public function addUser(){
@@ -715,6 +715,6 @@ class AdminPanelController extends BaseController {
 		}
 		User::createUser(Input::all());
 		Session::flash('status_success', 'User successfully created');
-		return Redirect::back();
+		return Redirect::to("/clients/".Input::get('customers_id'));
 	}
 }
