@@ -5,7 +5,7 @@
 	</div>
 	<div class="panelContent container col-xs-8">
 		<ul class="tab-margin nav nav-tabs" role="tablist">
-			<li class="active"><a href="#section1">Client</a></li>
+			<li class="active"><a href="#section1">Customer</a></li>
 			<li><a href="#section2">User</a></li>
 		</ul>
 		<div class="tab-content">
@@ -18,12 +18,12 @@
 								'contact_person' => 'required',
 								'active'         => 'required',
 							])}}
-						{{Former::text('client_name')->label('Name')->placeholder('Client Name')->class('form-control')}}
+						{{Former::text('client_name')->label('Name')->placeholder('Customer Name')->class('form-control')}}
 						{{Former::text('contact_person')->label('Contact Person')->placeholder('Contact Person')->class('form-control')}}
-						{{Former::text('client_address')->label('Address')->placeholder('Client Adress')->class('form-control')}}
+						{{Former::text('client_address')->label('Address')->placeholder('Adress')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
-						{{Former::text('client_contact_phone')->label('Phone')->placeholder('Client Phone')->class('form-control')}}
+						{{Former::text('client_contact_phone')->label('Phone')->placeholder('Phone')->class('form-control')}}
 						{{Former::text('client_contact_email')->label('Contact Email')->placeholder('Contact Email')->class('form-control')}}
 						{{Former::select('client_active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 
@@ -35,10 +35,10 @@
 					{{Former::text('username')->label('Username')->placeholder('Username')->class('form-control')}}
 					{{Former::password('password')->label('Password')->placeholder('Password')->class('form-control')}}
 					{{Former::password('password_confirmation')->label('Password')->placeholder('Retype your password')->class('form-control')}}
-					{{Former::text('name')->label('Client Name')->placeholder('Client Name')->class('form-control')}}
+					{{Former::text('name')->label('Name')->placeholder('Name')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
-					{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
+					{{Former::text('contact_sms')->label('SMS Phone')->placeholder('User SMS')->class('form-control')}}
 					{{Former::text('contact_email')->label('Email')->placeholder('Email')->class('form-control')}}
 					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
 				</div>

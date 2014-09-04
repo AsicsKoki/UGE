@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class AdminPanelController extends BaseController {
 
     public function __construct()
@@ -470,6 +472,7 @@ class AdminPanelController extends BaseController {
 	public function sendModbusQuery()
 	{
 		$data = Input::all();
+		$data['time'] = Carbon::now();
 		ModbusQuery::create($data);
 		return Redirect::back();
 	}
