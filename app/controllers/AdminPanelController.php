@@ -693,4 +693,28 @@ class AdminPanelController extends BaseController {
 	public function cancelUserAction(){
 		return Redirect::intended('clients');
 	}
+
+	public function getAddUser($cid){
+		return View::make('adminPanel.addUser')->with('cid', $cid)->with('accountTypes', AccountType::all()->toArray());
+	}
+
+
+	private $validationRulesUser = [
+			'username'              => 'required|min:3|unique:user,username',
+			'password'              => 'required|min:3',
+			'password_confirmation' => 'required|min:3',
+			'account_type_id'       => 'required'
+		];
+
+	public function addUser(){
+		$validator = Validator::make(Input::all(),
+		    $this->validationRules
+		);
+		if($validator->fails()){
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+		User::createUser(Input::all());
+		Session::flash('status_success', 'User successfully created');
+		return Redirect::back();
+	}
 }

@@ -45,6 +45,8 @@ Route::put('clients/{clientId}', array('as'=>'putClient', 'uses' => 'AdminPanelC
 Route::get('clients/{clientId}', array('as' => 'getClient',  'uses' => 'AdminPanelController@getCustomer'))->where('clientId', '\d+');
 Route::post('clients/changeClientState', array('as' => 'changeClientState',  'uses' => 'AdminPanelController@changeClientState'));
 Route::get('clientCancel', array('as' => 'cancelClientAction',  'uses' => 'AdminPanelController@cancelClientAction'));
+Route::get('clients/{cid}/newUser', array('as' => 'getAddUser', 'uses' => 'AdminPanelController@getAddUser'));
+Route::post('clients/{cid}/addUser', array('as' => 'addUser', 'uses' => 'AdminPanelController@addUser'));
 
 
 Route::get('analyzers', array('as' => 'analyzers', 'uses' => 'AdminPanelController@getAnalyzerList'));

@@ -26,6 +26,7 @@
 				{{Former::submit('Update customer')->class('form-control btn btn-info')}}
 				</div>
 			{{ Former::close() }}
+			<a class="btn btn-primary new-entry" href="{{ URL::route('getAddUser', ['cid'=> $customer->id]) }}">Add user</a>
 		</div>
 		<div class="row col-xs-10">
 			<table class='table table-striped'>

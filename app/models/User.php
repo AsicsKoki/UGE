@@ -91,7 +91,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 
-	protected $fillable = array('username', 'name', 'contact_person', 'contact_address', 'contact_phone', 'contact_sms', 'password', 'account_type_id');
+	protected $fillable = array('username', 'name', 'contact_person', 'contact_address', 'contact_phone', 'contact_sms', 'password', 'account_types_id', 'customers_id', 'contact_email');
 
 	public static function createUser($data){
 		$data['password'] = Hash::make($data['password']);
