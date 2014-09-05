@@ -40,7 +40,14 @@
 				<div class="col-md-6">
 					{{Former::text('contact_sms')->label('SMS Phone')->placeholder('User SMS')->class('form-control')}}
 					{{Former::text('contact_email')->label('Email')->placeholder('Email')->class('form-control')}}
-					{{Former::select('account_type_id')->options([1=>'Admin', 2=>'User'])->label('Account Type')->class('form-control')}}
+				<div class="control-group required">
+					<label for="account_types_id" class="control-label">Account type</label>
+					<select name="account_types_id" id="" class="form-control">
+						@foreach ($accountTypes as $accountType)
+							<option value="{{$accountType['id']}}">{{$accountType['type']}}</option>
+						@endforeach
+					</select>
+				</div>
 				</div>
 			</div>
 			<div class="col-md-12">

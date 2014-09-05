@@ -26,7 +26,7 @@ class AdminPanelController extends BaseController {
 
 	public function getRegisterClient()
 	{
-		return View::make('adminPanel.registerClient');
+		return View::make('adminPanel.registerClient')->with('accountTypes', AccountType::all()->toArray());
 	}
 
 	private $validationRules = [
@@ -60,7 +60,7 @@ class AdminPanelController extends BaseController {
 		$user->name = Input::get('name');
 		$user->contact_sms = Input::get('contact_sms');
 		$user->contact_email = Input::get('contact_email');
-		$user->account_types_id = Input::get('account_type_id');
+		$user->account_types_id = Input::get('account_types_id');
 		$user->save();
 		Session::flash('status_success', 'Client successfully created');
 		return Redirect::route('clients');
