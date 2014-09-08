@@ -11,6 +11,12 @@ class ModbusQuery extends Eloquent {
 
 	public function analyzer()
 	{
-		return $this->hasOne('analyzer', 'analyzers_id');
+		return $this->belongsTo('analyzer', 'analyzers_id');
 	}
+
+	public function modbusResponse()
+	{
+		return $this->hasOne('ModbusResponse', 'modbus_querys_id');
+	}
+
 }
