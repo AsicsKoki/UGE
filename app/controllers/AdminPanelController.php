@@ -464,8 +464,6 @@ class AdminPanelController extends BaseController {
 	{
 		$analyzerData = Analyzer::all()->toArray();
 		$modbusData = ModbusQuery::with('modbusResponse')->with('analyzer')->with('user')->get()->toArray();
-		// d($modbusData);
-		// exit;
 		return View::make('adminPanel.modbusConsole')->with('modbusData', $modbusData)->with('analyzerData', $analyzerData);
 	}
 	private $validationRulesModbus = [
