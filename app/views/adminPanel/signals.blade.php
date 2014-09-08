@@ -15,14 +15,14 @@
 			<tbody>
 			@foreach($signals as $signal)
 				<tr>
-					<td>{{$alarm['id']}}</td>
-					<td>{{$alarm['name_en']}}</td>
-					<td>{{$alarm['name_sr']}}</td>
+					<td>{{$signal['id']}}</td>
+					<td>{{$signal['name_en']}}</td>
+					<td>{{$signal['name_sr']}}</td>
 					<td>
-						@if($alarm['active']==1)
-							<button data-id="{{$alarm['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
+						@if($signal['active']==1)
+							<button data-id="{{$signal['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
 						@else;
-							<button data-id="{{$alarm['id']}}" type="button" class="status btn btn-success">Activate</button>
+							<button data-id="{{$signal['id']}}" type="button" class="status btn btn-success">Activate</button>
 						@endif
 					</td>
 				</tr>
