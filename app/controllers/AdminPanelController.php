@@ -447,7 +447,27 @@ class AdminPanelController extends BaseController {
 		return View::make('adminPanel.newMeasureTypeInAnalyzer')->with('analyzerTypes', $analyzerTypes);
 	}
 
+	private $validationRulesMeasureTypeInAnalyzerType = [
+			'name_en' => 'required|min:3',
+			'name_sr' => 'required',
+			'unit'    => 'required',
+			'active'  => 'required',
+			'threshold'  => 'required',
+			'offset'  => 'required',
+			'coefficient_of_proportionality'  => 'required',
+			'modbus_measure_function'  => 'required',
+			'modbus_measure_register'  => 'required',
+			'analyzer_types_id'  => 'required'
+	];
+
 	public function postRegisterMeasureTypeInAnalyzer(){
+
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesMeasureTypeInAnalyzerType
+		);
+		if($validator->fails()){
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
 		$measureType = new MeasureType;
 		$measureType->name_en = Input::get('name_en');
 		$measureType->name_sr = Input::get('name_sr');

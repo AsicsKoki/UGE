@@ -49,6 +49,9 @@
 				</div>
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
+				<div class="control-group">
+					<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::to('measuresManagement')}}">Cancel</a>
+				</div>
 				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn-info')}}
 			{{ Former::close() }}
 		</div>
