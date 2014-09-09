@@ -84,6 +84,8 @@ Route::get('measuresManagement', array('as' => 'getMeasuresManagement', 'uses' =
 Route::post('measuresManagement', array('as'=>'postNewMeasure', 'uses' => 'AdminPanelController@postNewMeasure'));
 Route::get('registerMeasure', array('as'=>'registerMeasure', 'uses' => 'AdminPanelController@getRegisterMeasure'));
 Route::post('measuresManagement/changeMeasureTypeState', array('as' => 'changeMeasureTypeState',  'uses' => 'AdminPanelController@changeMeasureTypeState'));
+Route::get('getRegisterMeasureTypeInAnalyzer', array('as'=>'getRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@getRegisterMeasureTypeInAnalyzer'));
+Route::post('postRegisterMeasureTypeInAnalyzer', array('as'=>'postRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@postRegisterMeasureTypeInAnalyzer'));
 
 Route::get('modbusConsole', array('as' => 'getModbusConsole', 'uses' => 'AdminPanelController@getModbusConsole'));
 Route::post('modbusConsole', array('as' => 'sendModbusQuery', 'uses' => 'AdminPanelController@sendModbusQuery'));

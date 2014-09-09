@@ -431,12 +431,42 @@ class AdminPanelController extends BaseController {
 	public function getMeasuresManagement()
 	{
 		$data = MeasureType::all()->toArray();
-		return View::make('adminPanel.measuresManagement')->with('data', $data);
+		$measureTypeInAnalyzerType = MeasureTypeInAnalyzerType::with('MeasureType')->with('analyzerType')->get()->toArray();
+
+		return View::make('adminPanel.measuresManagement')->with('data', $data)->with('measureTypeInAnalyzerType', $measureTypeInAnalyzerType);
 	}
 
 	public function getRegisterMeasure()
 	{
 		return View::make('adminPanel.newMeasure');
+	}
+
+	public function getRegisterMeasureTypeInAnalyzer()
+	{
+		$analyzerTypes= AnalyzerType::all();
+		return View::make('adminPanel.newMeasureTypeInAnalyzer')->with('analyzerTypes', $analyzerTypes);
+	}
+
+	public function postRegisterMeasureTypeInAnalyzer(){
+		$measureType = new MeasureType;
+		$measureType->name_en = Input::get('name_en');
+		$measureType->name_sr = Input::get('name_sr');
+		$measureType->unit = Input::get('unit');
+		$measureType->active = Input::get('active');
+		$measureType->save();
+
+		$measureTypeInAnalyzerType = new MeasureTypeInAnalyzerType;
+		$measureTypeInAnalyzerType->measure_types_id = $measureType->id;
+		$measureTypeInAnalyzerType->analyzer_types_id = Input::get('analyzer_types_id');
+		$measureTypeInAnalyzerType->modbus_measure_function = Input::get('modbus_measure_function');
+		$measureTypeInAnalyzerType->modbus_measure_register = Input::get('modbus_measure_register');
+		$measureTypeInAnalyzerType->coefficient_of_proportionality = Input::get('coefficient_of_proportionality');
+		$measureTypeInAnalyzerType->offset = Input::get('offset');
+		$measureTypeInAnalyzerType->threshold = Input::get('threshold');
+		$measureTypeInAnalyzerType->active = Input::get('active_measureType');
+		$measureTypeInAnalyzerType->save();
+		Session::flash('status_success', 'Measure successfully created');
+		return Redirect::to('measuresManagement');
 	}
 
 	private $validationRulesMeasure = [
