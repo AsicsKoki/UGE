@@ -378,7 +378,8 @@ class AdminPanelController extends BaseController {
 
 	public function getRegisterHub()
 	{
-		return View::make('adminPanel.registerHub');
+		$signalTypes = SignalType::all();
+		return View::make('adminPanel.registerHub')->with('signalTypes', $signalTypes);
 	}
 
 	private $validationRulesHub = [

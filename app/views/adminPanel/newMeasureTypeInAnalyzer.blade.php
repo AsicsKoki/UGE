@@ -38,7 +38,6 @@
 
 				{{Former::select('active_measureType')->options([1=>'Active', 0=>'Inactive'])->label('Active(for measure type in analyzer type)')->class('form-control')}}
 
-
 				<div class="control-group required">
 					<label for="analyzer_types_id" class="control-label">Analyzer type</label>
 					<select name="analyzer_types_id" id="" class="form-control">
