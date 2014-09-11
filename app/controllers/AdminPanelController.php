@@ -396,7 +396,48 @@ class AdminPanelController extends BaseController {
 	];
 
 	public function getHub($hid) {
-		return View::make('adminPanel.hubUpdate')->with('hub', Hub::find($hid));
+		$signals = SignalTypeInHub::with('signalType')->where('hubs_id', '=', $hid)->get()->toArray();
+		return View::make('adminPanel.hubUpdate')->with('hub', Hub::find($hid))->with('signalTypes', $signals);
+	}
+
+	public function removeSignalType($hid, $sid){
+		SignalTypeInHub::find($sid)->delete();
+		Session::flash('status_success', 'Signal successfully removed');
+		return Redirect::to('hubs/'.$hid);
+	}
+
+	public function getEditSignal($hid, $sid){
+		$hub = Hub::find($hid)->toArray();
+		$signal = SignalTypeInHub::find($sid)->toArray();
+		return View::make('adminPanel.editSignal')->with('hub', $hub)->with('signal', $signal);
+	}
+
+	public function postEditSignal($hid, $sid){
+		$signal = SignalTypeInHub::find($sid);
+		$signal->input_position = Input::get('input_position');
+		$signal->negative_logic = Input::get('negative_logic');
+		$signal->active = Input::get('active');
+		$signal->save();
+		Session::flash('status_success', 'Signal successfully updated');
+		return Redirect::to('/hubs/'.$hid);
+	}
+
+	public function getAssignSignal($hid){
+		$hub = Hub::find($hid)->toArray();
+		$signal = SignalType::all()->toArray();
+		return View::make('adminPanel.assignSignal')->with('hub', $hub)->with('signals', $signal);
+	}
+
+	public function postAssignSignal($hid){
+		$signal = new SignalTypeInHub;
+		$signal->hubs_id = $hid;
+		$signal->signal_types_id = Input::get('signal_types_id');
+		$signal->input_position = Input::get('input_position');
+		$signal->negative_logic = Input::get('negative_logic');
+		$signal->active = Input::get('active');
+		$signal->save();
+		Session::flash('status_success', 'Signal successfully added');
+		return Redirect::to('/hubs/'.$hid);
 	}
 
 	public function postHub($hubId){

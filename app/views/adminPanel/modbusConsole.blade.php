@@ -92,7 +92,7 @@
 		var input = $('#modbusAddress');
 		input.val(address);
 	})
-	$('.nav-tabs li a').click(function (e) {
+$('.nav-tabs li a').click(function (e) {
 	e.preventDefault()
 	$(this).tab('show')
 })

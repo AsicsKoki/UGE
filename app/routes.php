@@ -112,3 +112,8 @@ Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'A
 Route::post('signalManagement', array('as'=>'postNewSignal', 'uses' => 'AdminPanelController@postNewSignal'));
 Route::get('registerSignal', array('as' => 'getRegisterSignal', 'uses' => 'AdminPanelController@getRegisterSignal'));
 Route::post('signalManagement/changeSignalState', array('as' => 'changeSignalState',  'uses' => 'AdminPanelController@changeSignalState'));
+Route::get('hubs/{hid}/delete/{sid}', array('as' => 'removeSignalType', 'uses' => 'AdminPanelController@removeSignalType'))->where('sid', '\d+')->where('hid', '\d+');
+Route::get('hubs/{hid}/signal/{sid}', array('as' => 'getEditSignal', 'uses' => 'AdminPanelController@getEditSignal'));
+Route::post('hubs/{hid}/signal/{sid}', array('as' => 'postEditSignal', 'uses' => 'AdminPanelController@postEditSignal'));
+Route::get('hubs/{hid}/newSignal', array('as' => 'getAssignSignal', 'uses' => 'AdminPanelController@getAssignSignal'));
+Route::post('hubs/{hid}/newSignal', array('as' => 'postAssignSignal', 'uses' => 'AdminPanelController@postAssignSignal'));
