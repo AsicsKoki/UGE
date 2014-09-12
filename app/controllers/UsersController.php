@@ -41,7 +41,7 @@ class UsersController extends BaseController {
 			);
 
 			if(Auth::attempt($credentials)){
-				return Redirect::intended('/');
+				return Redirect::to('analyzers');
 			} else {
 				Session::flash('status_error', 'Your Username and/or password is invalid.');
 				return Redirect::back();

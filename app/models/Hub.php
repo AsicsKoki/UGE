@@ -15,6 +15,7 @@ class Hub extends Eloquent {
 
 	public static function createHub($data){
 		$hub = new Hub($data);
-   		return $hub->save();
+   		$hub->save();
+   		return $hub->id;
 	}
 }

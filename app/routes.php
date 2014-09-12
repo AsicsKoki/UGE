@@ -40,7 +40,7 @@ Route::get('/voltageUpdate', array('as' => 'getLatestVoltage', 'uses' => 'Monito
 
 Route::get('clients', array('as' => 'clients', 'uses' => 'AdminPanelController@getClientList'));
 Route::get('registerClients', array('as' => 'registerClient', 'uses' => 'AdminPanelController@getRegisterClient'));
-Route::post('registerClient', array('as'=>'postNewClient', 'uses' => 'AdminPanelController@postNewClient'));
+Route::post('registerClients', array('as'=>'postNewClient', 'uses' => 'AdminPanelController@postNewClient'));
 Route::put('clients/{clientId}', array('as'=>'putClient', 'uses' => 'AdminPanelController@putClient'))->where('clientId', '\d+');
 Route::get('clients/{clientId}', array('as' => 'getClient',  'uses' => 'AdminPanelController@getCustomer'))->where('clientId', '\d+');
 Route::post('clients/changeClientState', array('as' => 'changeClientState',  'uses' => 'AdminPanelController@changeClientState'));

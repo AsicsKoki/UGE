@@ -36,10 +36,22 @@ class AdminPanelController extends BaseController {
 			'contact_email' => 'required',
 		];
 
+		private $validationRulesUpdate = [
+			'name'     => 'required|min:3',
+			'contact_email' => 'required',
+		];
+
+		private $validationRulesClient = [
+			'name'     => 'required|min:3',
+			'password' => 'required|min:4',
+			'username' => 'required|min:4',
+			'contact_email' => 'required',
+		];
+
 	public function postNewClient(){
 
 		$validator = Validator::make(Input::all(),
-		    $this->validationRules
+		    $this->validationRulesClient
 		);
 		if($validator->fails()){
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
@@ -76,7 +88,7 @@ class AdminPanelController extends BaseController {
 	{
 		$customer = Customer::find($cid);
 		$validator = Validator::make(Input::all(),
-		    $this->validationRules
+		    $this->validationRulesUpdate
 		);
 
 
@@ -443,7 +455,7 @@ class AdminPanelController extends BaseController {
 	public function postHub($hubId){
 		$hub = Hub::find($hubId);
 		$validator = Validator::make(Input::all(),
-		    $this->validationRules
+		    $this->validationRulesHub
 		);
 
 
@@ -464,7 +476,7 @@ class AdminPanelController extends BaseController {
 		if($validator->passes()){
 			$hub = Hub::createHub(Input::all());
 			Session::flash('status_success', 'Hub successfully created');
-			return Redirect::to('hubs/'.$hub['id']);
+			return Redirect::to('hubs/'.$hub);
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
