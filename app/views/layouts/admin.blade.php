@@ -1,12 +1,15 @@
 <!doctype html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{{-- STYLES --}}
 		{{HTML::style('css/main.css')}}
 		{{HTML::style('css/sidebar.css')}}
 		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap.min.css')}}
 		{{HTML::style('bower_components/bootstrap/dist/css/bootstrap-theme.min.css')}}
 		{{HTML::style('bower_components/datatables/media/css/jquery.dataTables.css')}}
+		{{HTML::style('bower_components/datatables-responsive/css/dataTables.bootstrap.css')}}
+		{{HTML::style('bower_components/datatables-responsive/css/dataTables.responsive.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
@@ -49,6 +52,7 @@
 			{{ HTML::script('bower_components/bootstrap/dist/js/bootstrap.min.js') }}
 
 			{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
+			{{HTML::style('bower_components/datatables-responsive/js/dataTables.responsive.js')}}
 
 			@yield('main')
 			@yield('moreScripts')

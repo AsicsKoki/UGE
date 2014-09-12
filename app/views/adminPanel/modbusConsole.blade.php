@@ -86,11 +86,37 @@
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-	$('.table').dataTable();
-	$(".option").click(function(){
-		var address = $(this).data('address');
-		var input = $('#modbusAddress');
-		input.val(address);
+	var responsiveHelper;
+	var breakpointDefinition = {
+	    tablet: 1024,
+	    phone : 480
+	};
+	$('.table').dataTable({
+		 // Setup for Bootstrap support.
+	    sPaginationType  : 'bootstrap',
+	    oLanguage        : {
+	        sLengthMenu: '_MENU_ records per page'
+	    },
+
+	    // Setup for responsive datatables helper.
+	    bAutoWidth       : false,
+	    fnPreDrawCallback: function () {
+	        // Initialize the responsive datatables helper once.
+	        if (!responsiveHelper) {
+	            responsiveHelper = new ResponsiveDatatablesHelper(tableElement, breakpointDefinition);
+	        }
+	    },
+	    fnRowCallback  : function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+	        responsiveHelper.createExpandIcon(nRow);
+	    },
+	    fnDrawCallback : function (oSettings) {
+	        responsiveHelper.respond();
+	    }
+		});
+		$(".option").click(function(){
+			var address = $(this).data('address');
+			var input = $('#modbusAddress');
+			input.val(address);
 	})
 $('.nav-tabs li a').click(function (e) {
 	e.preventDefault()
