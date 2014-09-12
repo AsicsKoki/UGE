@@ -462,9 +462,9 @@ class AdminPanelController extends BaseController {
 		    $this->validationRulesHub
 		);
 		if($validator->passes()){
-			Hub::createHub(Input::all());
+			$hub = Hub::createHub(Input::all());
 			Session::flash('status_success', 'Hub successfully created');
-			return Redirect::route('getHubs');
+			return Redirect::to('hubs/'.$hub['id']);
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
