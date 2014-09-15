@@ -10,6 +10,7 @@
 		{{HTML::style('bower_components/datatables/media/css/jquery.dataTables.css')}}
 		{{HTML::style('bower_components/datatables-responsive/css/dataTables.bootstrap.css')}}
 		{{HTML::style('bower_components/datatables-responsive/css/dataTables.responsive.css')}}
+		{{HTML::style('cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
@@ -53,6 +54,8 @@
 
 			{{ HTML::script('bower_components/datatables/media/js/jquery.dataTables.js') }}
 			{{HTML::style('bower_components/datatables-responsive/js/dataTables.responsive.js')}}
+			{{ HTML::script('cdn.datatables.net/responsive/1.0.1/js/dataTables.responsive.js') }}
+
 
 			@yield('main')
 			@yield('moreScripts')

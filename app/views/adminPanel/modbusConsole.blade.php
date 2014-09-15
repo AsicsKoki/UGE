@@ -39,7 +39,7 @@
 			</div>
 			<div class="tab-pane in fade" id="section2">
 				<div class="row col-md-8">
-					<table class='table table-striped'>
+					<table class='table display responsive no-wrap'>
 					<thead>
 						<th>Analyzer</th>
 						<th>User</th>
@@ -91,33 +91,7 @@
 	    tablet: 1024,
 	    phone : 480
 	};
-	$('.table').dataTable({
-		 // Setup for Bootstrap support.
-	    sPaginationType  : 'bootstrap',
-	    oLanguage        : {
-	        sLengthMenu: '_MENU_ records per page'
-	    },
-
-	    // Setup for responsive datatables helper.
-	    bAutoWidth       : false,
-	    fnPreDrawCallback: function () {
-	        // Initialize the responsive datatables helper once.
-	        if (!responsiveHelper) {
-	            responsiveHelper = new ResponsiveDatatablesHelper(tableElement, breakpointDefinition);
-	        }
-	    },
-	    fnRowCallback  : function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-	        responsiveHelper.createExpandIcon(nRow);
-	    },
-	    fnDrawCallback : function (oSettings) {
-	        responsiveHelper.respond();
-	    }
-		});
-		$(".option").click(function(){
-			var address = $(this).data('address');
-			var input = $('#modbusAddress');
-			input.val(address);
-	})
+	$('.table').dataTable();
 $('.nav-tabs li a').click(function (e) {
 	e.preventDefault()
 	$(this).tab('show')
