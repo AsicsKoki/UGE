@@ -7,23 +7,22 @@ class AdminPanelController extends BaseController {
     public function __construct()
 	{
 	 	$this->beforeFilter('auth', array('except' => array('')));
-		// Enforce user authentication on specified methods
+		// Enforce user authentication on specified methods.
 		$this->beforeFilter('csrf', ['only' => ['authenticate']]);
 		parent::__construct();
 	}
-
 	public function getAnalyzerList()
 	{
 		$data = Analyzer::with('customer', 'hub')->get()->toArray();
 		return View::make('adminPanel.analyzers')->with('data', $data);
 	}
-
+	//Return the list of clients to the clients page. NOTE: Clients are also refered to as customers.
 	public function getClientList()
 	{
 		$data = Customer::with('user')->get()->toArray();
 		return View::make('adminPanel.clients')->with('data', $data);
 	}
-
+	//Generate the view that holds the registration form.
 	public function getRegisterClient()
 	{
 		return View::make('adminPanel.registerClient')->with('accountTypes', AccountType::all()->toArray());
@@ -47,7 +46,6 @@ class AdminPanelController extends BaseController {
 			'username' => 'required|min:4',
 			'contact_email' => 'required',
 		];
-
 	public function postNewClient(){
 
 		$validator = Validator::make(Input::all(),
@@ -77,13 +75,11 @@ class AdminPanelController extends BaseController {
 		Session::flash('status_success', 'Client successfully created');
 		return Redirect::route('clients');
 	}
-
 	public function getCustomer($cid) {
 		return View::make('adminPanel.customerUpdate')
 				->with('customer', Customer::find($cid))
 				->with('users', Customer::find($cid)->user);
 	}
-
 	public function putClient($cid)
 	{
 		$customer = Customer::find($cid);
@@ -100,16 +96,14 @@ class AdminPanelController extends BaseController {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
 	}
-
 	public function getRegisterAnalyzer()
 	{
 		return View::make('adminPanel.newAnalyzer')
 				->with('hubs', Hub::lists('id', 'name'))
 				->with('customers', Customer::lists('id', 'name'))
-				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'))
-				/*->with('measures', DB::table('measure_types')->lists('id', 'name_en'))*/;
+				->with('analyzers', DB::table('analyzer_types')->lists('id', 'name'));
 	}
-
+	//This function is used to list all alarms for a certain measure type for a certain analyzer type.
 	private function listAnalyzerAlarms($analyzerId) {
 		$measures = MeasureTypeInAnalyzer::where('analyzers_id', $analyzerId)->lists('id');
 
@@ -131,7 +125,7 @@ class AdminPanelController extends BaseController {
 				->with('alarms', $alarms)
 				->with('analyzerId', $aid);
 	}
-
+	//This function is used to list all measure types for a certain analyzer type.
 	public function getAnalyzerMeasureTypes($aid) {
 		$res = DB::table('measure_types_in_analyzer_types')->where('analyzer_types_id', $aid)->lists('measure_types_id');
 
