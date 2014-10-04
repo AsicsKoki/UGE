@@ -27,7 +27,7 @@
 							<td>
 								@if($measure['active']==1)
 									<button data-id="{{$measure['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
-								@else;
+								@else
 									<button data-id="{{$measure['id']}}" type="button" class="status btn btn-success">Activate</button>
 								@endif
 							</td>
@@ -50,10 +50,10 @@
 							<td>{{$measureData['measure_type']['name_en']}}</td>
 							<td>{{$measureData['analyzer_type']['name']}}</td>
 							<td>
-								@if($measureData['active']==1)
-									<button data-id="{{$measureData['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
-								@else;
-									<button data-id="{{$measureData['id']}}" type="button" class="status btn btn-success">Activate</button>
+								@if($measureData['measure_type']['active']==1)
+									<button data-id="{{$measureData['measure_type']['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
+								@else
+									<button data-id="{{$measureData['measure_type']['id']}}" type="button" class="status btn btn-success">Activate</button>
 								@endif
 							</td>
 						</tr>

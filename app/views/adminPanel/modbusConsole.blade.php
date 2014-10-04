@@ -37,7 +37,7 @@
 					{{ Former::close() }}
 				</div>
 			</div>
-			<div class="tab-pane in fade" id="section2">
+			<div class="tab-margin tab-pane in fade" id="section2">
 				<div class="row col-md-8">
 					<table class='table display responsive no-wrap'>
 					<thead>
