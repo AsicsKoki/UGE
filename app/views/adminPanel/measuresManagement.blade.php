@@ -36,7 +36,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="tab-pane active in fade" id="section2">
+			<div class="tab-pane in fade" id="section2">
 				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterMeasureTypeInAnalyzer') }}">New Measure</a>
 				<table id="measureTypeInAnalyzerTable" class="table table-hover display">
 					<thead>
