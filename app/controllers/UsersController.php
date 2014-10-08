@@ -20,12 +20,21 @@ class UsersController extends BaseController {
 
 
 	public function login(){
+		
+		/*$t = User::find(3);
+		dd($t->accountType->type);*/
+
 		return View::make('auth.login');
 	}
 
 	public function authenticate(){
-		$errors = new MessageBag;
-
+		$user = User::whereUsername(Input::get('username'))->first();
+		if ($user) {
+			if (strstr($user->accountType->type, 'admin') === false) {
+				Session::flash('status_error', 'You do not have admin privileges');
+				return Redirect::back();
+			}
+		}
 		$validator = Validator::make(
 		Input::all(),
 		    array(
@@ -47,7 +56,7 @@ class UsersController extends BaseController {
 				return Redirect::back();
 			}
 		} else {
-			return Redirect::intended('/login')->withErrors($errors)->withInput(Input::except('password'));
+			return Redirect::intended('/login')->withErrors($validator->errors())->withInput(Input::except('password'));
 		}
 	}
 

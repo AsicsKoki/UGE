@@ -80,9 +80,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
-	public function admin()
+	public function accountType()
 	{
-		return $this->hasOne('account_type');
+		return $this->hasOne('AccountType', 'id', 'account_types_id');
 	}
 
 	public function customer()
