@@ -472,8 +472,6 @@ class AdminPanelController extends BaseController {
 	{
 		$data = MeasureType::all()->toArray();
 		$measureTypeInAnalyzerType = MeasureTypeInAnalyzerType::with('MeasureType')->with('analyzerType')->get()->toArray();
-		d($measureTypeInAnalyzerType);
-		exit;
 		return View::make('adminPanel.measuresManagement')->with('data', $data)->with('measureTypeInAnalyzerType', $measureTypeInAnalyzerType);
 	}
 
