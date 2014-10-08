@@ -99,7 +99,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    		return $user->save();
 	}
 
-	public static function updateUser($data){
+	public static function updateUser($data){		
 		if (isset($data['password']))
 			$data['password'] = Hash::make($data['password']);
 		return User::find($uid)->update($data);

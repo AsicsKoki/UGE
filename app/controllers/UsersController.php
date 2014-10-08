@@ -75,10 +75,14 @@ class UsersController extends BaseController {
 	}
 
 	private $validationRules = [
-			'username'              => 'required|min:3',
+			'username'              => 'required|min:3|unique:user,username',
 			'password'              => 'required|min:3',
 			'password_confirmation' => 'required|min:3',
 			'name'                  => 'required',
+			'contact_address'       => 'required',
+			'contact_person'        => 'required',
+			'contact_phone'         => 'required',
+			'contact_sms'           => 'required',
 			'account_type_id'       => 'required'
 		];
 
@@ -110,15 +114,23 @@ class UsersController extends BaseController {
 		return View::make('users.user')->with('user', User::find($uid));
 	}
 
-	public function putUser($userId) {
+	public function putUser($uid) {
+		if (!$user = User::find($uid)) {
+			Session::flash('status_error', 'The user does not exist');
+			return Redirect::back();
+		}
+
+		$this->validationRules['username'] .= ','. $uid;
+
 		$validator = Validator::make(Input::all(),
 		    $this->validationRules
 		);
-		$user = User::find($userId);
+
+
 		if($validator->passes()){
 			$user->update(Input::all());
 			Session::flash('status_success', 'Profile updated');
-			return Redirect::to('clients');
+			return Redirect::route('getUsers');
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
