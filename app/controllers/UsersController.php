@@ -130,7 +130,7 @@ class UsersController extends BaseController {
 
 
 		if($validator->passes()){
-			$user->update(Input::all());
+			$user->updateUser(Input::all());
 			Session::flash('status_success', 'Profile updated');
 			return Redirect::route('clients');
 		} else {
