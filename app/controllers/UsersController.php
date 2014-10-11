@@ -75,13 +75,10 @@ class UsersController extends BaseController {
 	}
 
 	private $validationRules = [
-			'username'              => 'required|min:3|unique:user,username',
+			'username'              => 'required|min:3|unique:users,username',
 			'password'              => 'required|min:3',
 			'password_confirmation' => 'required|min:3',
 			'name'                  => 'required',
-			'contact_address'       => 'required',
-			'contact_person'        => 'required',
-			'contact_phone'         => 'required',
 			'contact_sms'           => 'required',
 			'account_type_id'       => 'required'
 		];
@@ -120,6 +117,11 @@ class UsersController extends BaseController {
 			return Redirect::back();
 		}
 
+		if (!Input::get('password')) {
+			unset($this->validationRules['password']);
+			unset($this->validationRules['password_confirmation']);
+		}
+
 		$this->validationRules['username'] .= ','. $uid;
 
 		$validator = Validator::make(Input::all(),
@@ -130,7 +132,7 @@ class UsersController extends BaseController {
 		if($validator->passes()){
 			$user->update(Input::all());
 			Session::flash('status_success', 'Profile updated');
-			return Redirect::route('getUsers');
+			return Redirect::route('clients');
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}

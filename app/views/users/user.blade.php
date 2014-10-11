@@ -6,8 +6,6 @@
 		{{ Former::open()->class('form-horizontal')->method('PUT')->enctype('multipart/form-data')->action(URL::route('putUser', ['userId'=>$user->id]))
 		->rules([
 					'username'              => 'required|min:3',
-					'password'              => 'required|min:3',
-					'password_confirmation' => 'required|min:3',
 					'name'                  => 'required',
 					'contact_address'       => 'required',
 					'contact_person'        => 'required',

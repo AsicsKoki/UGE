@@ -14,7 +14,7 @@
 Route::get('/', array('as' => 'homePage', 'uses' => 'HomeController@getHome'));
 
 // Log in;
-Route::get('users', array('as' => 'getUsers',  'uses' => 'UsersController@getUsers'));
+// Route::get('users', array('as' => 'getUsers',  'uses' => 'UsersController@getUsers'));
 Route::get('users/{userId}', array('as' => 'getUser',  'uses' => 'UsersController@getUser'))->where('userId', '\d+');
 Route::get('clientUser', array('as' => 'cancelUserAction',  'uses' => 'AdminPanelController@cancelUserAction'));
 
