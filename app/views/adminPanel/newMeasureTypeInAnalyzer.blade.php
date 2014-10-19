@@ -21,8 +21,6 @@
 					])}}
 				{{Former::select('Measure Type')->options($measures)->label('Active')->class('form-control')->name('measure_type')}}
 
-				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
-
 				{{Former::text('modbus_measure_function')->label('Modbus measure function')->class('form-control')}}
 
 				{{Former::text('modbus_measure_register')->label('Modbus measure register')->class('form-control')}}
