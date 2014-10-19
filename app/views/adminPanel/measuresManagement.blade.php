@@ -6,11 +6,11 @@
 	<div class="panelContent container col-md-8">
 		<ul class="tab-margin nav nav-tabs" role="tablist">
 			<li class="active"><a href="#section1">Measures</a></li>
-			<li><a href="#section2">Measure types in analyzers</a></li>
+			<li><a href="#section2">Measure Types in Analyzer Types</a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active in fade" id="section1">
-				<a class="btn btn-primary new-entry" href="{{ URL::route('registerMeasure') }}">New Measure</a>
+				<a class="btn btn-primary new-entry" href="{{ URL::route('registerMeasure') }}">New Measure Type</a>
 				<table id="analyzersTable" class="table table-hover display">
 					<thead>
 						<th>id</th>
@@ -37,7 +37,7 @@
 				</table>
 			</div>
 			<div class="tab-pane in fade" id="section2">
-				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterMeasureTypeInAnalyzer') }}">New Measure</a>
+				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterMeasureTypeInAnalyzer') }}">New Measure Type in Analyzer Type</a>
 				<table id="measureTypeInAnalyzerTable" class="table table-hover display">
 					<thead>
 						<th>Name</th>

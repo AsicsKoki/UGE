@@ -483,13 +483,17 @@ class AdminPanelController extends BaseController {
 	public function getRegisterMeasureTypeInAnalyzer()
 	{
 		$analyzerTypes= AnalyzerType::all();
-		return View::make('adminPanel.newMeasureTypeInAnalyzer')->with('analyzerTypes', $analyzerTypes);
+		$measureTypes = MeasureType::select('name_en', 'id')->get();
+		$measureTypesNew = [];
+		foreach ($measureTypes as $key => $value) {
+			$measureTypesNew[$value['id']] = $value['name_en'];
+		}
+		return View::make('adminPanel.newMeasureTypeInAnalyzer')
+					->with('analyzerTypes', $analyzerTypes)
+					->with('measures', $measureTypesNew);
 	}
 
 	private $validationRulesMeasureTypeInAnalyzerType = [
-			'name_en' => 'required|min:3',
-			'name_sr' => 'required',
-			'unit'    => 'required',
 			'active'  => 'required',
 			'threshold'  => 'required',
 			'offset'  => 'required',
@@ -507,12 +511,7 @@ class AdminPanelController extends BaseController {
 		if($validator->fails()){
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
-		$measureType = new MeasureType;
-		$measureType->name_en = Input::get('name_en');
-		$measureType->name_sr = Input::get('name_sr');
-		$measureType->unit = Input::get('unit');
-		$measureType->active = Input::get('active');
-		$measureType->save();
+		$measureType = MeasureType::find(Input::get('measure_type'));
 
 		$measureTypeInAnalyzerType = new MeasureTypeInAnalyzerType;
 		$measureTypeInAnalyzerType->measure_types_id = $measureType->id;

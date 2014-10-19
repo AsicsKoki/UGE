@@ -5,6 +5,7 @@
 	</div>
 	<div class="panelContent container col-xs-8">
 		<div class="col-md-6">
+			<h4>New Measure Type in Analyzer Type</h4>
 			{{ Former::open()->class('form')->method('POST')->enctype('multipart/form-data')->action(URL::route('postRegisterMeasureTypeInAnalyzer'))
 				->rules([
 						'name_en' => 'required|min:3',
@@ -18,11 +19,7 @@
 						'modbus_measure_register'  => 'required',
 						'analyzer_types_id'  => 'required'
 					])}}
-				{{Former::text('name_en')->label('Name EN')->placeholder('Measure name EN')->class('form-control')}}
-
-				{{Former::text('name_sr')->label('Name SRB')->placeholder('Name SRB')->class('form-control')}}
-
-				{{Former::text('unit')->label('Unit')->placeholder('Unit')->class('form-control')}}
+				{{Former::select('Measure Type')->options($measures)->label('Active')->class('form-control')->name('measure_type')}}
 
 				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
 

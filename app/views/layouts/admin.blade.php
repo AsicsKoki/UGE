@@ -10,7 +10,6 @@
 		{{HTML::style('bower_components/datatables/media/css/jquery.dataTables.css')}}
 		{{HTML::style('bower_components/datatables-responsive/css/dataTables.bootstrap.css')}}
 		{{HTML::style('bower_components/datatables-responsive/css/dataTables.responsive.css')}}
-		{{HTML::style('cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css')}}
 		@yield('moreStyles')
 	</head>
 	<body>
