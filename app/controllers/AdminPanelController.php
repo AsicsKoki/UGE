@@ -588,7 +588,7 @@ class AdminPanelController extends BaseController {
 		$res = [];
 
 		if (count($mes)) {
-			$res = AlarmTypeForMeasureTypeInAnalyzersType::with('alarmType')->with('measureTypeInAnalyzerType.measureType')->whereIn('measure_types_in_analyzer_types_id', $mes)->get()->toArray();
+			$res = AlarmTypeForMeasureTypeInAnalyzersTypes::with('alarmType')->with('measureTypeInAnalyzerType.measureType')->whereIn('measure_types_in_analyzer_types_id', $mes)->get()->toArray();
 		}
 
 		return View::make('partials.AlarmTypesForMeasureTypesInAnalyzer')

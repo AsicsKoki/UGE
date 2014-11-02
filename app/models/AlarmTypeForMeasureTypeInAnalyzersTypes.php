@@ -1,5 +1,5 @@
 <?php
-class AlarmTypeForMeasureTypeInAnalyzersType extends Eloquent {
+class AlarmTypeForMeasureTypeInAnalyzersTypes extends Eloquent {
 	protected $fillable = ['alarm_types_id', 'measure_types_in_analyzer_types_id', 'modbus_alarm_state_function', 'modbus_alarm_state_register'];
 	protected $table = 'alarm_types_for_measure_types_in_analyzer_types';
 	public $timestamps = false;
