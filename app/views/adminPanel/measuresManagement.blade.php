@@ -27,9 +27,9 @@
 							<td>{{$measure['unit']}}</td>
 							<td>
 								@if($measure['active']==1)
-									<button data-id="{{$measure['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
+									<button data-link="changeMeasureTypeState" data-id="{{$measure['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
 								@else
-									<button data-id="{{$measure['id']}}" type="button" class="status btn btn-success">Activate</button>
+									<button data-link="changeMeasureTypeState" data-id="{{$measure['id']}}" type="button" class="status btn btn-success">Activate</button>
 								@endif
 							</td>
 							<td>
@@ -45,21 +45,28 @@
 				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterMeasureTypeInAnalyzer') }}">New Measure Type in Analyzer Type</a>
 				<table id="measureTypeInAnalyzerTable" class="table table-hover display">
 					<thead>
+						<th>Id</th>
 						<th>Name</th>
 						<th>Analyzer Type</th>
-						<th>Active</th>
+						<th>Status</th>
+						<th>Action</th>
 					</thead>
 					<tbody>
 					@foreach($measureTypeInAnalyzerType as $measureData)
 						<tr>
+							<td>{{$measureData['id']}}</td>
 							<td>{{$measureData['measure_type']['name_en']}}</td>
 							<td>{{$measureData['analyzer_type']['name']}}</td>
 							<td>
-								@if($measureData['measure_type']['active']==1)
-									<button data-id="{{$measureData['measure_type']['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
+								@if($measureData['active']==1)
+									<button data-id="{{$measureData['id']}}" type="button" data-link="changeMeasureTypeInAnalyzerTypeState" class="status btn btn-danger">Deactivate</button>
 								@else
-									<button data-id="{{$measureData['measure_type']['id']}}" type="button" class="status btn btn-success">Activate</button>
+									<button data-id="{{$measureData['id']}}" type="button" data-link="changeMeasureTypeInAnalyzerTypeState" class="status btn btn-success">Activate</button>
 								@endif
+							</td>
+							<td>
+								<a class="btn btn-primary" href="{{ URL::route('getEditMeasureTypeInAnalyzer', ['mid' => $measureData['id']])}}">Edit</a>
+								<a class="btn btn-danger" href="{{ URL::route('removeMeasureTypeInAnalyzer', ['mid'=> $measureData['id']]) }}">Delete</a>
 							</td>
 						</tr>
 					@endforeach
@@ -87,7 +94,7 @@ $('.status').on("click",function(e){
 	var id = $(this).data('id');
 	var self = this;
 	$.ajax({
-		url: "measuresManagement/changeMeasureTypeState",
+		url: "measuresManagement/" + $(self).attr('data-link'),
 		type: "post",
 		data: {
 			state: state,

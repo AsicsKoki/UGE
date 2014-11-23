@@ -486,6 +486,16 @@ class AdminPanelController extends BaseController {
 		return Redirect::to('measuresManagement');
 	}
 
+	private $validationRulesMeasureTypeInAnalyzerType = [
+			'active'  => 'required',
+			'threshold'  => 'required',
+			'offset'  => 'required',
+			'coefficient_of_proportionality'  => 'required',
+			'modbus_measure_function'  => 'required',
+			'modbus_measure_register'  => 'required',
+			'analyzer_types_id'  => 'required'
+	];
+
 	public function getRegisterMeasureTypeInAnalyzer()
 	{
 		$analyzerTypes= AnalyzerType::all();
@@ -498,16 +508,6 @@ class AdminPanelController extends BaseController {
 					->with('analyzerTypes', $analyzerTypes)
 					->with('measures', $measureTypesNew);
 	}
-
-	private $validationRulesMeasureTypeInAnalyzerType = [
-			'active'  => 'required',
-			'threshold'  => 'required',
-			'offset'  => 'required',
-			'coefficient_of_proportionality'  => 'required',
-			'modbus_measure_function'  => 'required',
-			'modbus_measure_register'  => 'required',
-			'analyzer_types_id'  => 'required'
-	];
 
 	public function postRegisterMeasureTypeInAnalyzer(){
 
@@ -530,6 +530,50 @@ class AdminPanelController extends BaseController {
 		$measureTypeInAnalyzerType->active = Input::get('active_measureType');
 		$measureTypeInAnalyzerType->save();
 		Session::flash('status_success', 'Measure successfully created');
+		return Redirect::to('measuresManagement');
+	}
+
+	public function removeMeasureTypeInAnalyzer($mid) {
+		MeasureTypeInAnalyzerType::find($mid)->delete();
+		Session::flash('status_success', 'Measure type in analyzer successfully deleted');
+		return Redirect::to('measuresManagement');
+	}
+
+	public function getEditMeasureTypeInAnalyzer($mid)
+	{
+		$analyzerTypes= AnalyzerType::all();
+		$measureTypes = MeasureType::select('name_en', 'id')->get();
+		$measureTypesNew = [];
+		foreach ($measureTypes as $key => $value) {
+			$measureTypesNew[$value['id']] = $value['name_en'];
+		}
+		return View::make('adminPanel.editMeasureTypeInAnalyzer')
+					->with('analyzerTypes', $analyzerTypes)
+					->with('measureTypeInAnalyzer', MeasureTypeInAnalyzerType::find($mid))
+					->with('measures', $measureTypesNew);
+	}
+
+	public function postEditMeasureTypeInAnalyzer($mid){
+
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesMeasureTypeInAnalyzerType
+		);
+		if($validator->fails()){
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+		$measureType = MeasureType::find(Input::get('measure_type'));
+
+		$measureTypeInAnalyzerType = MeasureTypeInAnalyzerType::find($mid);
+		$measureTypeInAnalyzerType->measure_types_id = $measureType->id;
+		$measureTypeInAnalyzerType->analyzer_types_id = Input::get('analyzer_types_id');
+		$measureTypeInAnalyzerType->modbus_measure_function = Input::get('modbus_measure_function');
+		$measureTypeInAnalyzerType->modbus_measure_register = Input::get('modbus_measure_register');
+		$measureTypeInAnalyzerType->coefficient_of_proportionality = Input::get('coefficient_of_proportionality');
+		$measureTypeInAnalyzerType->offset = Input::get('offset');
+		$measureTypeInAnalyzerType->threshold = Input::get('threshold');
+		$measureTypeInAnalyzerType->active = Input::get('active');
+		$measureTypeInAnalyzerType->save();
+		Session::flash('status_success', 'Measure successfully updated');
 		return Redirect::to('measuresManagement');
 	}
 
@@ -763,6 +807,13 @@ class AdminPanelController extends BaseController {
 		$measureType = MeasureType::find(Input::get('id'));
 		$measureType->active = Input::get('state');
 		$measureType->save();
+		return 1;
+	}
+
+	public function changeMeasureTypeInAnalyzerTypeState(){
+		$measureTypeInAnalyzerType = MeasureTypeInAnalyzerType::find(Input::get('id'));
+		$measureTypeInAnalyzerType->active = Input::get('state');
+		$measureTypeInAnalyzerType->save();
 		return 1;
 	}
 

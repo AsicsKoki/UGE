@@ -83,12 +83,17 @@ Route::get('hubsCancel', array('as' => 'cancelHubAction',  'uses' => 'AdminPanel
 Route::get('measuresManagement', array('as' => 'getMeasuresManagement', 'uses' => 'AdminPanelController@getMeasuresManagement'));
 Route::post('measuresManagement', array('as'=>'postNewMeasure', 'uses' => 'AdminPanelController@postNewMeasure'));
 Route::get('registerMeasure', array('as'=>'registerMeasure', 'uses' => 'AdminPanelController@getRegisterMeasure'));
+Route::post('measuresManagement/changeMeasureTypeInAnalyzerTypeState', array('as' => 'changeMeasureTypeInAnalyzerTypeState',  'uses' => 'AdminPanelController@changeMeasureTypeInAnalyzerTypeState'));
 Route::post('measuresManagement/changeMeasureTypeState', array('as' => 'changeMeasureTypeState',  'uses' => 'AdminPanelController@changeMeasureTypeState'));
 Route::get('getRegisterMeasureTypeInAnalyzer', array('as'=>'getRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@getRegisterMeasureTypeInAnalyzer'));
 Route::post('postRegisterMeasureTypeInAnalyzer', array('as'=>'postRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@postRegisterMeasureTypeInAnalyzer'));
-Route::get('measuresManagement/{mid}/delete', array('as' => 'removeMeasureType', 'uses' => 'AdminPanelController@removeMeasureType'))->where('id', '\d+');
+Route::get('measuresManagement/{mid}/delete', array('as' => 'removeMeasureType', 'uses' => 'AdminPanelController@removeMeasureType'))->where('miid', '\d+');
 Route::get('measuresManagement/{mid}', array('as' => 'getEditMeasureType', 'uses' => 'AdminPanelController@getEditMeasureType'));
 Route::post('measuresManagement/{mid}', array('as' => 'postEditMeasureType', 'uses' => 'AdminPanelController@postEditMeasureType'));
+
+Route::get('getEditMeasureTypeInAnalyzer/{mid}', array('as'=>'getEditMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@getEditMeasureTypeInAnalyzer'))->where('mid', '\d+');
+Route::post('postEditMeasureTypeInAnalyzer/{mid}', array('as'=>'postEditMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@postEditMeasureTypeInAnalyzer'))->where('mid', '\d+');
+Route::get('removeMeasureTypeInAnalyzer/{mid}/delete', array('as' => 'removeMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@removeMeasureTypeInAnalyzer'))->where('mid', '\d+');
 
 
 Route::get('modbusConsole', array('as' => 'getModbusConsole', 'uses' => 'AdminPanelController@getModbusConsole'));

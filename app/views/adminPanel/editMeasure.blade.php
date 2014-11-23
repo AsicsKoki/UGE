@@ -19,7 +19,7 @@
 
 				{{Former::text('unit')->label('Unit')->placeholder('Unit')->class('form-control')}}
 
-				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')}}
+				{{Former::select('active')->options([1=>'Active', 0=>'Inactive'])->label('Active')->class('form-control')->value($measureType->active)}}
 
 				{{Former::hidden()->name('_token')->value(csrf_token())}}
 				{{Former::submit('Submit')->class('form-control submit-button submit-button-margin-bottom btn-info')}}
