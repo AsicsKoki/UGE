@@ -35,7 +35,7 @@
 					{{Former::text('username')->label('Username')->placeholder('Username')->class('form-control')}}
 					{{Former::password('password')->label('Password')->placeholder('Password')->class('form-control')}}
 					{{Former::password('password_confirmation')->label('Password')->placeholder('Retype your password')->class('form-control')}}
-					{{Former::text('name')->label('Name')->placeholder('Name')->class('form-control')}}
+					{{Former::text('first_name')->label('Name')->placeholder('Name')->class('form-control')}}
 				</div>
 				<div class="col-md-6">
 					{{Former::text('contact_sms')->label('SMS Phone')->placeholder('User SMS')->class('form-control')}}
@@ -68,5 +68,9 @@ $('.nav-tabs li a').click(function (e) {
 	e.preventDefault()
 	$(this).tab('show')
 })
+
+var ind = $('div.controls span.help-inline').eq(0).closest('div.tab-pane').index();
+console.log(ind);
+ind != -1 && $('.nav-tabs li').eq(ind).find('a').tab('show');
 </script>
 @stop

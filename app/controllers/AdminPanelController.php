@@ -67,7 +67,7 @@ class AdminPanelController extends BaseController {
 		$user->customers_id = $customer->id;
 		$user->username = Input::get('username');
 		$user->password = Hash::make(Input::get('password'));
-		$user->name = Input::get('name');
+		$user->name = Input::get('first_name');
 		$user->contact_sms = Input::get('contact_sms');
 		$user->contact_email = Input::get('contact_email');
 		$user->account_types_id = Input::get('account_types_id');
