@@ -86,6 +86,10 @@ Route::get('registerMeasure', array('as'=>'registerMeasure', 'uses' => 'AdminPan
 Route::post('measuresManagement/changeMeasureTypeState', array('as' => 'changeMeasureTypeState',  'uses' => 'AdminPanelController@changeMeasureTypeState'));
 Route::get('getRegisterMeasureTypeInAnalyzer', array('as'=>'getRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@getRegisterMeasureTypeInAnalyzer'));
 Route::post('postRegisterMeasureTypeInAnalyzer', array('as'=>'postRegisterMeasureTypeInAnalyzer', 'uses' => 'AdminPanelController@postRegisterMeasureTypeInAnalyzer'));
+Route::get('measuresManagement/{mid}/delete', array('as' => 'removeMeasureType', 'uses' => 'AdminPanelController@removeMeasureType'))->where('id', '\d+');
+Route::get('measuresManagement/{mid}', array('as' => 'getEditMeasureType', 'uses' => 'AdminPanelController@getEditMeasureType'));
+Route::post('measuresManagement/{mid}', array('as' => 'postEditMeasureType', 'uses' => 'AdminPanelController@postEditMeasureType'));
+
 
 Route::get('modbusConsole', array('as' => 'getModbusConsole', 'uses' => 'AdminPanelController@getModbusConsole'));
 Route::post('modbusConsole', array('as' => 'sendModbusQuery', 'uses' => 'AdminPanelController@sendModbusQuery'));

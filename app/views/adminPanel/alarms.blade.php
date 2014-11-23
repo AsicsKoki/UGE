@@ -8,7 +8,7 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active in fade alarms" id="section1">
-				<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterAlarm') }}">New Alarm</a>
+			<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterAlarm') }}">New Alarm</a>
 				<table id="alarmTypesTable" class="table table-hover display">
 					<thead>
 						<th>id</th>

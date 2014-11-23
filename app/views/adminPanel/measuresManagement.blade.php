@@ -17,6 +17,7 @@
 						<th>Name</th>
 						<th>Unit</th>
 						<th>Status</th>
+						<th>Action</th>
 					</thead>
 					<tbody>
 					@foreach($data as $measure)
@@ -30,6 +31,10 @@
 								@else
 									<button data-id="{{$measure['id']}}" type="button" class="status btn btn-success">Activate</button>
 								@endif
+							</td>
+							<td>
+								<a class="btn btn-primary" href="{{ URL::route('getEditMeasureType', ['aid' => $measure['id']])}}">Edit</a>
+								<a class="btn btn-danger" href="{{ URL::route('removeMeasureType', ['aid'=> $measure['id']]) }}">Delete</a>
 							</td>
 						</tr>
 					@endforeach

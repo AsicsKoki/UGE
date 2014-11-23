@@ -480,6 +480,12 @@ class AdminPanelController extends BaseController {
 		return View::make('adminPanel.newMeasure');
 	}
 
+	public function removeMeasureType($mid){
+		MeasureType::find($mid)->delete();
+		Session::flash('status_success', 'Measure type successfully deleted');
+		return Redirect::to('measuresManagement');
+	}
+
 	public function getRegisterMeasureTypeInAnalyzer()
 	{
 		$analyzerTypes= AnalyzerType::all();
@@ -542,6 +548,23 @@ class AdminPanelController extends BaseController {
 		if($validator->passes()){
 			MeasureType::createMeasureType(Input::all());
 			Session::flash('status_success', 'Measure successfully created');
+			return Redirect::route('getMeasuresManagement');
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+	}
+
+	public function getEditMeasureType($mid){
+		return View::make('adminPanel.editMeasure')->with('measureType', MeasureType::find($mid));
+	}
+
+	public function postEditMeasureType($mid){
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesMeasure
+		);
+		if($validator->passes()){
+			MeasureType::find($mid)->update(Input::all());
+			Session::flash('status_success', 'Measure successfully update');
 			return Redirect::route('getMeasuresManagement');
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
