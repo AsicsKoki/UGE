@@ -6,7 +6,7 @@
 	<div class="panelContent col-xs-8">
 		<h4>Signal Types</h4>
 		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterSignalType') }}">New Signal Type</a>
-		<table id="analyzersTable" class="table table-hover display">
+		<table id="signalsTable" class="table table-hover display">
 			<thead>
 				<th>id</th>
 				<th>Name (English)</th>
@@ -39,7 +39,15 @@
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-$('#analyzersTable').dataTable();
+$('#signalsTable').dataTable({
+				  "aoColumns": [
+					  null,
+					  null,
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false }
+				  ]
+				});
 $('.status').on("click",function(e){
 	e.preventDefault();
 	if($(this).hasClass('btn-danger')){

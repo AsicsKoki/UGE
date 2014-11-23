@@ -78,8 +78,24 @@
 @stop
 @section('moreScripts')
 <script type="text/javascript">
-$('#analyzersTable').dataTable();
-$('#measureTypeInAnalyzerTable').dataTable();
+$('#analyzersTable').dataTable({
+				  "aoColumns": [
+					  null,
+					  null,
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false }
+				  ]
+				});
+$('#measureTypeInAnalyzerTable').dataTable({
+				  "aoColumns": [
+					  null,
+					  null,
+					  null,
+					  { "bSortable": false },
+					  { "bSortable": false }
+				  ]
+				});
 $('.nav-tabs li a').click(function (e) {
 	e.preventDefault()
 	$(this).tab('show')
