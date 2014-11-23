@@ -12,6 +12,7 @@ class HomeController extends BaseController {
 
 	public function getHome()
 	{
+		return Redirect::to('analyzers');
 		return View::make('hello');
 	}
 
