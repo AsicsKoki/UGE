@@ -4,13 +4,15 @@
 	@include('partials.sidebar')
 	</div>
 	<div class="panelContent col-xs-8">
-		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterSignal') }}">New Signal</a>
+		<h4>Signal Types</h4>
+		<a class="btn btn-primary new-entry" href="{{ URL::route('getRegisterSignalType') }}">New Signal Type</a>
 		<table id="analyzersTable" class="table table-hover display">
 			<thead>
 				<th>id</th>
-				<th>Name</th>
-				<th>Name</th>
+				<th>Name (English)</th>
+				<th>Name (Serbian)</th>
 				<th>Status</th>
+				<th>Action</th>
 			</thead>
 			<tbody>
 			@foreach($signals as $signal)
@@ -21,9 +23,13 @@
 					<td>
 						@if($signal['active']==1)
 							<button data-id="{{$signal['id']}}" type="button" class="status btn btn-danger">Deactivate</button>
-						@else;
+						@else
 							<button data-id="{{$signal['id']}}" type="button" class="status btn btn-success">Activate</button>
 						@endif
+					</td>
+					<td>
+						<a class="btn btn-primary" href="{{ URL::route('getEditSignalType', ['mid' => $signal['id']])}}">Edit</a>
+						<a class="btn btn-danger" href="{{ URL::route('getRemoveSignalType', ['mid'=> $signal['id']]) }}">Delete</a>
 					</td>
 				</tr>
 			@endforeach

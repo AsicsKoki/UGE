@@ -745,7 +745,7 @@ class AdminPanelController extends BaseController {
 		return Redirect::route('getAlarmManagement');
 	}
 
-	public function getRegisterSignal()
+	public function getRegisterSignalType()
 	{
 		return View::make('adminPanel.newSignalType');
 	}
@@ -761,7 +761,7 @@ class AdminPanelController extends BaseController {
 		'active'  => 'required',
 	];
 
-	public function postNewSignal(){
+	public function postNewSignalType(){
 
 		$validator = Validator::make(Input::all(),
 		    $this->validationRulesSignal
@@ -773,6 +773,31 @@ class AdminPanelController extends BaseController {
 		} else {
 			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
 		}
+	}
+
+	public function getEditSignalType($sid) {
+		return View::make('adminPanel.editSignalType')
+				->with('signalType', SignalType::find($sid));
+	}
+
+	public function postEditSignalType($sid) {
+		$validator = Validator::make(Input::all(),
+		    $this->validationRulesSignal
+		);
+		if($validator->passes()){
+			SignalType::find($sid)->update(Input::all());
+			Session::flash('status_success', 'Signal successfully updated');
+			return Redirect::route('getSignalManagement');
+		} else {
+			return Redirect::back()->withInput(Input::all())->withErrors($validator->errors());
+		}
+
+	}
+
+	public function getRemoveSignalType($sid) {
+		SignalType::find($sid)->delete();
+		Session::flash('status_success', 'Signal type successfully deleted');
+		return Redirect::to('signalManagement');
 	}
 
 	public function changeAlarmForMeasureState(){

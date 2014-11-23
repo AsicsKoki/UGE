@@ -5,12 +5,13 @@
 	</div>
 	<div>
 		<div class="panelContent container col-md-8">
-			<h4>New Signal Type</h4>
-			{{ Former::open()->class('form-horizontal')->method('POST')->enctype('multipart/form-data')->action(URL::route('postNewSignalType'))
+			<h4>Edit Signal Type</h4>
+			{{ Former::open()->class('form-horizontal')->method('POST')->enctype('multipart/form-data')->action(URL::route('postEditSignalType', ['sid' => $signalType->id]))
 				->rules([
 						'name_sr' => 'required',
 						'active'  => 'required',
 					])}}
+				{{Former::populate($signalType)}}
 				{{Former::text('name_en')->label('Name EN')->placeholder('Measure name EN')->class('form-control')}}
 
 				{{Former::text('name_sr')->label('Name SRB')->placeholder('Name SRB')->class('form-control')}}

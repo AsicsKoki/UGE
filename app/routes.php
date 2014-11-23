@@ -118,8 +118,15 @@ Route::post('registerAnalyzerAlarm/{aid}', array('as' => 'putAlarmTypesForMeasur
 
 
 Route::get('signalManagement', array('as' => 'getSignalManagement', 'uses' => 'AdminPanelController@getSignalManagement'));
-Route::post('signalManagement', array('as'=>'postNewSignal', 'uses' => 'AdminPanelController@postNewSignal'));
-Route::get('registerSignal', array('as' => 'getRegisterSignal', 'uses' => 'AdminPanelController@getRegisterSignal'));
+Route::post('signalManagement', array('as'=>'postNewSignalType', 'uses' => 'AdminPanelController@postNewSignalType'));
+Route::get('registerSignal', array('as' => 'getRegisterSignalType', 'uses' => 'AdminPanelController@getRegisterSignalType'));
+Route::get('editSignalType/{sid}', array('as' => 'getEditSignalType', 'uses' => 'AdminPanelController@getEditSignalType'));
+Route::post('editSignalType/{sid}', array('as' => 'postEditSignalType', 'uses' => 'AdminPanelController@postEditSignalType'));
+Route::get('removeSignalType/{sid}', array('as' => 'getRemoveSignalType', 'uses' => 'AdminPanelController@getRemoveSignalType'));
+
+
+
+
 Route::post('signalManagement/changeSignalState', array('as' => 'changeSignalState',  'uses' => 'AdminPanelController@changeSignalState'));
 Route::get('hubs/{hid}/delete/{sid}', array('as' => 'removeSignalType', 'uses' => 'AdminPanelController@removeSignalType'))->where('sid', '\d+')->where('hid', '\d+');
 Route::get('hubs/{hid}/signal/{sid}', array('as' => 'getEditSignal', 'uses' => 'AdminPanelController@getEditSignal'));
