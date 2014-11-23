@@ -8,7 +8,7 @@ class AdminPanelController extends BaseController {
 	{
 	 	$this->beforeFilter('auth', array('except' => array('')));
 		// Enforce user authentication on specified methods.
-		$this->beforeFilter('csrf', ['only' => ['authenticate']]);
+		$this->beforeFilter('csrf', array('on' => 'post'));
 		parent::__construct();
 	}
 	public function getAnalyzerList()

@@ -75,6 +75,10 @@ Route::filter('csrf', function()
 {
 	if (Session::token() != Input::get('_token'))
 	{
+        Auth::logout();
+        Session::flash('status_error', 'Expired session, please log in again.');
+
+        return Redirect::to('/login');
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
