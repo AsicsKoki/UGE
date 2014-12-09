@@ -80,7 +80,7 @@ class UsersController extends BaseController {
 			'password_confirmation' => 'required|min:3',
 			'name'                  => 'required',
 			'contact_sms'           => 'required',
-			'account_type_id'       => 'required'
+			'account_types_id'       => 'required'
 		];
 
 	public function postNewUser(){
@@ -99,7 +99,8 @@ class UsersController extends BaseController {
 
 	public function getUsers() {
 
-		return View::make('users.users')->with('users', User::all());
+		return View::make('users.users')
+				->with('users', User::all());
 	}
 
 	public function getUser($uid) {
@@ -108,7 +109,9 @@ class UsersController extends BaseController {
 			return Redirect::route('getUsers');
 		}
 
-		return View::make('users.user')->with('user', User::find($uid));
+		return View::make('users.user')
+				->with('accountTypes', AccountType::all())
+				->with('user', User::find($uid));
 	}
 
 	public function putUser($uid) {

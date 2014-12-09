@@ -20,7 +20,7 @@
 			{{Former::text('name')->label('Client name')->placeholder('Client name')->class('form-control')}}
 			{{Former::text('contact_email')->label('Email Address')->placeholder('Email Adress')->class('form-control')}}
 			{{Former::text('contact_sms')->label('SMS phone')->placeholder('Client SMS')->class('form-control')}}
-			{{Former::select('account_type_id')->options([1=>'Admin', 0=>'User'])->label('Account Type')->class('form-control')}}
+			{{Former::select('account_types_id')->fromQuery($accountTypes, 'type', 'id')->label('Account Type')->class('form-control')->value($user->account_types_id)}}
 			{{Former::hidden()->name('_token')->value(csrf_token())}}
 			<div class="control-group">
 				<a class="form-control submit-button submit-button-margin-bottom btn btn-danger" href="{{ URL::route('cancelUserAction')}}">Cancel</a>
